@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:id="@+id/gradiantHome"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:contentDescription="@string/descGradiant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/border_gradiant" />
+
+    <TextView
+        android:id="@+id/txtNameScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/txtCashSale"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gradiantHome" />
+
+    <TextView
+        android:id="@+id/txtUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/txtUserName"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/imgUser"
+        app:layout_constraintTop_toTopOf="@+id/gradiantHome" />
+
+    <ImageView
+        android:id="@+id/imgUser"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/descUserImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/descBtnBack"
+        android:scaleType="fitXY"
+        android:tint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <EditText
+        android:id="@+id/txtNameClient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/colorHint"
+        android:hint="@string/txtNameClient"
+        android:autofillHints="@string/txtNameClient"
+        android:backgroundTint="@color/lineHint"
+        android:drawableTint="@color/lineHintNext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gradiantHome" />
+
+    <EditText
+        android:id="@+id/txtNameProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/colorHint"
+        android:hint="@string/txtNameProduct"
+        android:autofillHints="@string/txtNameProduct"
+        android:backgroundTint="@color/lineHint"
+        android:drawableTint="@color/lineHintNext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNameClient" />
+
+    <Spinner
+        android:id="@+id/spnType"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints="@string/txtType"
+        android:backgroundTint="@color/lineHint"
+        android:contentDescription="@string/descListValue"
+        android:drawableTint="@color/lineHintNext"
+        android:textColor="@color/black"
+        android:textColorHint="@color/colorHint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtValue"
+        app:layout_constraintTop_toBottomOf="@+id/txtNameProduct" />
+
+    <EditText
+        android:id="@+id/txtValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="29dp"
+        android:autofillHints="@string/txtValue"
+        android:backgroundTint="@color/lineHint"
+        android:drawableTint="@color/lineHintNext"
+        android:ems="10"
+        android:hint="@string/txtValue"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/colorHint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNameProduct" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spnType">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/txtType" />
+    </android.support.design.widget.TextInputLayout>
+
+</android.support.constraint.ConstraintLayout>

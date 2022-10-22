@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">AppBastos</string>
+
+    <!-- Textos en campos -->
+    <string name="txtName">Nombre</string>
+    <string name="txtNameClient">Nombre del cliente*</string>
+    <string name="txtNameProduct">Nombre del Prodcto*</string>
+    <string name="txtValue">Valor por unidad*</string>
+    <string name="txtType">Tipo*</string>
+    <string name="txtAmount">Cantidad*</string>
+
+    <!-- titulos de Screen-->
+    <string name="txtCashSale">Venta a contado</string>
+
+    <!-- Textos que cambiaran-->
+    <string name="txtUserName">Nombre del usuario</string>
+
+    <!-- Textos en botones -->
+    <string name="txtBtnLogin">Ingresar</string>
+
+    <!-- Descripciones de Imagenes -->
+    <string name="descLogo">Logo de la aplicacion de AppBastos</string>
+    <string name="descGradiant">Gradiante que se usara en todas las screen</string>
+    <string name="descUserImage">Imagen de usuario</string>
+
+    <!-- Descripcion de botones -->
+    <string name="descBtnBack">Boton que al presionar cuelve a la pantalla anterior</string>
+
+    <string name="descListValue">Lista de tipos de valores permitidos</string>
+
+</resources>
