@@ -1,5 +1,6 @@
 package com.kent.appbastos
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -13,7 +14,9 @@ class AddRemarks : AppCompatActivity() {
         val btnCancel: Button = findViewById(R.id.btnCancel)
 
         btnContinue.setOnClickListener {
-
+            val intent: Intent = Intent(this, Share::class.java)
+            startActivity(intent)
+            finish()
         }
 
         btnCancel.setOnClickListener {

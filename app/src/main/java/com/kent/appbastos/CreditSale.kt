@@ -32,14 +32,15 @@ class CreditSale : AppCompatActivity() {
             btnOpenAddDebt.setOnClickListener {
                 val intent: Intent = Intent(this, AddRemarks::class.java)
                 startActivity(intent)
+                finish()
             }
             btnAddPayment.setOnClickListener {
                 val intent: Intent = Intent(this, Payment::class.java)
                 startActivity(intent)
+                finish()
             }
 
             alertDialog.show()
-            finish()
         }
 
         btnCancel.setOnClickListener {
