@@ -20,6 +20,7 @@ class CashSale : AppCompatActivity() {
         btnContinue.setOnClickListener {
             val intent: Intent = Intent(this, AddRemarks::class.java)
             startActivity(intent)
+            finish()
         }
 
         btnCancel.setOnClickListener {

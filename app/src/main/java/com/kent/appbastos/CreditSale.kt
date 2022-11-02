@@ -1,5 +1,4 @@
 package com.kent.appbastos
-import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -40,6 +39,7 @@ class CreditSale : AppCompatActivity() {
             }
 
             alertDialog.show()
+            finish()
         }
 
         btnCancel.setOnClickListener {
