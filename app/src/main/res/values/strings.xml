@@ -10,7 +10,7 @@
     <string name="txtType">Tipo*</string>
     <string name="txtAmount">Cantidad*</string>
     <string name="txtValueOperational">Valor*</string>
-    <string name="txtDescription" >Descripcion*</string>
+    <string name="txtDescription">Descripcion*</string>
     <string name="txtTypeOperational">Tipo de operacion</string>
 
     <!-- Topics of Screen-->
@@ -26,7 +26,6 @@
     <string name="txtDebt">Deuda</string>
     <string name="txtPayment">Pago</string>
     <string name="txtRemarks">Comentarios</string>
-
 
 
     <!-- texts in buttons -->

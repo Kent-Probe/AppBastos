@@ -1,7 +1,9 @@
 package com.kent.appbastos
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +17,20 @@ class CashSale : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.cash_sale)
 
+        val btnContinue: Button = findViewById(R.id.btnContinue)
+        val btnCancel: Button = findViewById(R.id.btnCancel)
+
+        btnContinue.setOnClickListener {
+            val intent: Intent = Intent(this, AddRemarks::class.java)
+            startActivity(intent)
+        }
+
+        btnCancel.setOnClickListener {
+            finishAffinity()
+        }
+
+
+        /*
         // Get the Intent that started this activity and extract the string
         val message = intent.getStringExtra(APPBASTOS_EXTRA_CASHSALE)
 
@@ -23,7 +39,6 @@ class CashSale : AppCompatActivity() {
             text = message
         }
 
-        /*
         val spTypesValues : Spinner =  findViewById(R.id.spnType)
 
         //Create an ArrayAdapter using the string array and a default spinner layout
