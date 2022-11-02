@@ -24,7 +24,6 @@ class CreditSale : AppCompatActivity() {
 
             dialogAlertDialog.setView(view)
             val alertDialog: AlertDialog = dialogAlertDialog.create()
-            alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
             val btnOpenAddDebt: Button = view.findViewById(R.id.btnOpenNewDebt)
             val btnAddPayment: Button = view.findViewById(R.id.btnAddPayment)
