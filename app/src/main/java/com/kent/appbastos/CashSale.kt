@@ -2,10 +2,7 @@ package com.kent.appbastos
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.Spinner
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -15,7 +12,7 @@ class CashSale : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.cash_sale)
+        setContentView(R.layout.activity_cash_sale)
 
         val btnContinue: Button = findViewById(R.id.btnContinue)
         val btnCancel: Button = findViewById(R.id.btnCancel)
@@ -26,7 +23,7 @@ class CashSale : AppCompatActivity() {
         }
 
         btnCancel.setOnClickListener {
-            finishAffinity()
+            finish()
         }
 
 
