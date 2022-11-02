@@ -9,23 +9,37 @@
     <string name="txtType">Tipo*</string>
     <string name="txtAmount">Cantidad*</string>
 
-    <!-- titulos de Screen-->
+    <!-- Topics of Screen-->
     <string name="txtCashSale">Venta a contado</string>
 
-    <!-- Textos que cambiaran-->
+    <!-- texts-->
     <string name="txtUserName">Nombre del usuario</string>
 
-    <!-- Textos en botones -->
+    <!-- texts in buttons -->
     <string name="txtBtnLogin">Ingresar</string>
+    <string name="txtBtnContinue">Continuar</string>
+    <string name="txtBtnCancel">Cancelar</string>
 
-    <!-- Descripciones de Imagenes -->
+    <!-- Description of images -->
     <string name="descLogo">Logo de la aplicacion de AppBastos</string>
     <string name="descGradiant">Gradiante que se usara en todas las screen</string>
     <string name="descUserImage">Imagen de usuario</string>
 
-    <!-- Descripcion de botones -->
+    <!-- Description of buttons -->
     <string name="descBtnBack">Boton que al presionar cuelve a la pantalla anterior</string>
 
     <string name="descListValue">Lista de tipos de valores permitidos</string>
+
+
+
+    <string name="select">Select</string>
+
+    <!--arrays-->
+    <string-array name="types">
+        <item>Lb</item>
+        <item>Lb</item>
+        <item>Kg</item>
+        <item>Kg</item>
+    </string-array>
 
 </resources>

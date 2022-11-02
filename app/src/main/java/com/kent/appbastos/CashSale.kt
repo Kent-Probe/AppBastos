@@ -1,10 +1,10 @@
 package com.kent.appbastos
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 
 class CashSale : AppCompatActivity() {
@@ -23,20 +23,21 @@ class CashSale : AppCompatActivity() {
             text = message
         }
 
+        /*
         val spTypesValues : Spinner =  findViewById(R.id.spnType)
 
         //Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
             this,
-            R.array.typesValue,
+            R.array.types,
             R.layout.spinner_item_types
         ).also {  arrayAdapter ->
             //Specify the layout to use when the list of choices appears
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             //Apply the adapter to the spinner
             spTypesValues.adapter = arrayAdapter
-
         }
+         */
 
     }
 }
