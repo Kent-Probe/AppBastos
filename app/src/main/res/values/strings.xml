@@ -12,6 +12,7 @@
     <string name="txtValueOperational">Valor*</string>
     <string name="txtDescription">Descripcion*</string>
     <string name="txtTypeOperational">Tipo de operacion</string>
+    <string name="txtAlertDialog">Este cliente tiene una deuda abierta. ¿Que desea hacer?</string>
 
     <!-- Topics of Screen-->
     <string name="txtCashSale">Venta a contado</string>
@@ -35,6 +36,8 @@
     <string name="txtBtnShare">Enviar</string>
     <string name="txtBtnPrintOut">Imprimir</string>
     <string name="txtBtnBackHome">Regresar</string>
+    <string name="txtBtnOpenNewDebt">Abrir una nueva deuda</string>
+    <string name="txtBtnAddPayment">Agregar pago</string>
 
     <!-- Description of images -->
     <string name="descLogo">Logo de la aplicacion de AppBastos</string>
