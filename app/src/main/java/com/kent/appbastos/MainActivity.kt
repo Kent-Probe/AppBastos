@@ -6,12 +6,15 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.concurrent.thread
 
 const val APPBASTOS_EXTRA_CASHSALE = "com.kent.appbastos.CashSale"
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.SplashThem)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

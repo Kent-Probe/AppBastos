@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="DialogCustomStyle" parent="MaterialAlertDialog.Material3" >
-
+    <style name="SplashThem" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 </resources>
