@@ -2,23 +2,40 @@
     <string name="app_name">AppBastos</string>
 
     <!-- Textos en campos -->
+    <string name="txtUserName">Nombre del usuario</string>
     <string name="txtName">Nombre</string>
     <string name="txtNameClient">Nombre del cliente*</string>
     <string name="txtNameProduct">Nombre del Prodcto*</string>
     <string name="txtValue">Valor por unidad*</string>
     <string name="txtType">Tipo*</string>
     <string name="txtAmount">Cantidad*</string>
+    <string name="txtValueOperational">Valor*</string>
+    <string name="txtDescription" >Descripcion*</string>
+    <string name="txtTypeOperational">Tipo de operacion</string>
 
     <!-- Topics of Screen-->
     <string name="txtCashSale">Venta a contado</string>
+    <string name="txtMenu">Menu</string>
+    <string name="txtCreditSale">Venta a credito</string>
+    <string name="txtMoneyInstallments">Cuotas de pago</string>
+    <string name="txtAddRemarks">Agregar comentarios</string>
+    <string name="txtShare">Compartir</string>
+    <string name="txtProfile">Perfil</string>
+    <string name="txtOperationalExpenses">Gastos operacionales</string>
+    <string name="txtTelClient">Numero del cliente</string>
+    <string name="txtDebt">Deuda</string>
+    <string name="txtPayment">Pago</string>
+    <string name="txtRemarks">Comentarios</string>
 
-    <!-- texts-->
-    <string name="txtUserName">Nombre del usuario</string>
+
 
     <!-- texts in buttons -->
     <string name="txtBtnLogin">Ingresar</string>
     <string name="txtBtnContinue">Continuar</string>
     <string name="txtBtnCancel">Cancelar</string>
+    <string name="txtBtnShare">Enviar</string>
+    <string name="txtBtnPrintOut">Imprimir</string>
+    <string name="txtBtnBackHome">Regresar</string>
 
     <!-- Description of images -->
     <string name="descLogo">Logo de la aplicacion de AppBastos</string>
@@ -29,7 +46,6 @@
     <string name="descBtnBack">Boton que al presionar cuelve a la pantalla anterior</string>
 
     <string name="descListValue">Lista de tipos de valores permitidos</string>
-
 
 
     <string name="select">Select</string>
