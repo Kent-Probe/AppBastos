@@ -129,11 +129,11 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnCancel"
+                android:id="@+id/btnContinue"
                 android:layout_width="@dimen/dimBtn"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_rounded"
-                android:text="@string/txtBtnCancel"
+                android:text="@string/txtBtnContinue"
                 android:textColor="@color/white"
                 tools:ignore="TextContrastCheck" />
 
@@ -143,11 +143,11 @@
                 android:gravity="end">
 
                 <Button
-                    android:id="@+id/btnContinue"
+                    android:id="@+id/btnCancel"
                     android:layout_width="@dimen/dimBtn"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_rounded"
-                    android:text="@string/txtBtnContinue"
+                    android:text="@string/txtBtnCancel"
                     android:textColor="@color/white"
                     tools:ignore="TextContrastCheck" />
 
