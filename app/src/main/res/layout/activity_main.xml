@@ -8,34 +8,35 @@
     android:background="#FFFFFF"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView3"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/gradiantHome"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:contentDescription="@string/descGradiant"
-        android:scaleType="fitXY"
+        android:background="@drawable/border_gradiant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/border_gradiant" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/imgUser"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="100dp"
-        android:contentDescription="@string/descLogo"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/descUserImage"
+        app:layout_constraintEnd_toEndOf="@+id/gradiantHome"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:srcCompat="@drawable/ic_launcher_background"
+        tools:ignore="ImageContrastCheck" />
 
     <EditText
         android:id="@+id/txtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="32dp"
         android:autofillHints="@string/txtName"
         android:backgroundTint="@color/lineHint"
@@ -50,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/gradiantHome" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -65,6 +66,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtName"
-        />
+        tools:ignore="TextContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

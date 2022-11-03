@@ -11,6 +11,7 @@
     <string name="txtAmount">Cantidad*</string>
     <string name="txtValueOperational">Valor*</string>
     <string name="txtDescription">Descripcion*</string>
+    <string name="txtPaymentValue">Pago*</string>
     <string name="txtTypeOperational">Tipo de operacion</string>
     <string name="txtAlertDialog">Este cliente tiene una deuda abierta. ¿Que desea hacer?</string>
 
