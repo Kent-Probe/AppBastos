@@ -2,11 +2,9 @@ package com.kent.appbastos
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import kotlin.concurrent.thread
 
 const val APPBASTOS_EXTRA_CASHSALE = "com.kent.appbastos.CashSale"
 
@@ -20,7 +18,12 @@ class MainActivity : AppCompatActivity() {
 
         val btn: Button = findViewById(R.id.btnLogin)
         btn.setOnClickListener{
-            val intent: Intent = Intent(this, MainMenu:: class.java)
+
+            val editText: EditText = findViewById(R.id.txtName)
+            val name = editText.text.toString()
+            val intent: Intent = Intent(this, MainMenu:: class.java).apply {
+                putExtra(APPBASTOS_EXTRA_CASHSALE, name)
+            }
             startActivity(intent)
         }
 

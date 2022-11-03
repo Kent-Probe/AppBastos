@@ -116,7 +116,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"
-                android:inputType="text"
+                android:inputType="text|textCapSentences"
                 android:textColorLink="#000000" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -137,7 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"
-                android:inputType="text"
+                android:inputType="text|textCapSentences"
                 android:textColorLink="#000000" />
 
         </com.google.android.material.textfield.TextInputLayout>

@@ -117,8 +117,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"
-                android:inputType="text"
-                android:textColorLink="#000000" />
+                android:inputType="text|textCapWords"
+                android:textColorLink="#000000"
+                android:nextFocusForward="@id/txtDebt"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -140,7 +141,8 @@
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"
                 android:inputType="text"
-                android:textColorLink="#000000" />
+                android:textColorLink="#000000"
+                android:nextFocusForward="@id/txtNameProduct"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -161,8 +163,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"
-                android:inputType="text"
-                android:textColorLink="#000000" />
+                android:inputType="text|textCapWords"
+                android:textColorLink="#000000"
+                android:nextFocusForward="@id/txtPayment"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -184,7 +187,8 @@
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"
                 android:inputType="number"
-                android:textColorLink="#000000">
+                android:textColorLink="#000000"
+                android:nextFocusForward="@id/btnContinue">
 
             </com.google.android.material.textfield.TextInputEditText>
 

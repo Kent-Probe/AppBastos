@@ -114,8 +114,9 @@
                 android:layout_height="match_parent"
                 android:backgroundTint="#00000000"
                 android:gravity="top"
-                android:inputType="textMultiLine"
-                android:textColorLink="@color/black" />
+                android:inputType="textMultiLine|textCapSentences"
+                android:textColorHighlight="#00FFFFFF"
+                android:textColorLink="#00FFFFFF" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
