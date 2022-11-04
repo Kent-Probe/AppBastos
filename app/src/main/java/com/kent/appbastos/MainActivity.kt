@@ -17,14 +17,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btn: Button = findViewById(R.id.btnLogin)
-        btn.setOnClickListener{
+        btn.setOnClickListener {
 
             val editText: EditText = findViewById(R.id.txtName)
             val name = editText.text.toString()
-            val intent: Intent = Intent(this, MainMenu:: class.java).apply {
-                putExtra(APPBASTOS_EXTRA_CASHSALE, name)
+
+            if (name.isNotEmpty()) {
+                val intent: Intent = Intent(this, MainMenu::class.java).apply {
+                    putExtra(APPBASTOS_EXTRA_CASHSALE, name)
+                }
+                startActivity(intent)
+            } else {
+                editText.error = "Error, el campo no puede estar vacio"
             }
-            startActivity(intent)
+
         }
 
     }

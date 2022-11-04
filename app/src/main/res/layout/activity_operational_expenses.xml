@@ -105,7 +105,7 @@
         app:layout_constraintTop_toBottomOf="@+id/gradiantHome">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtTypeOperational"
+            android:id="@+id/InputTypeOperational"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/txtTypeOperational"
@@ -113,6 +113,7 @@
             app:hintTextColor="@color/lineHint">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/typeOperational"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"
@@ -126,7 +127,7 @@
             android:layout_height="10dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtDescription"
+            android:id="@+id/InputDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/txtDescription"
@@ -134,6 +135,7 @@
             app:hintTextColor="@color/lineHint">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"
@@ -147,7 +149,7 @@
             android:layout_height="10dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtValue"
+            android:id="@+id/InputValue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/txtValueOperational"
@@ -155,6 +157,7 @@
             app:hintTextColor="@color/lineHint">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/value"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"

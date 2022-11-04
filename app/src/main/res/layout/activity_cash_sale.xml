@@ -104,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/gradiantHome">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtNameClient"
+            android:id="@+id/inputNameClient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/txtNameClient"
@@ -112,6 +112,7 @@
             app:hintTextColor="@color/lineHint">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameClient"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"
@@ -125,7 +126,7 @@
             android:layout_height="10dp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtNameProduct"
+            android:id="@+id/inputNameProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/txtNameProduct"
@@ -133,6 +134,7 @@
             app:hintTextColor="@color/lineHint">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameProduct"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"
@@ -146,7 +148,7 @@
             android:layout_height="10dp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtValue"
+            android:id="@+id/inputValueUnit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/txtValue"
@@ -154,6 +156,7 @@
             app:hintTextColor="@color/lineHint">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/valueUnit"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"
@@ -167,7 +170,7 @@
             android:layout_height="10dp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtAmount"
+            android:id="@+id/inputAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/txtAmount"
@@ -175,6 +178,7 @@
             app:hintTextColor="@color/lineHint">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/amount"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"

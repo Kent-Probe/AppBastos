@@ -18,17 +18,17 @@ class MainMenu : AppCompatActivity() {
         val btnOperationalExpenses: Button = findViewById(R.id.btnOperationalExpenses)
 
         btnCashSale.setOnClickListener {
-            val intent: Intent = Intent(this, CashSale:: class.java)
+            val intent = Intent(this, CashSale::class.java)
             startActivity(intent)
         }
 
         btnCreditSale.setOnClickListener {
-            val intent: Intent = Intent(this, CreditSale:: class.java)
+            val intent = Intent(this, CreditSale::class.java)
             startActivity(intent)
         }
 
         btnOperationalExpenses.setOnClickListener {
-            val intent: Intent = Intent(this, OperationalExpenses:: class.java)
+            val intent = Intent(this, OperationalExpenses::class.java)
             startActivity(intent)
         }
     }

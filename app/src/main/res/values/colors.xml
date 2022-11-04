@@ -13,4 +13,5 @@
     <color name="colorHint">#FF534D4D</color>
     <color name="lineHint">#070000</color>
     <color name="lineHintNext">#000000</color>
+    <color name="error">#AC0E0E</color>
 </resources>

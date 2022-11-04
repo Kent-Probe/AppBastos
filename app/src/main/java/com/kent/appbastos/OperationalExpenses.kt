@@ -4,6 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
+import com.google.android.material.textfield.TextInputLayout
+import com.kent.appbastos.validate.ValidateEmpty
+import java.util.*
 
 class OperationalExpenses : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,9 +18,33 @@ class OperationalExpenses : AppCompatActivity() {
         val btnCancel: Button = findViewById(R.id.btnCancel)
 
         btnContinue.setOnClickListener {
-            val intent: Intent = Intent(this, AddRemarks::class.java)
-            startActivity(intent)
-            finish()
+
+            //Variables de los TextInputLayout
+            val inputTypeOperational: TextInputLayout = findViewById(R.id.InputTypeOperational)
+            val inputDescription: TextInputLayout = findViewById(R.id.InputDescription)
+            val inputValue: TextInputLayout = findViewById(R.id.InputValue)
+
+            //Variables del  editText
+            val typeOperationalView: TextView = findViewById(R.id.typeOperational)
+            val descriptionView: TextView = findViewById(R.id.description)
+            val valueView: TextView = findViewById(R.id.value)
+
+            //Variables de los text del TextInputLayout
+            val typeOperational: String = typeOperationalView.text.toString()
+            val description: String = descriptionView.text.toString()
+            val value: String = valueView.text.toString()
+
+            //Arrays
+            val texts: Vector<String> = Vector(listOf(typeOperational, description, value))
+            val inputsLayouts: Vector<TextInputLayout> =
+                Vector(listOf(inputTypeOperational, inputDescription, inputValue))
+
+            if (ValidateEmpty().validate(texts, inputsLayouts)) {
+                val intent = Intent(this, AddRemarks::class.java)
+                startActivity(intent)
+                finish()
+            }
+
         }
 
         btnCancel.setOnClickListener {

@@ -1,40 +1,40 @@
 <resources>
-    <string name="app_name">AppBastos</string>
+    <string name="app_name" translatable="false">AppBastos</string>
 
     <!-- Textos en campos -->
-    <string name="txtUserName">Nombre del usuario</string>
-    <string name="txtName">Nombre</string>
-    <string name="txtNameClient">Nombre del cliente*</string>
-    <string name="txtNameProduct">Nombre del Prodcto*</string>
-    <string name="txtValue">Valor por unidad*</string>
-    <string name="txtType">Tipo*</string>
-    <string name="txtAmount">Cantidad*</string>
-    <string name="txtValueOperational">Valor*</string>
-    <string name="txtDescription">Descripcion*</string>
-    <string name="txtPaymentValue">Pago*</string>
-    <string name="txtTypeOperational">Tipo de operacion</string>
-    <string name="txtAlertDialog">Este cliente tiene una deuda abierta. ¿Que desea hacer?</string>
+    <string name="txtUserName" translatable="false">Nombre del usuario</string>
+    <string name="txtName" translatable="false">Nombre</string>
+    <string name="txtNameClient" translatable="false">Nombre del cliente*</string>
+    <string name="txtNameProduct" translatable="false">Nombre del Prodcto*</string>
+    <string name="txtValue" translatable="false">Valor por unidad*</string>
+    <string name="txtType" translatable="false">Tipo*</string>
+    <string name="txtAmount" translatable="false">Cantidad*</string>
+    <string name="txtValueOperational" translatable="false">Valor*</string>
+    <string name="txtDescription" translatable="false">Descripcion*</string>
+    <string name="txtPaymentValue" translatable="false">Pago*</string>
+    <string name="txtTypeOperational" translatable="false">Tipo de operacion</string>
+    <string name="txtAlertDialog" translatable="false">Este cliente tiene una deuda abierta. ¿Que desea hacer?</string>
 
     <!-- Topics of Screen-->
-    <string name="txtCashSale">Venta a contado</string>
-    <string name="txtMenu">Menu</string>
-    <string name="txtCreditSale">Venta a credito</string>
-    <string name="txtMoneyInstallments">Cuotas de pago</string>
-    <string name="txtAddRemarks">Agregar comentarios</string>
-    <string name="txtShare">Compartir</string>
-    <string name="txtProfile">Perfil</string>
-    <string name="txtOperationalExpenses">Gastos operacionales</string>
-    <string name="txtTelClient">Numero del cliente</string>
-    <string name="txtDebt">Deuda</string>
-    <string name="txtPayment">Pago</string>
-    <string name="txtRemarks">Comentarios</string>
+    <string name="txtCashSale" translatable="false">Venta a contado</string>
+    <string name="txtMenu" translatable="false">Menu</string>
+    <string name="txtCreditSale" translatable="false">Venta a credito</string>
+    <string name="txtMoneyInstallments" translatable="false">Cuotas de pago</string>
+    <string name="txtAddRemarks" translatable="false">Agregar comentarios</string>
+    <string name="txtShare" translatable="false">Compartir</string>
+    <string name="txtProfile" translatable="false">Perfil</string>
+    <string name="txtOperationalExpenses" translatable="false">Gastos operacionales</string>
+    <string name="txtTelClient" translatable="false">Numero del cliente</string>
+    <string name="txtDebt" translatable="false">Deuda</string>
+    <string name="txtPayment" translatable="false">Pago</string>
+    <string name="txtRemarks" translatable="false">Comentarios</string>
 
 
     <!-- texts in buttons -->
-    <string name="txtBtnLogin">Ingresar</string>
-    <string name="txtBtnContinue">Continuar</string>
-    <string name="txtBtnCancel">Cancelar</string>
-    <string name="txtBtnShare">Enviar</string>
+    <string name="txtBtnLogin" translatable="false">Ingresar</string>
+    <string name="txtBtnContinue" translatable="false">Continuar</string>
+    <string name="txtBtnCancel" translatable="false">Cancelar</string>
+    <string name="txtBtnShare" translatable="false">Enviar</string>
     <string name="txtBtnPrintOut">Imprimir</string>
     <string name="txtBtnBackHome">Regresar</string>
     <string name="txtBtnOpenNewDebt">Abrir una nueva deuda</string>

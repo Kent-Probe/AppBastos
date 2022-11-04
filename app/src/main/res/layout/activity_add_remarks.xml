@@ -102,21 +102,21 @@
             android:id="@+id/txtRemarks"
             android:layout_width="match_parent"
             android:layout_height="244dp"
-            android:background="@drawable/text_multiline_rounded"
             android:hint="@string/txtRemarks"
             android:textColorHint="@color/colorHint"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidth="12dp"
-            app:hintTextColor="@color/lineHint">
+            app:hintTextColor="@color/lineHint"
+            android:background="@drawable/text_multiline_rounded">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="#00000000"
+                android:backgroundTint="#00FFFFFF"
                 android:gravity="top"
                 android:inputType="textMultiLine|textCapSentences"
                 android:textColorHighlight="#00FFFFFF"
-                android:textColorLink="#00FFFFFF" />
+                android:textColorLink="#00000000" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

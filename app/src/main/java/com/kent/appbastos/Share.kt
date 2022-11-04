@@ -15,7 +15,7 @@ class Share : AppCompatActivity() {
         val btnShare: Button = findViewById(R.id.btnShare)
         val btnPrintOut: Button = findViewById(R.id.btnPrintOut)
 
-        btnBack.setOnClickListener{
+        btnBack.setOnClickListener {
             finish()
         }
         btnBackHome.setOnClickListener {
