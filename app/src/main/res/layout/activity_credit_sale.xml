@@ -127,7 +127,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/txtTelClient"
             android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
+            app:hintTextColor="@color/lineHint"
+            app:prefixText="+57">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/numberClient"
@@ -171,7 +172,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/txtValue"
             android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
+            app:hintTextColor="@color/lineHint"
+            app:prefixText="$">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/valueUnit"
@@ -180,7 +182,6 @@
                 android:backgroundTint="@color/lineHint"
                 android:inputType="number"
                 android:textColorLink="#000000" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <Space

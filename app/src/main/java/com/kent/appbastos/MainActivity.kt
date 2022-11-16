@@ -8,14 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 
 const val APPBASTOS_EXTRA_CASHSALE = "com.kent.appbastos"
 
-//const val CREDIT_SALE = "com.kent.appbastos.CreditSale"
-const val OPERATIONAL_EXPENSES = "com.kent.appbastos.OperationalExpenses"
-//Text of use
+//Value for save
+const val VALUES_SAVE = "com.kent.appbastos"
 
-//const val NUMBER_CLIENT = "com.kent.appbastos.number"
-const val TYPE_OPERATIONAL = "com.kent.appbastos.type"
-const val DESCRIPTION = "com.kent.appbastos.description"
-const val VALUE = "com.kent.appbastos.value"
 
 
 class MainActivity : AppCompatActivity() {

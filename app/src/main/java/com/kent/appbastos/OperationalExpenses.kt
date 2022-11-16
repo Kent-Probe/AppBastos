@@ -50,12 +50,11 @@ class OperationalExpenses : AppCompatActivity() {
                 )
             )
 
+            val textsValue = "Gastos operacionales.$typeOperational.$description.$value"
+
             if (ValidateEmpty().validate(texts, inputsLayouts)) {
                 val intent = Intent(this, AddRemarks::class.java).apply {
-                    putExtra(TYPE_OPERATIONAL, typeOperational)
-                    putExtra(DESCRIPTION, description)
-                    putExtra(VALUE, value)
-                    putExtra(OPERATIONAL_EXPENSES, "operationalExpenses")
+                    putExtra(VALUES_SAVE, textsValue)
                 }
                 startActivity(intent)
                 finish()

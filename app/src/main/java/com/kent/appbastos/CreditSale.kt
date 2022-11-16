@@ -67,6 +67,8 @@ class CreditSale : AppCompatActivity() {
                 )
             )
 
+            val textsValue = "Venta a credito.$nameClient.$numberClient.$nameProduct.$valueUnit.$valueAmount"
+
 
             if (ValidateEmpty().validate(texts, inputsLayouts)) {
 
@@ -82,12 +84,15 @@ class CreditSale : AppCompatActivity() {
 
                 btnOpenAddDebt.setOnClickListener {
                     val intent = Intent(this, AddRemarks::class.java).apply {
+                        putExtra(VALUES_SAVE, textsValue)
                     }
                     startActivity(intent)
                     finish()
                 }
                 btnAddPayment.setOnClickListener {
-                    val intent = Intent(this, Payment::class.java)
+                    val intent = Intent(this, Payment::class.java).apply {
+                        putExtra(VALUES_SAVE, textsValue)
+                    }
                     startActivity(intent)
                     finish()
                 }

@@ -20,4 +20,12 @@ class ValidateEmpty {
         return valid
     }
 
+    fun validateEmptyOrNull(array: List<String>?): Boolean{
+        var validate = true
+        if (array == null || array.isEmpty()){
+            validate = false
+        }
+        return validate
+    }
+
 }

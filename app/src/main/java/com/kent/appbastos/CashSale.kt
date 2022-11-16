@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.kent.appbastos.validate.ValidateEmpty
 import java.util.*
-//const val CASH_SALE= "com.kent.appbastos.CashSale"
 
 
 class CashSale : AppCompatActivity() {
@@ -64,9 +63,11 @@ class CashSale : AppCompatActivity() {
                 )
             )
 
+            val textsValue = "Venta a contado.$nameClient.$nameProduct.$valueUnit.$valueAmount"
+
             if (ValidateEmpty().validate(texts, inputsLayouts)) {
                 val intent = Intent(this, AddRemarks::class.java).apply {
-
+                    putExtra(VALUES_SAVE, textsValue)
                 }
                 startActivity(intent)
             }

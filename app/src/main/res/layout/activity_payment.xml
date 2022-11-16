@@ -120,7 +120,8 @@
                 android:backgroundTint="@color/lineHint"
                 android:inputType="text|textCapWords"
                 android:textColorLink="#000000"
-/>
+                android:enabled="false"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -166,7 +167,8 @@
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"
                 android:inputType="text|textCapWords"
-                android:textColorLink="#000000" />
+                android:textColorLink="#000000"
+                android:enabled="false"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -181,7 +183,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/txtPaymentValue"
             android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
+            app:hintTextColor="@color/lineHint"
+            app:prefixText="$">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/payment"

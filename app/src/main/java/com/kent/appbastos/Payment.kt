@@ -17,6 +17,15 @@ class Payment : AppCompatActivity() {
         val btnContinue: Button = findViewById(R.id.btnContinue)
         val btnCancel: Button = findViewById(R.id.btnCancel)
 
+        val nameClientView: TextView = findViewById(R.id.nameClient)
+        val nameProductView: TextView = findViewById(R.id.nameProduct)
+
+        //Variable de CreditSale
+        val values = this.intent.extras?.getString(VALUES_SAVE)?.split(".")
+
+        nameClientView.text = values?.get(1)
+        nameProductView.text = values?.get(3)
+
         btnContinue.setOnClickListener {
 
             //Variables de los TextInputLayout
@@ -26,10 +35,8 @@ class Payment : AppCompatActivity() {
             val inputPayment: TextInputLayout = findViewById(R.id.inputPayment)
 
 
-            //Variables del  editText
-            val nameClientView: TextView = findViewById(R.id.nameClient)
+            //Variables del editText
             val debtView: TextView = findViewById(R.id.debt)
-            val nameProductView: TextView = findViewById(R.id.nameProduct)
             val paymentView: TextView = findViewById(R.id.payment)
 
 
@@ -39,13 +46,32 @@ class Payment : AppCompatActivity() {
             val nameProduct: String = nameProductView.text.toString()
             val payment: String = paymentView.text.toString()
 
+
+
             //Arrays
-            val texts: Vector<String> = Vector(listOf(nameClient, debt, nameProduct, payment))
-            val inputsLayouts: Vector<TextInputLayout> =
-                Vector(listOf(inputNameClient, inputDebt, inputNameProduct, inputPayment))
+            val texts: Vector<String> = Vector(
+                listOf(
+                    nameClient,
+                    debt,
+                    nameProduct,
+                    payment
+                )
+            )
+            val inputsLayouts: Vector<TextInputLayout> = Vector(
+                listOf(
+                    inputNameClient,
+                    inputDebt,
+                    inputNameProduct,
+                    inputPayment
+                )
+            )
+
+            val textsValue = "$nameClient.$debt.$nameProduct.$payment"
 
             if (ValidateEmpty().validate(texts, inputsLayouts)) {
-                val intent = Intent(this, AddRemarks::class.java)
+                val intent = Intent(this, AddRemarks::class.java).apply {
+                    putExtra(VALUES_SAVE, textsValue)
+                }
                 startActivity(intent)
                 finish()
             }

@@ -99,7 +99,7 @@
         app:layout_constraintTop_toBottomOf="@+id/gradiantHome">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtRemarks"
+            android:id="@+id/inputTxtRemarks"
             android:layout_width="match_parent"
             android:layout_height="244dp"
             android:hint="@string/txtRemarks"
@@ -110,6 +110,7 @@
             android:background="@drawable/text_multiline_rounded">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtRemarks"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="#00FFFFFF"
