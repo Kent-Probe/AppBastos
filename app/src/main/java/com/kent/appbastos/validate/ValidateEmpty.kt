@@ -11,7 +11,7 @@ class ValidateEmpty {
         for ((num, text) in texts.withIndex()){
             if(text.isEmpty()){
                 inputLayout[num].isErrorEnabled = true
-                inputLayout[num].error = "Error, el campo no puede estar vacio"
+                inputLayout[num].error = "Error: Campo Vacio"
                 valid = false
             }else{
                 inputLayout[num].isErrorEnabled = false

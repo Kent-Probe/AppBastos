@@ -2,8 +2,8 @@
     <string name="app_name" translatable="false">AppBastos</string>
 
     <!-- Textos en campos -->
-    <string name="txtUserName" translatable="false">Nombre del usuario</string>
-    <string name="txtName" translatable="false">Nombre</string>
+    <string name="txtUserName" translatable="false">Nombre del usuario*</string>
+    <string name="txtName" translatable="false">Nombre*</string>
     <string name="txtNameClient" translatable="false">Nombre del cliente*</string>
     <string name="txtNameProduct" translatable="false">Nombre del Prodcto*</string>
     <string name="txtValue" translatable="false">Valor por unidad*</string>
@@ -12,7 +12,8 @@
     <string name="txtValueOperational" translatable="false">Valor*</string>
     <string name="txtDescription" translatable="false">Descripcion*</string>
     <string name="txtPaymentValue" translatable="false">Pago*</string>
-    <string name="txtTypeOperational" translatable="false">Tipo de operacion</string>
+    <string name="txtTypeOperational" translatable="false">Tipo de operacion*</string>
+    <string name="txtRemarks" translatable="false">Comentarios</string>
     <string name="txtAlertDialog" translatable="false">Este cliente tiene una deuda abierta. ¿Que desea hacer?</string>
 
     <!-- Topics of Screen-->
@@ -27,7 +28,6 @@
     <string name="txtTelClient" translatable="false">Numero del cliente</string>
     <string name="txtDebt" translatable="false">Deuda</string>
     <string name="txtPayment" translatable="false">Pago</string>
-    <string name="txtRemarks" translatable="false">Comentarios</string>
 
 
     <!-- texts in buttons -->

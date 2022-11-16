@@ -12,6 +12,9 @@ import com.google.android.material.textfield.TextInputLayout
 import com.kent.appbastos.validate.ValidateEmpty
 import java.util.*
 
+
+
+
 class CreditSale : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +48,15 @@ class CreditSale : AppCompatActivity() {
             val valueAmount: String = valueAmountView.text.toString()
 
             //Arrays
-            val texts: Vector<String> =
-                Vector(listOf(nameClient, numberClient, nameProduct, valueUnit, valueAmount))
+            val texts: Vector<String> = Vector(
+                listOf(
+                    nameClient,
+                    numberClient,
+                    nameProduct,
+                    valueUnit,
+                    valueAmount
+                )
+            )
             val inputsLayouts: Vector<TextInputLayout> = Vector(
                 listOf(
                     inputNameClient,
@@ -71,7 +81,8 @@ class CreditSale : AppCompatActivity() {
                 val btnAddPayment: Button = view.findViewById(R.id.btnAddPayment)
 
                 btnOpenAddDebt.setOnClickListener {
-                    val intent = Intent(this, AddRemarks::class.java)
+                    val intent = Intent(this, AddRemarks::class.java).apply {
+                    }
                     startActivity(intent)
                     finish()
                 }

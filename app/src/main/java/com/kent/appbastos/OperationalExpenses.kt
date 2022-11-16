@@ -35,12 +35,28 @@ class OperationalExpenses : AppCompatActivity() {
             val value: String = valueView.text.toString()
 
             //Arrays
-            val texts: Vector<String> = Vector(listOf(typeOperational, description, value))
-            val inputsLayouts: Vector<TextInputLayout> =
-                Vector(listOf(inputTypeOperational, inputDescription, inputValue))
+            val texts: Vector<String> = Vector(
+                listOf(
+                    typeOperational,
+                    description,
+                    value
+                )
+            )
+            val inputsLayouts: Vector<TextInputLayout> = Vector(
+                listOf(
+                    inputTypeOperational,
+                    inputDescription,
+                    inputValue
+                )
+            )
 
             if (ValidateEmpty().validate(texts, inputsLayouts)) {
-                val intent = Intent(this, AddRemarks::class.java)
+                val intent = Intent(this, AddRemarks::class.java).apply {
+                    putExtra(TYPE_OPERATIONAL, typeOperational)
+                    putExtra(DESCRIPTION, description)
+                    putExtra(VALUE, value)
+                    putExtra(OPERATIONAL_EXPENSES, "operationalExpenses")
+                }
                 startActivity(intent)
                 finish()
             }

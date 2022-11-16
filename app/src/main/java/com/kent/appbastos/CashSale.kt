@@ -3,11 +3,13 @@ package com.kent.appbastos
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.kent.appbastos.validate.ValidateEmpty
 import java.util.*
+//const val CASH_SALE= "com.kent.appbastos.CashSale"
 
 
 class CashSale : AppCompatActivity() {
@@ -18,6 +20,7 @@ class CashSale : AppCompatActivity() {
 
         val btnContinue: Button = findViewById(R.id.btnContinue)
         val btnCancel: Button = findViewById(R.id.btnCancel)
+        val btnBack: ImageButton = findViewById(R.id.btnBack)
 
         btnContinue.setOnClickListener {
 
@@ -44,7 +47,14 @@ class CashSale : AppCompatActivity() {
             val inputsLayouts = Vector<TextInputLayout>()
 
             //Llenar arrays
-            texts.addAll(listOf(nameClient, nameProduct, valueUnit, valueAmount))
+            texts.addAll(
+                listOf(
+                    nameClient,
+                    nameProduct,
+                    valueUnit,
+                    valueAmount
+                )
+            )
             inputsLayouts.addAll(
                 listOf(
                     inputNameClient,
@@ -55,41 +65,20 @@ class CashSale : AppCompatActivity() {
             )
 
             if (ValidateEmpty().validate(texts, inputsLayouts)) {
-                val intent = Intent(this, AddRemarks::class.java)
+                val intent = Intent(this, AddRemarks::class.java).apply {
+
+                }
                 startActivity(intent)
-                finish()
             }
 
         }
 
+        btnBack.setOnClickListener{
+            finish()
+        }
         btnCancel.setOnClickListener {
             finish()
         }
-
-
-        /*
-        // Get the Intent that started this activity and extract the string
-        val message = intent.getStringExtra(APPBASTOS_EXTRA_CASHSALE)
-
-        //Capture the layout's TexView and set the string as its text
-        val textView = findViewById<TextView>(R.id.txtUserName).apply {
-            text = message
-        }
-
-        val spTypesValues : Spinner =  findViewById(R.id.spnType)
-
-        //Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.types,
-            R.layout.spinner_item_types
-        ).also {  arrayAdapter ->
-            //Specify the layout to use when the list of choices appears
-            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            //Apply the adapter to the spinner
-            spTypesValues.adapter = arrayAdapter
-        }
-         */
 
     }
 }

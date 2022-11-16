@@ -31,7 +31,7 @@
                 android:contentDescription="@string/descUserImage"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_launcher_background"
+                app:srcCompat="@mipmap/ic_launcher_round"
                 tools:ignore="ImageContrastCheck" />
 
             <TextView
@@ -138,8 +138,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"
-                android:textColorLink="#000000"
-                android:inputType="text|textCapSentences"/>
+                android:inputType="text|textCapSentences"
+                android:textColorLink="#000000" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

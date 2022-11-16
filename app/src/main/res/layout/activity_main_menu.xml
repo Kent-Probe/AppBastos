@@ -30,7 +30,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:contentDescription="@string/descUserImage"
-                app:srcCompat="@drawable/ic_launcher_background"
+                app:srcCompat="@mipmap/ic_launcher_round"
                 tools:ignore="ImageContrastCheck" />
 
             <TextView
