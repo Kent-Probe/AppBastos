@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".MainActivity">
+    tools:context=".usecases.launcher.MainActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/gradiantHome"
@@ -31,41 +31,22 @@
         app:srcCompat="@mipmap/ic_launcher_round"
         tools:ignore="ImageContrastCheck" />
 
-    <EditText
-        android:id="@+id/txtName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="32dp"
-        android:autofillHints="@string/txtName"
-        android:backgroundTint="@color/lineHint"
-        android:drawableTint="@color/lineHintNext"
-        android:ems="10"
-        android:foregroundTint="#000000"
-        android:hint="@string/txtName"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColor="#000000"
-        android:textColorHint="@color/colorHint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gradiantHome" />
-
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="114dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/button_rounded"
+        android:background="@drawable/button_google"
+        android:drawableStart="@drawable/googleg_standard_color_18"
+        android:drawablePadding="17dp"
         android:text="@string/txtBtnLogin"
-        android:textColor="@color/white"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtName"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/imgUser" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

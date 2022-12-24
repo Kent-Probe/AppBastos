@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "501226489695",
+    "project_id": "appbastos-7e153",
+    "storage_bucket": "appbastos-7e153.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501226489695:android:14370d79b6e41099dcd8ea",
+        "android_client_info": {
+          "package_name": "com.kent.appbastos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "501226489695-u1hdb2b4p6vnrvo7d997qquc8hsvacb9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4cr4qfOoqxzw13PlPAPpnUCFIcHBgnX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "501226489695-u1hdb2b4p6vnrvo7d997qquc8hsvacb9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

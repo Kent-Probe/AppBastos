@@ -13,58 +13,71 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".Share"
+            android:name=".usecases.sale.MenuSale"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Payment"
+            android:name=".usecases.screenComplete.ScreenPrincipal"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_screen_principal"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.Fullscreen" />
+        <activity
+            android:name=".usecases.share.Share"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddRemarks"
+            android:name=".usecases.sale.Payment"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".OperationalExpenses"
+            android:name=".usecases.remarks.AddRemarks"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CreditSale"
+            android:name=".usecases.sale.OperationalExpenses"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainMenu"
+            android:name=".usecases.sale.CreditSale"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CashSale"
+            android:name=".usecases.mainPrincipal.MainMenu"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:theme="@style/SplashThem"
-            android:exported="true">
+            android:name=".usecases.sale.CashSale"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".usecases.launcher.MainActivity"
+            android:exported="true"
+            android:theme="@style/SplashThem">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

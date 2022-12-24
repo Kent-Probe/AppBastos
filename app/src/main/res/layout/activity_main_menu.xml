@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenu">
-
+    tools:context=".usecases.mainPrincipal.MainMenu">
 
     <LinearLayout
         android:id="@+id/gradiantHome"
@@ -101,24 +100,11 @@
         app:layout_constraintTop_toBottomOf="@+id/gradiantHome">
 
         <Button
-            android:id="@+id/btnCashSale"
+            android:id="@+id/btnRegisterSale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_rounded"
-            android:text="@string/txtCashSale"
-            android:textColor="@color/white"
-            tools:ignore="TextContrastCheck" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <Button
-            android:id="@+id/txtCreditSale"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
-            android:text="@string/txtCreditSale"
+            android:text="@string/txtBtnRegisterSale"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
 
@@ -132,6 +118,19 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_rounded"
             android:text="@string/txtOperationalExpenses"
+            android:textColor="@color/white"
+            tools:ignore="TextContrastCheck" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/btnLogOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_rounded"
+            android:text="@string/txtLogOut"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
 

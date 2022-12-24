@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@drawable/layout_background_dialog">
     <TextView
-        android:id="@+id/text_dialog"
+        android:id="@+id/textDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="42dp"
@@ -22,7 +22,7 @@
 
 
         <Button
-            android:id="@+id/btnOpenNewDebt"
+            android:id="@+id/btnUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
@@ -33,7 +33,7 @@
             android:text="@string/txtBtnOpenNewDebt" />
 
         <Button
-            android:id="@+id/btnAddPayment"
+            android:id="@+id/btnDown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtBtnAddPayment"

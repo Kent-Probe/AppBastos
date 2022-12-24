@@ -16,6 +16,11 @@
     <string name="txtRemarks" translatable="false">Comentarios</string>
     <string name="txtAlertDialog" translatable="false">Este cliente tiene una deuda abierta. ¿Que desea hacer?</string>
 
+    //Txt Onboard
+    <string name="txtOnboarding_1">Aplicacion para la gestion de mercado en </string>
+    <string name="txtOnboarding_2">Aplicacion</string>
+    <string name="txtBtnSkip">Omitir</string>
+
     <!-- Topics of Screen-->
     <string name="txtCashSale" translatable="false">Venta a contado</string>
     <string name="txtMenu" translatable="false">Menu</string>
@@ -25,13 +30,14 @@
     <string name="txtShare" translatable="false">Compartir</string>
     <string name="txtProfile" translatable="false">Perfil</string>
     <string name="txtOperationalExpenses" translatable="false">Gastos operacionales</string>
+    <string name="txtLogOut" translatable="false">Salir de sesion</string>
     <string name="txtTelClient" translatable="false">Numero del cliente</string>
     <string name="txtDebt" translatable="false">Deuda</string>
     <string name="txtPayment" translatable="false">Pago</string>
 
 
     <!-- texts in buttons -->
-    <string name="txtBtnLogin" translatable="false">Ingresar</string>
+    <string name="txtBtnLogin" translatable="false">Ingresar con google</string>
     <string name="txtBtnContinue" translatable="false">Continuar</string>
     <string name="txtBtnCancel" translatable="false">Cancelar</string>
     <string name="txtBtnShare" translatable="false">Enviar</string>
@@ -39,6 +45,7 @@
     <string name="txtBtnBackHome">Regresar</string>
     <string name="txtBtnOpenNewDebt">Abrir una nueva deuda</string>
     <string name="txtBtnAddPayment">Agregar pago</string>
+    <string name="txtBtnRegisterSale">Registrar Venta</string>
 
     <!-- Description of images -->
     <string name="descLogo">Logo de la aplicacion de AppBastos</string>
@@ -60,5 +67,23 @@
         <item>Kg</item>
         <item>Kg</item>
     </string-array>
+
+
+
+    <string name="title_activity_screen_principal">screenPrincipal</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">APP   \nBASTOS </string>
+    <string name="title_activity_menu_sale">menu_sale</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!-- Strings storage data -->
+    <string name="prefs_file">com.kent.appbastos.PREFERENCE_FILE_KEY</string>
 
 </resources>

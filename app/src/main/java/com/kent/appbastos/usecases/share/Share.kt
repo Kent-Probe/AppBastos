@@ -1,9 +1,10 @@
-package com.kent.appbastos
+package com.kent.appbastos.usecases.share
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import com.kent.appbastos.R
 
 class Share : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,8 +13,8 @@ class Share : AppCompatActivity() {
 
         val btnBack: ImageButton = findViewById(R.id.btnBack)
         val btnBackHome: Button = findViewById(R.id.btnBackHome)
-        val btnShare: Button = findViewById(R.id.btnShare)
-        val btnPrintOut: Button = findViewById(R.id.btnPrintOut)
+        //val btnShare: Button = findViewById(R.id.btnShare)
+        //val btnPrintOut: Button = findViewById(R.id.btnPrintOut)
 
         btnBack.setOnClickListener {
             finish()

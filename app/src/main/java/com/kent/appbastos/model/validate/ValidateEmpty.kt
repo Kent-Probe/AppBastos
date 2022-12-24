@@ -1,4 +1,4 @@
-package com.kent.appbastos.validate
+package com.kent.appbastos.model.validate
 
 import com.google.android.material.textfield.TextInputLayout
 import java.util.*
@@ -28,4 +28,15 @@ class ValidateEmpty {
         return validate
     }
 
+    fun valueUnit(value:String, inputLayout: TextInputLayout): Boolean{
+        var validate = true
+        if(value == "0"){
+            inputLayout.isErrorEnabled = true
+            inputLayout.error = "Error: No puede ser 0"
+            validate = false
+        }else{
+            inputLayout.isErrorEnabled = false
+        }
+        return  validate
+    }
 }

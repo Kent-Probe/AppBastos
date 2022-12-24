@@ -1,15 +1,17 @@
-package com.kent.appbastos
+package com.kent.appbastos.usecases.sale
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
+
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import com.google.android.material.textfield.TextInputLayout
-import com.kent.appbastos.validate.ValidateEmpty
+import com.kent.appbastos.R
+import com.kent.appbastos.model.alerts.Alerts
+import com.kent.appbastos.usecases.remarks.AddRemarks
+import com.kent.appbastos.model.validate.ValidateEmpty
 import java.util.*
 
 
@@ -67,37 +69,29 @@ class CreditSale : AppCompatActivity() {
                 )
             )
 
-            val textsValue = "Venta a credito.$nameClient.$numberClient.$nameProduct.$valueUnit.$valueAmount"
-
-
             if (ValidateEmpty().validate(texts, inputsLayouts)) {
+                val view: View = Alerts().showAlertPersonalize(
+                    layoutInflater,
+                    this,
+                    R.string.txtAlertDialog.toString(),
+                    R.string.txtBtnOpenNewDebt.toString(),
+                    R.string.txtBtnAddPayment.toString()
+                )
 
-                val dialogAlertDialog: AlertDialog.Builder = AlertDialog.Builder(this)
-                val layoutInflater: LayoutInflater = layoutInflater
-                val view: View = layoutInflater.inflate(R.layout.dialog_custom, null)
+                val btnUp: Button = view.findViewById(R.id.btnUp)
+                val btnDown: Button = view.findViewById(R.id.btnDown)
 
-                dialogAlertDialog.setView(view)
-                val alertDialog: AlertDialog = dialogAlertDialog.create()
-
-                val btnOpenAddDebt: Button = view.findViewById(R.id.btnOpenNewDebt)
-                val btnAddPayment: Button = view.findViewById(R.id.btnAddPayment)
-
-                btnOpenAddDebt.setOnClickListener {
-                    val intent = Intent(this, AddRemarks::class.java).apply {
-                        putExtra(VALUES_SAVE, textsValue)
-                    }
+                btnUp.setOnClickListener {
+                    val intent = Intent(this, AddRemarks::class.java)
                     startActivity(intent)
                     finish()
                 }
-                btnAddPayment.setOnClickListener {
-                    val intent = Intent(this, Payment::class.java).apply {
-                        putExtra(VALUES_SAVE, textsValue)
-                    }
+                btnDown.setOnClickListener {
+                    val intent = Intent(this, Payment::class.java)
                     startActivity(intent)
                     finish()
                 }
 
-                alertDialog.show()
             }
         }
 

@@ -1,4 +1,4 @@
-package com.kent.appbastos
+package com.kent.appbastos.usecases.remarks
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import com.kent.appbastos.validate.ValidateEmpty
+import com.kent.appbastos.R
+import com.kent.appbastos.usecases.launcher.VALUES_SAVE
+import com.kent.appbastos.usecases.share.Share
+import com.kent.appbastos.model.validate.ValidateEmpty
 
 
 class AddRemarks : AppCompatActivity() {

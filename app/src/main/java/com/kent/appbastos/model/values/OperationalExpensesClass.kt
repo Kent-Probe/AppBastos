@@ -1,4 +1,4 @@
-package com.kent.appbastos.model
+package com.kent.appbastos.model.values
 
 class OperationalExpensesClass {
     var typeOperational = ""

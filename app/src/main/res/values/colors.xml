@@ -14,4 +14,16 @@
     <color name="lineHint">#070000</color>
     <color name="lineHintNext">#000000</color>
     <color name="error">#AC0E0E</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="greenWhite">#0000FF9F</color>
+    <color name="greenBlack">#2C9782</color>
+
+    //indicator color
+    <color name="inactive">#C4C4C4</color>
+    <color name="active">#50C2C9</color>
+
 </resources>
