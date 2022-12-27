@@ -82,15 +82,22 @@ class CreditSale : AppCompatActivity() {
                     layoutInflater,
                     this,
                     R.string.txtAlertDialog.toString(),
-                    R.string.txtBtnOpenNewDebt.toString(),
-                    R.string.txtBtnAddPayment.toString()
+                    "Abrir una nueva deuda",
+                    "Agregar pago"
                 )
 
                 val btnUp: Button = view.findViewById(R.id.btnUp)
                 val btnDown: Button = view.findViewById(R.id.btnDown)
 
                 btnUp.setOnClickListener {
-                    val intent = Intent(this, AddRemarks::class.java)
+                    val intent = Intent(this, AddRemarks::class.java).apply {
+                        putExtra("nameClient", nameClient)
+                        putExtra("numberClient", numberClient)
+                        putExtra("nameProduct", nameProduct)
+                        putExtra("valueUnit", valueUnit.toFloat())
+                        putExtra("valueAmount", valueAmount.toInt())
+                        putExtra("title", "creditSale")
+                    }
                     startActivity(intent)
                     finish()
                 }

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import com.kent.appbastos.R
 import com.kent.appbastos.model.values.CashSaleClass
 import java.io.File
@@ -30,7 +31,7 @@ class Share : AppCompatActivity() {
         val btnBack: ImageButton = findViewById(R.id.btnBack)
         val btnBackHome: Button = findViewById(R.id.btnBackHome)
         val btnShare: Button = findViewById(R.id.btnShare)
-        //val btnPrintOut: Button = findViewById(R.id.btnPrintOut)
+        val btnPrintOut: Button = findViewById(R.id.btnPrintOut)
 
         btnBack.setOnClickListener {
             finish()
@@ -41,6 +42,11 @@ class Share : AppCompatActivity() {
 
         btnShare.setOnClickListener {
             share()
+        }
+
+        //COnstruccion
+        btnPrintOut.setOnClickListener {
+            Toast.makeText(this, "En construccion", Toast.LENGTH_LONG)
         }
     }
 
