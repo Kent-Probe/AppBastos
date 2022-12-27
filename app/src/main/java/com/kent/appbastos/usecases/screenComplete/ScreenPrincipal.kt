@@ -26,11 +26,14 @@ import com.kent.appbastos.usecases.launcher.MainActivity
  */
 class ScreenPrincipal : AppCompatActivity() {
 
+    /*
     private lateinit var mSLideViewPager: ViewPager
     private lateinit var mDotLayout: LinearLayout
     private lateinit var skipbtn: Button
     private lateinit var dots: Array<TextView?>
     private lateinit var viewPagerAdapter: ViewPagerAdapter
+    */
+
 
 
     private lateinit var binding: ActivityScreenPrincipalBinding
@@ -86,6 +89,7 @@ class ScreenPrincipal : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        /*
         //date of the Onboarding
         setContentView(R.layout.activity_screen_principal)
         skipbtn = findViewById(R.id.skipButton)
@@ -100,6 +104,7 @@ class ScreenPrincipal : AppCompatActivity() {
         mSLideViewPager!!.adapter = viewPagerAdapter
         setUpindicator(0)
         mSLideViewPager!!.addOnPageChangeListener(viewListener)
+        * */
 
         binding = ActivityScreenPrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -193,7 +198,8 @@ class ScreenPrincipal : AppCompatActivity() {
     }
 
 
-
+    /*
+    *
     //Date for pager view
     fun setUpindicator(position: Int) {
         dots = arrayOfNulls(2)
@@ -228,4 +234,5 @@ class ScreenPrincipal : AppCompatActivity() {
     private fun getitem(i: Int): Int {
         return mSLideViewPager!!.currentItem + i
     }
+    * */
 }

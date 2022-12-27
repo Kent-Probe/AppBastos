@@ -1,5 +1,6 @@
 package com.kent.appbastos.usecases.sale
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -19,10 +20,18 @@ class CashSale : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cash_sale)
 
+        //Change value of name Profile
+        val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val profile = pref.getString("profile", null).toString()
+        val txtUserName:TextView = findViewById(R.id.txtUserName)
+        txtUserName.text = profile
+
+        //Variables of buttons
         val btnContinue: Button = findViewById(R.id.btnContinue)
         val btnCancel: Button = findViewById(R.id.btnCancel)
         val btnBack: ImageButton = findViewById(R.id.btnBack)
 
+        //Click buttons
         btnContinue.setOnClickListener {
 
             //Variables de los TextInputLayout
@@ -65,9 +74,18 @@ class CashSale : AppCompatActivity() {
                 )
             )
 
+            //SHow mistake
             if (ValidateEmpty().validate(texts, inputsLayouts) && ValidateEmpty().valueUnit(valueUnit, inputValueUnit)) {
-                val intent = Intent(this, AddRemarks::class.java)
+                val intent = Intent(this, AddRemarks::class.java).apply {
+                    putExtra("nameClient", nameClient)
+                    putExtra("nameProduct", nameProduct)
+                    putExtra("valueUnit", valueUnit.toFloat())
+                    putExtra("valueAmount", valueAmount.toInt())
+                    putExtra("title", "CashSale")
+                }
+
                 startActivity(intent)
+                finish()
             }
 
         }

@@ -26,7 +26,7 @@
     <string name="txtMenu" translatable="false">Menu</string>
     <string name="txtCreditSale" translatable="false">Venta a credito</string>
     <string name="txtMoneyInstallments" translatable="false">Cuotas de pago</string>
-    <string name="txtAddRemarks" translatable="false">Agregar comentarios</string>
+    <string name="txtConfirmar" translatable="false">Confirmar</string>
     <string name="txtShare" translatable="false">Compartir</string>
     <string name="txtProfile" translatable="false">Perfil</string>
     <string name="txtOperationalExpenses" translatable="false">Gastos operacionales</string>
@@ -42,7 +42,7 @@
     <string name="txtBtnCancel" translatable="false">Cancelar</string>
     <string name="txtBtnShare" translatable="false">Enviar</string>
     <string name="txtBtnPrintOut">Imprimir</string>
-    <string name="txtBtnBackHome">Regresar</string>
+    <string name="txtBtnBackHome">Registrar otra venta</string>
     <string name="txtBtnOpenNewDebt">Abrir una nueva deuda</string>
     <string name="txtBtnAddPayment">Agregar pago</string>
     <string name="txtBtnRegisterSale">Registrar Venta</string>
@@ -69,7 +69,6 @@
     </string-array>
 
 
-
     <string name="title_activity_screen_principal">screenPrincipal</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">APP   \nBASTOS </string>
@@ -85,5 +84,7 @@
 
     <!-- Strings storage data -->
     <string name="prefs_file">com.kent.appbastos.PREFERENCE_FILE_KEY</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

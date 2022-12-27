@@ -1,5 +1,6 @@
 package com.kent.appbastos.usecases.sale
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,9 +18,17 @@ class Payment : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
 
+        //Change value of name Profile
+        val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val profile = pref.getString("profile", null).toString()
+        val txtUserName:TextView = findViewById(R.id.txtUserName)
+        txtUserName.text = profile
+
+        //Variables Buttons
         val btnContinue: Button = findViewById(R.id.btnContinue)
         val btnCancel: Button = findViewById(R.id.btnCancel)
 
+        //Variables of TextView
         val nameClientView: TextView = findViewById(R.id.nameClient)
         val nameProductView: TextView = findViewById(R.id.nameProduct)
 

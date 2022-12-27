@@ -25,6 +25,7 @@ class MainMenu : AppCompatActivity() {
         val provider = bundle?.getString("provider")
         val profile = bundle?.getString("profile")
 
+
         //Guardar Datos
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
         pref.putString("email", email)

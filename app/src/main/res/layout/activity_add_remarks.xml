@@ -74,7 +74,7 @@
             android:id="@+id/txtNameScreen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txtAddRemarks"
+            android:text="@string/txtConfirmar"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/white"
             android:textSize="18sp"
@@ -109,13 +109,12 @@
             app:hintTextColor="@color/lineHint"
             android:background="@drawable/text_multiline_rounded">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <TextView
                 android:id="@+id/txtRemarks"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="#00FFFFFF"
                 android:gravity="top"
-                android:inputType="textMultiLine|textCapSentences"
                 android:textColorHighlight="#00FFFFFF"
                 android:textColorLink="#00000000"/>
 

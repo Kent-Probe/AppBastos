@@ -85,15 +85,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun session(){
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val profile = pref.getString("profile", null).toString()
         val email = pref.getString("email", null)
         val provider = pref.getString("provider", null)
-        val profile = pref.getString("profile", null).toString()
 
         if(email != null && provider != null){
             mainMenuScreen(email, ProviderType.valueOf(provider), profile)
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -102,7 +103,6 @@ class MainActivity : AppCompatActivity() {
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             try{
                 val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
-
                 if (account != null){
                     val credential: AuthCredential = GoogleAuthProvider.getCredential(account.idToken, null)
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
