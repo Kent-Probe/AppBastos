@@ -14,10 +14,11 @@ class CreditSaleClass(
     var valueAmount:Int,
     var valueTotal:Float,
     var dateTime:LocalDateTime,
-    var consecutive:String
+    var consecutive:String,
+    var type:String
 ) {
-    constructor() : this("", "","","",0f,0,0f, LocalDateTime.now(),"")
-    var currentBalance:Float = 0f
+    constructor() : this("", "","","",0f,0,0f, LocalDateTime.now(),"", "")
+    //var currentBalance:Float = 0f
 
     //Methods of Archive
     fun saveArchive(context: Context):Boolean{
@@ -33,7 +34,9 @@ class CreditSaleClass(
                     "\nCantidad: $valueAmount" +
                     "\nValor total: $valueTotal" +
                     "\nFecha: $dateTime" +
-                    "\nconsecutivo: $consecutive")
+                    "\nconsecutivo: $consecutive" +
+                    "\nType: $type"
+            )
             archive.flush()
             archive.close()
         }catch (e: IOException){
@@ -43,7 +46,7 @@ class CreditSaleClass(
     }
 
     fun openArchive(context: AddRemarks):String{
-        var successful = "nada"
+        var successful: String
         try {
             val archive =
                 InputStreamReader(context.openFileInput("CreditSale.txt"))
@@ -87,7 +90,8 @@ class CreditSaleClass(
                 "\nCantidad: $valueAmount" +
                 "\nValor total: $valueTotal" +
                 "\nFecha: $dateTime" +
-                "\nconsecutivo: $consecutive")
+                "\nconsecutivo: $consecutive"+
+                "\nType: $type")
     }
 
 }

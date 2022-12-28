@@ -21,8 +21,7 @@ class AddRemarks : AppCompatActivity() {
         setContentView(R.layout.activity_add_remarks)
 
         //Variables Temp
-        var uriPath = ""
-        var txtTempTEXT = ""
+        var txtTempTEXT: String
         val title = intent.extras?.getString("title")
 
         //Texts of field
@@ -86,6 +85,7 @@ class AddRemarks : AppCompatActivity() {
         val nameProduct = this.intent.extras?.getString("nameProduct")
         val valueUnit = this.intent.extras?.getFloat("valueUnit")
         val valueAmount = this.intent.extras?.getInt("valueAmount")
+        val type = this.intent.extras?.getString("typeProduct")
 
         //Date for the class
         return CashSaleClass(
@@ -96,7 +96,8 @@ class AddRemarks : AppCompatActivity() {
             valueUnit.toString().toFloat(),
             valueUnit.toString().toFloat() * valueAmount.toString().toInt(),
             LocalDateTime.now(),
-            "#Consecutivo"
+            "#Consecutivo",
+            type.toString()
         )
     }
     private fun fillClassCredit(): CreditSaleClass{
@@ -106,6 +107,7 @@ class AddRemarks : AppCompatActivity() {
         val nameProduct = this.intent.extras?.getString("nameProduct")
         val valueUnit = this.intent.extras?.getFloat("valueUnit")
         val valueAmount = this.intent.extras?.getInt("valueAmount")
+        val type = this.intent.extras?.getString("typeProduct")
 
         return CreditSaleClass(
             "MARCA",
@@ -116,7 +118,8 @@ class AddRemarks : AppCompatActivity() {
             valueAmount.toString().toInt(),
             valueUnit.toString().toFloat() * valueAmount.toString().toInt(),
             LocalDateTime.now(),
-            "#Consecutivo"
+            "#Consecutivo",
+            type.toString()
         )
     }
 }

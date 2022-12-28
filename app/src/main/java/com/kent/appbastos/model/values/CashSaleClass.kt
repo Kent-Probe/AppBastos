@@ -7,7 +7,6 @@ import java.io.File
 import java.io.IOException
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
-import java.io.StringBufferInputStream
 import java.time.LocalDateTime
 
 class CashSaleClass(
@@ -18,9 +17,10 @@ class CashSaleClass(
     var valueUnit: Float,
     var valueTotal: Float,
     var dateTime: LocalDateTime,
-    var consecut: String
+    var consecut: String,
+    var type: String
 ) {
-    constructor() : this("","","",0,0f,0f, LocalDateTime.now(),"")
+    constructor() : this("","","",0,0f,0f, LocalDateTime.now(),"", "")
 
 
     //Methods of Archive
@@ -36,7 +36,9 @@ class CashSaleClass(
                     "\nCantidad: $amount" +
                     "\nValor total: $valueTotal" +
                     "\nFecha: $dateTime" +
-                    "\nconsecutivo: $consecut")
+                    "\nconsecutivo: $consecut"+
+                    "\nType: $type"
+            )
             archive.flush()
             archive.close()
         }catch (e: IOException){
@@ -46,7 +48,7 @@ class CashSaleClass(
     }
 
     fun openArchive(context: AddRemarks):String{
-        var successful = ""
+        var successful: String
         try {
             val archive =
                 InputStreamReader(context.openFileInput("CashSale.txt"))
@@ -89,6 +91,7 @@ class CashSaleClass(
                 "\nCantidad: $amount" +
                 "\nValor total: $valueTotal" +
                 "\nFecha: $dateTime" +
-                "\nconsecutivo: $consecut")
+                "\nconsecutivo: $consecut"+
+                "\nType: $type")
     }
 }

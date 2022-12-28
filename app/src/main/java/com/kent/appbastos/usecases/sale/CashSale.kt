@@ -3,9 +3,7 @@ package com.kent.appbastos.usecases.sale
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.kent.appbastos.R
@@ -15,10 +13,23 @@ import java.util.*
 
 
 class CashSale : AppCompatActivity() {
-    //Metodo Crea el layout
+    //Method create the layout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cash_sale)
+
+        //Spinner
+        val type: Spinner = findViewById(R.id.type)
+
+        //Options
+        val options = arrayOf("v", "m")
+
+        //Adapter
+        val adapter = ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, options)
+
+        //Adapter with the spinner
+        type.adapter = adapter
+        type.setSelection(0)
 
         //Change value of name Profile
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
@@ -81,6 +92,7 @@ class CashSale : AppCompatActivity() {
                     putExtra("nameProduct", nameProduct)
                     putExtra("valueUnit", valueUnit.toFloat())
                     putExtra("valueAmount", valueAmount.toInt())
+                    putExtra("type", type.selectedItem.toString())
                     putExtra("title", "CashSale")
                 }
 
