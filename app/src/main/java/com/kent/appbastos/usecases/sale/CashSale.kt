@@ -46,7 +46,6 @@ class CashSale : AppCompatActivity() {
         btnContinue.setOnClickListener {
 
             //Variables de los TextInputLayout
-            val inputNameClient: TextInputLayout = findViewById(R.id.inputNameClient)
             val inputNameProduct: TextInputLayout = findViewById(R.id.inputNameProduct)
             val inputValueUnit: TextInputLayout = findViewById(R.id.inputValueUnit)
             val inputValueAmount: TextInputLayout = findViewById(R.id.inputAmount)
@@ -58,7 +57,7 @@ class CashSale : AppCompatActivity() {
             val valueAmountView: TextView = findViewById(R.id.amount)
 
             //Variables de los text del TextInputLayout
-            val nameClient: String = nameClientView.text.toString()
+            var nameClient: String = nameClientView.text.toString()
             val nameProduct: String = nameProductView.text.toString()
             val valueUnit: String = valueUnitView.text.toString()
             val valueAmount: String = valueAmountView.text.toString()
@@ -70,7 +69,6 @@ class CashSale : AppCompatActivity() {
             //Llenar arrays
             texts.addAll(
                 listOf(
-                    nameClient,
                     nameProduct,
                     valueUnit,
                     valueAmount
@@ -78,7 +76,6 @@ class CashSale : AppCompatActivity() {
             )
             inputsLayouts.addAll(
                 listOf(
-                    inputNameClient,
                     inputNameProduct,
                     inputValueUnit,
                     inputValueAmount
@@ -87,6 +84,9 @@ class CashSale : AppCompatActivity() {
 
             //SHow mistake
             if (ValidateEmpty().validate(texts, inputsLayouts) && ValidateEmpty().valueUnit(valueUnit, inputValueUnit)) {
+                if(nameClient ==""){
+                    nameClient = "temp"
+                }
                 val intent = Intent(this, AddRemarks::class.java).apply {
                     putExtra("nameClient", nameClient)
                     putExtra("nameProduct", nameProduct)

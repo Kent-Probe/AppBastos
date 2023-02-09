@@ -1,18 +1,18 @@
 package com.kent.appbastos.usecases.mainPrincipal
 
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.kent.appbastos.R
-import com.kent.appbastos.usecases.sale.OperationalExpenses
+import com.kent.appbastos.usecases.dashboard.DashBoard
 import com.kent.appbastos.usecases.sale.MenuSale
+import com.kent.appbastos.usecases.sale.OperationalExpenses
 
 class MainMenu : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +37,7 @@ class MainMenu : AppCompatActivity() {
         val btnRegisterSale: Button = findViewById(R.id.btnRegisterSale)
         val btnOperationalExpenses: Button = findViewById(R.id.btnOperationalExpenses)
         val btnLogOut: Button = findViewById(R.id.btnLogOut)
+        val btnDashBoard: Button = findViewById(R.id.btnDashBoard)
 
         //Variables of text view
         val textUserView: TextView = findViewById(R.id.txtUserName)
@@ -65,6 +66,12 @@ class MainMenu : AppCompatActivity() {
             startActivity(intent)
         }
 
+        btnDashBoard.setOnClickListener {
+            val intent = Intent(this, DashBoard::class.java)
+            startActivity(intent)
+        }
+
+
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -72,12 +79,12 @@ class MainMenu : AppCompatActivity() {
             if (keyCode == event.keyCode) run {
                 val alertDialog = AlertDialog.Builder(this)
                 alertDialog.setMessage("¿Desea salir?")
-                    .setPositiveButton("si", DialogInterface.OnClickListener { dialog, which ->
+                    .setPositiveButton("si") { dialog, which ->
                         finishAffinity()
-                    })
-                    .setNegativeButton("No", DialogInterface.OnClickListener { dialog, which ->
+                    }
+                    .setNegativeButton("No") { dialog, which ->
                         dialog.dismiss()
-                    })
+                    }
                 alertDialog.show()
             }
         }

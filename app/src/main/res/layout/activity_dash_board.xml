@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".usecases.mainPrincipal.MainMenu">
+    tools:context=".usecases.dashboard.DashBoard">
 
     <LinearLayout
         android:id="@+id/gradiantHome"
@@ -45,6 +45,25 @@
                 android:textStyle="bold"
                 tools:ignore="TextContrastCheck" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="#00FFFFFF"
+                    android:contentDescription="@string/descBtnBack"
+                    android:scaleType="fitXY"
+                    app:srcCompat="?attr/actionModeCloseDrawable"
+                    app:tint="@color/white"
+                    tools:ignore="ImageContrastCheck,ImageContrastCheck" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <Space
@@ -53,10 +72,10 @@
 
 
         <TextView
-            android:id="@+id/txtNameScreen"
+            android:id="@+id/txtDashboard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txtMenu"
+            android:text="@string/txtDashboard"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/white"
             android:textSize="18sp"
@@ -81,52 +100,17 @@
         app:layout_constraintTop_toBottomOf="@+id/gradiantHome">
 
         <Button
-            android:id="@+id/btnRegisterSale"
+            android:id="@+id/btnRegisterUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_rounded"
-            android:text="@string/txtBtnRegisterSale"
+            android:text="@string/txtBtnRegisterUser"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
-
-        <Button
-            android:id="@+id/btnOperationalExpenses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
-            android:text="@string/txtOperationalExpenses"
-            android:textColor="@color/white"
-            tools:ignore="TextContrastCheck" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <Button
-            android:id="@+id/btnDashBoard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
-            android:text="@string/txtDashboard"
-            android:textColor="@color/white"
-            tools:ignore="TextContrastCheck" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <Button
-            android:id="@+id/btnLogOut"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
-            android:text="@string/txtLogOut"
-            android:textColor="@color/white"
-            tools:ignore="TextContrastCheck" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -1,11 +1,11 @@
 package com.kent.appbastos.model.alerts
 
-import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.kent.appbastos.R
 
 
@@ -21,8 +21,23 @@ class Alerts {
     }
 
     fun showAlertPersonalize(layoutInflater: LayoutInflater, context: Context, txtDialog: String, txtBtnUp: String, txtBtnDown: String):View {
-        val dialogAlertDialog: androidx.appcompat.app.AlertDialog.Builder = androidx.appcompat.app.AlertDialog.Builder(context)
+        val dialogAlertDialog = AlertDialog.Builder(context)
         val view: View = layoutInflater.inflate(R.layout.dialog_custom, null)
+
+        val textDialog: TextView = view.findViewById(R.id.textDialog)
+        textDialog.text = txtDialog
+
+        dialogAlertDialog.setView(view)
+        val alertDialog: AlertDialog = dialogAlertDialog.create()
+
+        alertDialog.show()
+
+        return view
+    }
+
+    fun showAlertSelection(layoutInflater: LayoutInflater, context: Context, txtDialog: String, txtBtnUp: String, txtBtnDown: String, listUser: Array<String>): View{
+        val dialogAlertDialog = AlertDialog.Builder(context)
+        val view: View = layoutInflater.inflate(R.layout.dialog_custom_selection, null)
 
         val btnUp: Button = view.findViewById(R.id.btnUp)
         btnUp.text = txtBtnUp
@@ -31,12 +46,16 @@ class Alerts {
         val textDialog: TextView = view.findViewById(R.id.textDialog)
         textDialog.text = txtDialog
 
+
         dialogAlertDialog.setView(view)
-        val alertDialog: androidx.appcompat.app.AlertDialog = dialogAlertDialog.create()
+            .setItems(listUser){ dialog, item ->  }
+        val alertDialog = dialogAlertDialog.create()
 
         alertDialog.show()
 
         return view
     }
 
+
 }
+

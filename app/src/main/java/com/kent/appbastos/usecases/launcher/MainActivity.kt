@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                             mainMenuScreen(account.email ?: "", ProviderType.GOOGLE, account.givenName ?: "")
                         }else{
                             Alerts().showAlert(
-                                "Error",
+                                "Error que se esperaba",
                                 "No se a iniciado sesion",
                                 "Aceptar",
                                 this
@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }catch (e: ApiException){
                 Alerts().showAlert(
-                    "Error",
+                    "Revise su conexion a internet",
                     "No se a iniciado sesion",
                     "Aceptar",
                     this

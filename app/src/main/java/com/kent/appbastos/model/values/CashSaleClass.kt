@@ -3,7 +3,6 @@ package com.kent.appbastos.model.values
 import android.content.Context
 import com.kent.appbastos.usecases.remarks.AddRemarks
 import java.io.BufferedReader
-import java.io.File
 import java.io.IOException
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
@@ -13,14 +12,14 @@ class CashSaleClass(
     var nameClient: String,
     var nameProduct: String,
     var marca: String,
-    var amount: Int,
+    private var amount: Float,
     var valueUnit: Float,
     var valueTotal: Float,
     var dateTime: LocalDateTime,
     var consecut: String,
     var type: String
 ) {
-    constructor() : this("","","",0,0f,0f, LocalDateTime.now(),"", "")
+    constructor() : this("","","",0f,0f,0f, LocalDateTime.now(),"", "")
 
 
     //Methods of Archive
@@ -68,20 +67,6 @@ class CashSaleClass(
         return successful
     }
 
-    fun uriArchive(): String{
-        val fileList = File.listRoots()
-        for(file in fileList){
-            return file.path.toString()
-        }
-        return ""
-    }
-
-    fun existArchive(){
-        val fileList = File.listRoots()
-        for(file in fileList){
-            print(file.toString())
-        }
-    }
 
     fun dateOfClass(): String{
         return ("Nombre Client: $nameClient" +
