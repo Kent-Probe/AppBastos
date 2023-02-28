@@ -16,6 +16,8 @@
     <string name="txtRemarks" translatable="false">Comentarios</string>
     <string name="txtAlertDialog" translatable="false">Este cliente tiene una deuda abierta. ¿Que desea hacer?</string>
     <string name="txtUsers">Clientes registrados</string>
+    <string name="txtRegisterUserName">Nombre del usuario</string>
+    <string name="txtNumberUser">Numero de telefono</string>
 
     //Txt Onboard
     <string name="txtOnboarding_1">Aplicacion para la gestion de mercado en </string>

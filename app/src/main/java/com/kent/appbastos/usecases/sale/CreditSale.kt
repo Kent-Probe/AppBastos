@@ -140,7 +140,7 @@ class CreditSale : AppCompatActivity() {
     }
 
     private fun readUser(context: Context){
-        database.child("users").addValueEventListener(object : ValueEventListener {
+        database.child("users").child("clients").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val items: ArrayList<String> = ArrayList()
                 snapshot.children.forEach { child ->

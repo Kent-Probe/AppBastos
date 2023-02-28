@@ -1,10 +1,10 @@
 package com.kent.appbastos.usecases.users
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -26,19 +26,29 @@ class ListUsers : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_users)
 
+
         //fill recycle view
         val listUserRecyclerView: RecyclerView = findViewById(R.id.listUserId)
 
         //Val button
         val floatButtonBack: FloatingActionButton = findViewById(R.id.exitBtn)
+        val floatBtnAddUser: FloatingActionButton = findViewById(R.id.btnAddUser)
+
+        floatBtnAddUser.setOnClickListener {
+            val intent = Intent(this, RegisterUser::class.java)
+            startActivity(intent)
+        }
 
         floatButtonBack.setOnClickListener {
             finish()
         }
         listUsers.clear()
         setupRecyclerView(listUserRecyclerView, this)
+
+
     }
 
+    //Function of Recycler View with Database
     private fun setupRecyclerView(recyclerView: RecyclerView, context: Context) {
 
         messagesListener = object : ValueEventListener {
@@ -63,9 +73,10 @@ class ListUsers : AppCompatActivity() {
                 Log.e("TAG", "messages:onCancelled:")
             }
         }
-        database.child("users").addValueEventListener(messagesListener)
+        database.child("users").child("clients").addListenerForSingleValueEvent(messagesListener)
     }
 
+    /*
     //Deslizar item
     private fun deleteSwipe(recyclerView: RecyclerView){
         val touchHelperCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
@@ -82,6 +93,6 @@ class ListUsers : AppCompatActivity() {
         }
         val itemTouchHelper = ItemTouchHelper(touchHelperCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
-    }
+    }*/
 
 }

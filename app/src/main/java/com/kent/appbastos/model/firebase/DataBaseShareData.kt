@@ -1,7 +1,12 @@
 package com.kent.appbastos.model.firebase
 
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.Query
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.kent.appbastos.model.BasicEventCallback
 import java.time.LocalDateTime
 
 class DataBaseShareData () {
@@ -9,15 +14,16 @@ class DataBaseShareData () {
     val database = Firebase.database.reference
 
 /*
-    fun writeNewUser(name: String, number: String) {
-        val user = User(name, number)
-        database.child("users").push().setValue(user)
-    }
 
     fun writeDebts(debts: Debts, nameClient: String){
         database.child("debts").child(nameClient).push().setValue(debts)
     }
 */
+    fun writeNewUser(name: String, number: String) {
+        val user = User(name, number)
+        database.child("users").child("clients").push().setValue(user)
+    }
+
     fun writeNewCreditSale(amount: Float, valueUnit: Float, nameClient: String) {
         val debut = amount * valueUnit
         val creditSale = CreditSale(amount, valueUnit, debut)
@@ -27,6 +33,27 @@ class DataBaseShareData () {
     fun writeNewCashSale(){
         val cashSale = CashSale(0f, 0f)
         database.child("cashSale").setValue(cashSale)
+    }
+
+    //Function for check exit user
+    fun checkClientExist(nameClient: String, callBack: BasicEventCallback){
+        val databaseUser = database.child("users").child("clients")
+
+        val userByNameClient: Query = databaseUser.orderByChild("username").equalTo(nameClient).limitToFirst(1)
+
+        userByNameClient.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(!snapshot.exists()) callBack.onSuccess()
+
+                else callBack.onCancel()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                callBack.databaseFailure()
+            }
+
+        })
+
     }
 }
 
