@@ -8,35 +8,42 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.kent.appbastos.R
-import com.kent.appbastos.model.alerts.Alerts
 import com.kent.appbastos.model.validate.ValidateEmpty
 import com.kent.appbastos.usecases.remarks.AddRemarks
+import com.kent.appbastos.usecases.users.ListUsers
+import com.kent.appbastos.usecases.users.ListUsers.Companion.PHONE
+import com.kent.appbastos.usecases.users.ListUsers.Companion.USERNAME
 import java.util.*
-
 
 class CreditSale : AppCompatActivity() {
 
-    private val database = Firebase.database.reference
-
-    private lateinit var nameClientView: Button
+    //Variables for the response Launcher (object that is the response of the activity)
     private lateinit var numberClientView: TextView
+    private lateinit var inputNumberClient: TextInputLayout
+    private lateinit var btnSeeUser: Button
 
+    private lateinit var numberText: String
+
+    //Response of the activity
+    private val responseLauncher = registerForActivityResult(StartActivityForResult()){
+        if (it.resultCode == RESULT_OK){
+            inputNumberClient.visibility = View.VISIBLE
+            numberClientView.text = it.data?.getStringExtra(PHONE)
+            btnSeeUser.text = it.data?.getStringExtra(USERNAME)
+            numberText = it.data?.getStringExtra(PHONE).toString()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_credit_sale)
 
-        readUser(this)
-
-        nameClientView = findViewById(R.id.nameClient)
+        //variable input text
         numberClientView = findViewById(R.id.numberClient)
+        inputNumberClient = findViewById(R.id.inputNumberClient)
 
         //Spinner
         val type:Spinner = findViewById(R.id.type)
@@ -62,16 +69,23 @@ class CreditSale : AppCompatActivity() {
         val btnContinue: Button = findViewById(R.id.btnContinue)
         val btnCancel: Button = findViewById(R.id.btnCancel)
 
+        //assign button values
+        btnSeeUser = findViewById(R.id.btnNameUserAdd)
+        btnSeeUser.setOnClickListener {
+            val intent = Intent(this, ListUsers::class.java).apply {
+                putExtra("creditSale", true)
+            }
+            responseLauncher.launch(intent)
+        }
+
+
         //Click Buttons
         btnContinue.setOnClickListener {
 
             //Variables de los TextInputLayout
-            val inputNumberClient: TextInputLayout = findViewById(R.id.inputNumberClient)
             val inputNameProduct: TextInputLayout = findViewById(R.id.inputNameProduct)
             val inputValueUnit: TextInputLayout = findViewById(R.id.inputValueUnit)
             val inputValueAmount: TextInputLayout = findViewById(R.id.inputAmount)
-
-            inputNumberClient.visibility = View.VISIBLE
 
             //Variables del  editText
             val nameProductView: TextView = findViewById(R.id.nameProduct)
@@ -84,7 +98,7 @@ class CreditSale : AppCompatActivity() {
             val valueUnit: String = valueUnitView.text.toString()
             val valueAmount: String = valueAmountView.text.toString()
 
-            //Arrays
+            //Arrays -2
             val texts: Vector<String> = Vector(
                 listOf(
                     nameProduct,
@@ -100,38 +114,27 @@ class CreditSale : AppCompatActivity() {
                 )
             )
 
-            if (ValidateEmpty().validate(texts, inputsLayouts)) {
-                val view: View = Alerts().showAlertPersonalize(
-                    layoutInflater,
-                    this,
-                    R.string.txtAlertDialog.toString(),
-                    "Abrir una nueva deuda",
-                    "Agregar pago"
-                )
-
-                val btnUp: Button = view.findViewById(R.id.btnUp)
-                val btnDown: Button = view.findViewById(R.id.btnDown)
-
-                btnUp.setOnClickListener {
-                    val intent = Intent(this, AddRemarks::class.java).apply {
-                        putExtra("nameClient", "nameClient")
-                        putExtra("numberClient", "numberClient")
-                        putExtra("nameProduct", nameProduct)
-                        putExtra("valueUnit", valueUnit.toFloat())
-                        putExtra("valueAmount", valueAmount.toInt())
-                        putExtra("type", type.selectedItem.toString())
-                        putExtra("title", "creditSale")
-                    }
-                    startActivity(intent)
-                    finish()
-                }
-                btnDown.setOnClickListener {
-                    val intent = Intent(this, Payment::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-
+            //validate empty fields
+            if (!ValidateEmpty().validate(texts, inputsLayouts)) {
+                return@setOnClickListener
             }
+
+            if (btnSeeUser.text.toString() == R.string.txtNameClient.toString() || btnSeeUser.text == null || btnSeeUser.text == ""){
+                btnSeeUser.error = "Debe seleccionar un cliente"
+                return@setOnClickListener
+            }
+
+            val intent = Intent(this, AddRemarks::class.java).apply {
+                putExtra("nameClient", btnSeeUser.text)
+                putExtra("numberClient", numberText)
+                putExtra("nameProduct", nameProduct)
+                putExtra("valueUnit", valueUnit.toFloat())
+                putExtra("valueAmount", valueAmount.toInt())
+                putExtra("type", type.selectedItem.toString())
+                putExtra("title", "creditSale")
+            }
+            startActivity(intent)
+            finish()
         }
 
         btnCancel.setOnClickListener {
@@ -139,33 +142,4 @@ class CreditSale : AppCompatActivity() {
         }
     }
 
-    private fun readUser(context: Context){
-        database.child("users").child("clients").addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val items: ArrayList<String> = ArrayList()
-                snapshot.children.forEach { child ->
-                    val user = child.child("username").value.toString()
-                    items.add(user)
-                }
-                val users:Array<String> = Array(snapshot.childrenCount.toInt()){
-                    items[it]
-                }
-
-                nameClientView.setOnClickListener {
-                    Alerts().showAlertSelection(
-                        layoutInflater,
-                        context,
-                        "Clientes registrados",
-                        "Registrar un nuevo cliente",
-                        "Calcelar",
-                        users,
-                    )
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                //listUser.clear()
-            }
-        })
-    }
 }

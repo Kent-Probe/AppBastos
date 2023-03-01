@@ -2,13 +2,13 @@ package com.kent.appbastos.usecases.remarks
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -16,6 +16,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.kent.appbastos.R
 import com.kent.appbastos.model.firebase.DataBaseShareData
+import com.kent.appbastos.model.firebase.Debts
 import com.kent.appbastos.model.values.CashSaleClass
 import com.kent.appbastos.model.values.CreditSaleClass
 import com.kent.appbastos.usecases.share.Share
@@ -71,10 +72,20 @@ class AddRemarks : AppCompatActivity() {
                 else Toast.makeText(this, "No se guardo", Toast.LENGTH_LONG).show()
             }else{
                 if(dateCreditSaleClass.saveArchive(this)){
+                    //Save data in the database
+                    val debts = Debts(
+                        dateCreditSaleClass.valueTotal,
+                        dateCreditSaleClass.dateTime,
+                        dateCreditSaleClass.valueAmount.toInt(),
+                        dateCreditSaleClass.valueUnit,
+                        dateCreditSaleClass.valueTotal)
+                    DataBaseShareData().writeDebts(debts, dateCreditSaleClass.nameClient)
+
                     Toast.makeText(this, "Se grabo correctamente", Toast.LENGTH_LONG).show()
                 }
                 else Toast.makeText(this, "No se guardo", Toast.LENGTH_LONG).show()
             }
+
             val intent = Intent(this, Share::class.java).apply {
                 putExtra("text", txtTempTEXT)
             }
@@ -121,8 +132,8 @@ class AddRemarks : AppCompatActivity() {
         val valueUnit = this.intent.extras?.getFloat("valueUnit").toString()
         val valueAmount = this.intent.extras?.getInt("valueAmount").toString()
         val type = this.intent.extras?.getString("type").toString()
-
-        DataBaseShareData().writeNewCreditSale(valueAmount.toFloat(), valueUnit.toFloat(), nameClient)
+        val total = valueUnit.toFloat() * valueAmount.toInt()
+        val localDataTIme: LocalDateTime = LocalDateTime.now()
 
         return CreditSaleClass(
             "MARCA",
@@ -131,8 +142,8 @@ class AddRemarks : AppCompatActivity() {
             nameProduct,
             valueUnit.toFloat(),
             valueAmount.toFloat(),
-            valueUnit.toFloat() * valueAmount.toInt(),
-            LocalDateTime.now(),
+            total,
+            localDataTIme,
             "#Consecutivo",
             type
         )

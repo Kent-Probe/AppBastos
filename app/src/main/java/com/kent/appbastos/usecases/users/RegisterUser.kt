@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.database.DataSnapshot
 import com.kent.appbastos.R
 import com.kent.appbastos.model.BasicEventCallback
 import com.kent.appbastos.model.firebase.DataBaseShareData
@@ -20,6 +21,7 @@ class RegisterUser : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_user)
+
 
         //Buttons of the layer
         val btnContinue: Button = findViewById(R.id.btnContinue)
@@ -67,10 +69,12 @@ class RegisterUser : AppCompatActivity() {
             val toastFailure: Toast = Toast.makeText(this, "Error en base de datos", Toast.LENGTH_LONG)
             if(ValidateEmpty().validate(texts, inputLayout)){
                 DataBaseShareData().checkClientExist(nameUser.text.toString(), object : BasicEventCallback{
-                    override fun onSuccess() {
-                        database.writeNewUser(name = nameUserText, number = numberText)
-                        toastSuccess.show()
-                        finish()
+                    override fun onSuccess(dataSnapshot: DataSnapshot) {
+                        if(!dataSnapshot.exists()){
+                            database.writeNewUser(name = nameUserText, number = numberText)
+                            toastSuccess.show()
+                            finish()
+                        }
                     }
 
                     override fun databaseFailure() {

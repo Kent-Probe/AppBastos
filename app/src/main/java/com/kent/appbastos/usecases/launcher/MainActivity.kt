@@ -17,7 +17,6 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.kent.appbastos.R
 import com.kent.appbastos.model.alerts.Alerts
 import com.kent.appbastos.usecases.mainPrincipal.MainMenu
-import com.kent.appbastos.usecases.screenComplete.ScreenPrincipal
 
 enum class ProviderType{
     GOOGLE
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //First Screen
-        first()
+        //first()
 
         val btnLogin: Button = findViewById(R.id.btnLogin)
         btnLogin.setOnClickListener {
@@ -70,18 +69,19 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun first(){
+//Funcnion que ejecuta una ventana solo una vez
+    /*private fun first(){
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val isFirst = pref.getString("isFirst", null)
         if(isFirst == null){
-            val intent = Intent(this, ScreenPrincipal::class.java)
-            startActivity(intent)
             val prefFirst = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
             prefFirst.putString("isFirst", "si")
             prefFirst.apply()
+            val intent = Intent(this, ScreenPrincipal::class.java)
+            startActivity(intent)
         }
 
-    }
+    }*/
 
     private fun session(){
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)

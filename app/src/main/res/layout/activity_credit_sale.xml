@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -99,14 +100,19 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/nameClient"
+        <Button
+            android:id="@+id/btnNameUserAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/style_user_button"
+            android:drawableStart="@drawable/ic_baseline_people_24"
+            android:drawablePadding="12dp"
+            android:gravity="fill_vertical"
             android:hint="@string/txtNameClient"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-        </androidx.appcompat.widget.AppCompatButton>
+            app:hintTextColor="@color/lineHint" />
 
         <Space
             android:layout_width="match_parent"
@@ -116,10 +122,11 @@
             android:id="@+id/inputNumberClient"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:enabled="false"
             android:hint="@string/txtTelClient"
             android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint"
-            android:visibility="gone">
+            android:visibility="gone"
+            app:hintTextColor="@color/lineHint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/numberClient"

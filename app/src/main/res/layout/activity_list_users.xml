@@ -51,6 +51,7 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/descUserImage"
         android:src="@drawable/ic_add_black_24dp"
+        android:visibility="visible"
         app:backgroundTint="@color/teal_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
