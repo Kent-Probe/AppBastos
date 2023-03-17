@@ -14,20 +14,26 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.kent.appbastos.R
 import com.kent.appbastos.model.EventCallBackSuccess
-import com.kent.appbastos.model.adapter.RecyclerViewAdapter
+import com.kent.appbastos.model.adapter.RecyclerViewAdapterListUsers
 import com.kent.appbastos.model.firebase.DataBaseShareData
 import com.kent.appbastos.model.firebase.User
 
 class ListUsers : AppCompatActivity() {
 
-    private lateinit var messagesListener: ValueEventListener
     private val listUsers:MutableList<User> = ArrayList()
     private val database = DataBaseShareData().database
 
     companion object{
+        //Properties
         const val USERNAME = "username"
+        const val NUMBER = "number"
+        const val NUMBER_DEBTS= "numberDebts"
         const val PHONE = "phone"
         const val KEY = "key"
+        const val DEBTS = "debts"
+
+        const val USER = "users"
+        const val CLIENT = "clients"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,23 +68,23 @@ class ListUsers : AppCompatActivity() {
     //Function of Recycler View with Database
     private fun setupRecyclerView(recyclerView: RecyclerView, context: Context, isCreditSale: Boolean) {
 
-        messagesListener = object : ValueEventListener {
+        val messagesListener = object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 listUsers.clear()
                 dataSnapshot.children.forEach { child ->
                     val user =
                         User(
-                            username = child.child("username").value.toString(),
-                            number = child.child("number").value.toString(),
-                            numberDebts = child.child("numberDebts").value.toString().toFloat(),
-                            debts = child.child("debts").value.toString().toFloat(),
+                            username = child.child(USERNAME).value.toString(),
+                            number = child.child(NUMBER).value.toString(),
+                            numberDebts = child.child(NUMBER_DEBTS).value.toString().toFloat(),
+                            debts = child.child(DEBTS).value.toString().toFloat(),
                             key = child.key
                         )
                     user.let { listUsers.add(user) }
                 }
                 recyclerView.layoutManager = LinearLayoutManager(context)
-                recyclerView.adapter = RecyclerViewAdapter(listUsers, context, object : EventCallBackSuccess{
+                recyclerView.adapter = RecyclerViewAdapterListUsers(listUsers, object : EventCallBackSuccess{
                     override fun onSuccess(user: User) {
                         if(isCreditSale){
                             val intent = Intent().apply {
@@ -98,7 +104,7 @@ class ListUsers : AppCompatActivity() {
                 Log.e("TAG", "messages:onCancelled:")
             }
         }
-        database.child("users").child("clients").addListenerForSingleValueEvent(messagesListener)
+        database.child(USER).child(CLIENT).addListenerForSingleValueEvent(messagesListener)
     }
 
     /*

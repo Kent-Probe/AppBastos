@@ -24,20 +24,30 @@ class DataBaseShareData () {
         const val DEBTS_TOTAL = "debts"
         const val NUMBER = "number"
         const val NUMBER_DEBTS = "numberDebts"
+        const val VALUE_TOTAL = "valueTotal"
+
+        //key value
+        const val KEY = "key"
     }
     private fun increment(valueS: String, increment: Float): Float{
         return valueS.toFloat() + increment
     }
 
+    //Write payment
+    fun addPayment(nameClient: String, key: String, valueTotal: Float){
+        database.child(DEBTS).child(nameClient).child(key).child(VALUE_TOTAL).setValue(valueTotal)
+    }
+
+    //Write new debts
     fun writeDebts(debts: Debts, nameClient: String){
         database.child(DEBTS).child(nameClient).push().setValue(debts)
         checkClientExist(nameClient, object : BasicEventCallback{
             override fun onSuccess(dataSnapshot: DataSnapshot) {
                 dataSnapshot.children.forEach { child ->
                     val updates: MutableMap<String, Any> = hashMapOf(
-                        DEBTS_TOTAL to increment(child.child(DEBTS_TOTAL).value.toString(), 1f),
+                        DEBTS_TOTAL to increment(child.child(DEBTS_TOTAL).value.toString(), debts.valueTotal),
                         NUMBER to child.child(NUMBER).value.toString(),
-                        NUMBER_DEBTS to increment(child.child(NUMBER_DEBTS).value.toString(), debts.valueTotal),
+                        NUMBER_DEBTS to increment(child.child(NUMBER_DEBTS).value.toString(), 1f),
                         USERNAME to child.child(USERNAME).value.toString()
                     )
                     database.child(USERS).child(CLIENTS).child(child.key.toString()).setValue(updates)
@@ -55,11 +65,13 @@ class DataBaseShareData () {
         })
     }
 
+    //Write new user
     fun writeNewUser(name: String, number: String) {
         val user = User(name, number)
         database.child(USERS).child(CLIENTS).push().setValue(user)
     }
 
+    //Write new cash sale
     fun writeNewCashSale(){
         val cashSale = CashSale(0f, 0f)
         database.child("cashSale").setValue(cashSale)
@@ -79,13 +91,13 @@ class DataBaseShareData () {
             override fun onCancelled(error: DatabaseError) {
                 callBack.databaseFailure()
             }
-
         })
-
     }
+
+
 }
 
-data class Debts( val debts: Float, val dateTime: LocalDateTime, val amount: Int, val valueUnit: Float, val valueTotal: Float)
+data class Debts( val debts: Float, val dateTime: LocalDateTime, val amount: Int, val valueUnit: Float, val valueTotal: Float, val key: String? = null)
 
 data class CashSale(val amount: Float, val valueUnit: Float)
 

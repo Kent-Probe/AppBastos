@@ -13,28 +13,39 @@ import com.kent.appbastos.R
 import com.kent.appbastos.usecases.dashboard.DashBoard
 import com.kent.appbastos.usecases.sale.MenuSale
 import com.kent.appbastos.usecases.sale.OperationalExpenses
+import com.kent.appbastos.usecases.debts.Payment
 
 class MainMenu : AppCompatActivity() {
+
+    companion object{
+        //date of the auth
+        const val EMAIL = "email"
+        const val PROVIDER = "provider"
+        const val PROFILE = "profile"
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
 
         //Variables of share data
         val bundle = intent.extras
-        val email = bundle?.getString("email")
-        val provider = bundle?.getString("provider")
-        val profile = bundle?.getString("profile")
+        val email = bundle?.getString(EMAIL)
+        val provider = bundle?.getString(PROVIDER)
+        val profile = bundle?.getString(PROFILE)
 
 
         //Guardar Datos
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
-        pref.putString("email", email)
-        pref.putString("provider", provider)
-        pref.putString("profile", profile)
+        pref.putString(EMAIL, email)
+        pref.putString(PROVIDER, provider)
+        pref.putString(PROFILE, profile)
         pref.apply()
 
         //Variables of buttons
         val btnRegisterSale: Button = findViewById(R.id.btnRegisterSale)
+        val btnAddPayment: Button = findViewById(R.id.btnAddPayment)
         val btnOperationalExpenses: Button = findViewById(R.id.btnOperationalExpenses)
         val btnLogOut: Button = findViewById(R.id.btnLogOut)
         val btnDashBoard: Button = findViewById(R.id.btnDashBoard)
@@ -47,9 +58,9 @@ class MainMenu : AppCompatActivity() {
         btnLogOut.setOnClickListener {
             //Deleted Dates
             val preferences = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
-            preferences.remove("email")
-            preferences.remove("provider")
-            preferences.remove("profile")
+            preferences.remove(EMAIL)
+            preferences.remove(PROVIDER)
+            preferences.remove(PROFILE)
             preferences.apply()
 
             FirebaseAuth.getInstance().signOut()
@@ -68,6 +79,11 @@ class MainMenu : AppCompatActivity() {
 
         btnDashBoard.setOnClickListener {
             val intent = Intent(this, DashBoard::class.java)
+            startActivity(intent)
+        }
+
+        btnAddPayment.setOnClickListener {
+            val intent = Intent(this, Payment::class.java)
             startActivity(intent)
         }
 

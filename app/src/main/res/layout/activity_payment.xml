@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".usecases.sale.Payment">
+    tools:context=".usecases.debts.Payment">
 
     <LinearLayout
         android:id="@+id/gradiantHome"
@@ -105,72 +105,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gradiantHome">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputNameClient"
+        <Button
+            android:id="@+id/btnNameUserAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/style_user_button"
+            android:drawableStart="@drawable/ic_baseline_people_24"
+            android:drawablePadding="12dp"
+            android:gravity="fill_vertical"
             android:hint="@string/txtNameClient"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nameClient"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="text|textCapWords"
-                android:textColorLink="#000000"
-                android:enabled="false"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputDebt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtDebt"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/debt"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="text"
-                android:textColorLink="#000000"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
+            app:hintTextColor="@color/lineHint" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputNameProduct"
+        <Button
+            android:id="@+id/btnDebt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/txtNameProduct"
+            android:background="@drawable/style_user_button"
+            android:drawableStart="@drawable/ic_debts"
+            android:drawablePadding="12dp"
+            android:gravity="fill_vertical"
+            android:hint="@string/txtDebt"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nameProduct"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="text|textCapWords"
-                android:textColorLink="#000000"
-                android:enabled="false"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
+            app:hintTextColor="@color/lineHint"
+            android:visibility="gone"/>
 
         <Space
             android:layout_width="match_parent"
@@ -201,7 +168,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+            android:layout_height="20dp"/>
 
 
         <LinearLayout

@@ -89,6 +89,20 @@
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
 
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/btnAddPayment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_rounded"
+            android:text="@string/txtBtnAddPayment"
+            android:textColor="@color/white"
+            tools:ignore="TextContrastCheck" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />

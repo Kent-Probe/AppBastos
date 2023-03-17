@@ -13,6 +13,20 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".usecases.debts.ListDebts"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".usecases.detailsClients.DetailsClient"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".usecases.users.RegisterUser"
             android:exported="false">
             <meta-data
@@ -41,12 +55,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".usecases.screenComplete.ScreenPrincipal"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
-            android:label="@string/title_activity_screen_principal"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.Fullscreen" />
-        <activity
             android:name=".usecases.share.Share"
             android:exported="false">
             <meta-data
@@ -54,7 +62,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".usecases.sale.Payment"
+            android:name=".usecases.debts.Payment"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

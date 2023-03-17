@@ -37,6 +37,7 @@ class CreditSale : AppCompatActivity() {
             numberText = it.data?.getStringExtra(PHONE).toString()
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_credit_sale)
