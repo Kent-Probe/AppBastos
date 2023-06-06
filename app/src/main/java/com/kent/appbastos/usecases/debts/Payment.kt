@@ -70,7 +70,7 @@ class Payment : AppCompatActivity() {
             responseLauncherDebts.launch(intent)
             val temp = "deuda"
             btnSeeDebts.text = temp
-            btnSeeDebts.visibility = View.GONE
+            //btnSeeDebts.visibility = View.GONE
         }
 
         btnCancel.setOnClickListener {

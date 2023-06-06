@@ -7,8 +7,12 @@
     <string name="txtNameClient" translatable="false">Nombre del cliente*</string>
     <string name="txtNameProduct" translatable="false">Nombre del Prodcto*</string>
     <string name="txtValue" translatable="false">Valor por unidad*</string>
+    <string name="txtValueMin" translatable="false">Precio Base*</string>
     <string name="txtType" translatable="false">Tipo*</string>
     <string name="txtAmount" translatable="false">Cantidad*</string>
+    <string name="txtAmountMin" translatable="false">Cantidad Minima*</string>
+    <string name="txtFlete" translatable="false">Flete*</string>
+    <string name="txtProvider" translatable="false">Provedor</string>
     <string name="txtValueOperational" translatable="false">Valor*</string>
     <string name="txtDescription" translatable="false">Descripcion*</string>
     <string name="txtPaymentValue" translatable="false">Pago*</string>
@@ -41,6 +45,7 @@
     <string name="txtDebt" translatable="false">Deuda</string>
     <string name="txtPayment" translatable="false">Pago</string>
     <string name="txtDashboard" translatable="false">DashBoard</string>
+    <string name="txtAddInventory" translatable="false">Agregar inventario</string>
 
 
     <!-- texts in buttons -->
@@ -54,6 +59,7 @@
     <string name="txtBtnAddPayment">Agregar pago</string>
     <string name="txtBtnRegisterSale">Registrar Venta</string>
     <string name="txtBtnRegisterUser">Administrar clientes</string>
+    <string name="txtBtnAddInventory">Agregar Inventario</string>
 
     <!-- Description of images -->
     <string name="descLogo">Logo de la aplicacion de AppBastos</string>

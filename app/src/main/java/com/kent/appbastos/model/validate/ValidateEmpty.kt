@@ -5,6 +5,26 @@ import java.util.*
 
 class ValidateEmpty {
 
+    fun validateMin(textGreaterThan: String, textLessThan: String, inputLayoutGreater: TextInputLayout, inputLayoutLess: TextInputLayout): Boolean{
+        var validate = true
+        val greaterThan = textGreaterThan.toFloat()
+        val lessThan = textLessThan.toFloat()
+
+        if (greaterThan <= lessThan){
+            inputLayoutGreater.isErrorEnabled = true
+            inputLayoutGreater.isErrorEnabled = true
+
+            inputLayoutGreater.error = "Error: debe ser mayor que la cantidad minima"
+            inputLayoutLess.error = "Error: debe ser menor que la cantidad"
+
+            validate = false
+        }else{
+            inputLayoutGreater.isErrorEnabled = false
+            inputLayoutLess.isErrorEnabled = false
+        }
+        return validate
+    }
+
     fun validate(texts: Vector<String>, inputLayout: Vector<TextInputLayout>): Boolean{
 
         var valid = true
@@ -37,6 +57,6 @@ class ValidateEmpty {
         }else{
             inputLayout.isErrorEnabled = false
         }
-        return  validate
+        return validate
     }
 }

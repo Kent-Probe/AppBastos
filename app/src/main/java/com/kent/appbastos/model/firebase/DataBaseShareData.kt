@@ -1,13 +1,13 @@
 package com.kent.appbastos.model.firebase
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.Query
-import com.google.firebase.database.ValueEventListener
+import android.content.Context
+import android.widget.Toast
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.kent.appbastos.model.BasicEventCallback
 import java.time.LocalDateTime
+import java.util.*
 
 class DataBaseShareData () {
 
@@ -18,6 +18,7 @@ class DataBaseShareData () {
         const val DEBTS = "debts"
         const val USERS = "users"
         const val CLIENTS = "clients"
+        const val INVENTORY = "inventory"
 
         //title of DATABASE date
         const val USERNAME = "username"
@@ -25,6 +26,7 @@ class DataBaseShareData () {
         const val NUMBER = "number"
         const val NUMBER_DEBTS = "numberDebts"
         const val VALUE_TOTAL = "valueTotal"
+        const val AMOUNT = "amount"
 
         //key value
         const val KEY = "key"
@@ -94,8 +96,61 @@ class DataBaseShareData () {
         })
     }
 
+    fun addInventory(data: Vector<String>, context:Context){
+
+        database.child(INVENTORY).addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val inventory = Inventory(
+                    amount = data[0].toFloat(),
+                    valueBase = data[1].toFloat(),
+                    provider = data[2],
+                    amountMin = data[3].toFloat(),
+                    flete = data[4],
+                    name = data[5]
+                )
+                database.child(INVENTORY).push().setValue(inventory)
+                Toast.makeText(context, "Datos agregados con exito", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(context, "Ocurrio un error al guardar los datos", Toast.LENGTH_LONG).show()
+            }
+
+        })
+    }
+
+    fun delDatabase(context: Context){
+
+        val childEventListener = object  : ChildEventListener{
+            override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                database.child(INVENTORY).child(dataSnapshot.key.toString()).removeValue()
+            }
+
+            override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                Toast.makeText(context, "cambio", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+                //Toast.makeText(context, "removio", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                Toast.makeText(context, "movio", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Toast.makeText(context, "cancelar", Toast.LENGTH_LONG).show()
+            }
+        }
+        for(i in 1..10000){
+            database.child(INVENTORY).limitToFirst(100).addChildEventListener(childEventListener)
+        }
+
+    }
 
 }
+
+data class Inventory(val amount: Float, val provider: String, val valueBase: Float, val name:String, val amountMin:Float, val flete:String)
 
 data class Debts( val debts: Float, val dateTime: LocalDateTime, val amount: Int, val valueUnit: Float, val valueTotal: Float, val key: String? = null)
 
