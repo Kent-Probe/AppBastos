@@ -1,12 +1,12 @@
 package com.kent.appbastos.model.values
 
 import android.content.Context
+import com.kent.appbastos.model.firebase.DateTime
 import com.kent.appbastos.usecases.remarks.AddRemarks
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
-import java.time.LocalDateTime
 
 class CashSaleClass(
     var nameClient: String,
@@ -15,11 +15,11 @@ class CashSaleClass(
     private var amount: Float,
     var valueUnit: Float,
     var valueTotal: Float,
-    var dateTime: LocalDateTime,
+    var dateTime: DateTime,
     var consecut: String,
     var type: String
 ) {
-    constructor() : this("","","",0f,0f,0f, LocalDateTime.now(),"", "")
+    constructor() : this("","","",0f,0f,0f, DateTime(0,0 ,0),"", "")
 
 
     //Methods of Archive

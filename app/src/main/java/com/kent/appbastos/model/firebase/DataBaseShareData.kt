@@ -6,7 +6,6 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.kent.appbastos.model.BasicEventCallback
-import java.time.LocalDateTime
 import java.util.*
 
 class DataBaseShareData () {
@@ -17,6 +16,7 @@ class DataBaseShareData () {
         //title of DATABASE
         const val DEBTS = "debts"
         const val USERS = "users"
+        const val USERS_APP = "usersApp"
         const val CLIENTS = "clients"
         const val INVENTORY = "inventory"
 
@@ -41,7 +41,9 @@ class DataBaseShareData () {
     }
 
     //Write new debts
-    fun writeDebts(debts: Debts, nameClient: String){
+    fun writeDebts(context: Context, debts: Debts, nameClient: String, keyInventory: String, newAmount: String){
+        database.child(INVENTORY).child(keyInventory).child("amount").setValue(newAmount.toFloat())
+
         database.child(DEBTS).child(nameClient).push().setValue(debts)
         checkClientExist(nameClient, object : BasicEventCallback{
             override fun onSuccess(dataSnapshot: DataSnapshot) {
@@ -57,11 +59,11 @@ class DataBaseShareData () {
             }
 
             override fun onCancel() {
-                TODO("Not yet implemented")
+                Toast.makeText(context, "Error con un dato", Toast.LENGTH_SHORT).show()
             }
 
             override fun databaseFailure() {
-                TODO("Not yet implemented")
+                Toast.makeText(context, "Error con la base da datos", Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -77,6 +79,33 @@ class DataBaseShareData () {
     fun writeNewCashSale(){
         val cashSale = CashSale(0f, 0f)
         database.child("cashSale").setValue(cashSale)
+    }
+
+    //Write new User App on firebase realtime database
+    fun writeNewUserApp(context: Context, userUID: String, userApp: UserApp, callBack: BasicEventCallback){
+        val databaseUser = database.child(USERS).child(USERS_APP).child(userUID)
+        databaseUser.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    callBack.onSuccess(snapshot)
+                    Toast.makeText(context, "Bienvenido de nuevo", Toast.LENGTH_SHORT).show()
+                    return
+                }
+                databaseUser.setValue(userApp).addOnCompleteListener {
+                    if(it.isSuccessful){
+                        callBack.onSuccess(snapshot)
+                        Toast.makeText(context, "Bienvenido", Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                callBack.databaseFailure()
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     //Function for check exit user
@@ -142,21 +171,40 @@ class DataBaseShareData () {
                 Toast.makeText(context, "cancelar", Toast.LENGTH_LONG).show()
             }
         }
-        for(i in 1..10000){
-            database.child(INVENTORY).limitToFirst(100).addChildEventListener(childEventListener)
-        }
 
+        database.child(INVENTORY).limitToFirst(100).addChildEventListener(childEventListener)
+
+    }
+
+    fun checkDebts(type: String, callBack: BasicEventCallback){
+        val inventory: Query = database.child(INVENTORY)
+
+        inventory.orderByChild("name").equalTo(type).limitToFirst(1).addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()) callBack.onSuccess(snapshot)
+                else callBack.onCancel()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                callBack.databaseFailure()
+            }
+
+        })
     }
 
 }
 
+data class DateTime(val day: Int, val month: Int, val year: Int)
+
 data class Inventory(val amount: Float, val provider: String, val valueBase: Float, val name:String, val amountMin:Float, val flete:String)
 
-data class Debts( val debts: Float, val dateTime: LocalDateTime, val amount: Int, val valueUnit: Float, val valueTotal: Float, val key: String? = null)
+data class Debts(val debts: Float, val dateTime: DateTime, val amount: Int, val valueUnit: Float, val valueTotal: Float, val key: String? = null)
 
 data class CashSale(val amount: Float, val valueUnit: Float)
 
 data class CreditSale(val amount: Float, val valueUnit: Float, val debut: Float)
+
+data class UserApp(val firstName: String, val lastName: String, val email: String, val rol: String, val key: String? = null)
 
 data class User(val username: String? = null, val number: String? = null, val numberDebts: Float? = 0f, val debts: Float? = 0f, val key:String? = null) {
     // Null default values create a no-argument default constructor, which is needed

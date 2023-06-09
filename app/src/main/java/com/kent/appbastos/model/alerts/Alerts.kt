@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.kent.appbastos.R
+import com.kent.appbastos.model.EventButtonsCallBack
 
 
 class Alerts {
@@ -20,24 +21,14 @@ class Alerts {
         dialog.show()
     }
 
-    fun showAlertPersonalize(layoutInflater: LayoutInflater, context: Context, txtDialog: String, txtBtnUp: String, txtBtnDown: String):View {
-        val dialogAlertDialog = AlertDialog.Builder(context)
-        val view: View = layoutInflater.inflate(R.layout.dialog_custom, null)
-
-        val textDialog: TextView = view.findViewById(R.id.textDialog)
-        textDialog.text = txtDialog
-
-        dialogAlertDialog.setView(view)
-        val alertDialog: AlertDialog = dialogAlertDialog.create()
-
-        alertDialog.show()
-
-        return view
-    }
-
-    fun showAlertSelection(layoutInflater: LayoutInflater, context: Context, txtDialog: String, txtBtnUp: String, txtBtnDown: String, listUser: Array<String>): View{
+    fun showAlertSelection(layoutInflater: LayoutInflater, context: Context, txtDialog: String, txtBtnUp: String, txtBtnDown: String, eventButtons: EventButtonsCallBack){
         val dialogAlertDialog = AlertDialog.Builder(context)
         val view: View = layoutInflater.inflate(R.layout.dialog_custom_selection, null)
+
+        dialogAlertDialog.setView(view)
+
+        val alertDialog = dialogAlertDialog.create()
+        alertDialog.show()
 
         val btnUp: Button = view.findViewById(R.id.btnUp)
         btnUp.text = txtBtnUp
@@ -46,14 +37,13 @@ class Alerts {
         val textDialog: TextView = view.findViewById(R.id.textDialog)
         textDialog.text = txtDialog
 
+        btnUp.setOnClickListener{
+            eventButtons.buttonUp(alertDialog)
+        }
 
-        dialogAlertDialog.setView(view)
-            .setItems(listUser){ dialog, item ->  }
-        val alertDialog = dialogAlertDialog.create()
-
-        alertDialog.show()
-
-        return view
+        btnDown.setOnClickListener {
+            eventButtons.buttonDown(alertDialog)
+        }
     }
 
 

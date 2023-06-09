@@ -14,8 +14,12 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DataSnapshot
 import com.kent.appbastos.R
+import com.kent.appbastos.model.BasicEventCallback
 import com.kent.appbastos.model.alerts.Alerts
+import com.kent.appbastos.model.firebase.DataBaseShareData
+import com.kent.appbastos.model.firebase.UserApp
 import com.kent.appbastos.usecases.mainPrincipal.MainMenu
 
 enum class ProviderType{
@@ -60,37 +64,25 @@ class MainActivity : AppCompatActivity() {
         session()
     }
 
-    private fun mainMenuScreen(email:String, provider: ProviderType, profile:String){
+    private fun mainMenuScreen(email:String, provider: ProviderType, profile:String, rol: String){
         val intent = Intent(this, MainMenu::class.java).apply {
             putExtra("email", email)
             putExtra("provider", provider.name)
             putExtra("profile", profile)
+            putExtra("rol", rol)
         }
         startActivity(intent)
     }
-
-//Funcnion que ejecuta una ventana solo una vez
-    /*private fun first(){
-        val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val isFirst = pref.getString("isFirst", null)
-        if(isFirst == null){
-            val prefFirst = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
-            prefFirst.putString("isFirst", "si")
-            prefFirst.apply()
-            val intent = Intent(this, ScreenPrincipal::class.java)
-            startActivity(intent)
-        }
-
-    }*/
 
     private fun session(){
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val profile = pref.getString("profile", null).toString()
         val email = pref.getString("email", null)
+        val rol = pref.getString("rol", null).toString()
         val provider = pref.getString("provider", null)
 
         if(email != null && provider != null){
-            mainMenuScreen(email, ProviderType.valueOf(provider), profile)
+            mainMenuScreen(email, ProviderType.valueOf(provider), profile, rol)
         }
     }
 
@@ -99,7 +91,6 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == GOOGLE_SIGN_IN){
-
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             try{
                 val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
@@ -107,10 +98,25 @@ class MainActivity : AppCompatActivity() {
                     val credential: AuthCredential = GoogleAuthProvider.getCredential(account.idToken, null)
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
                         if(it.isSuccessful){
-                            mainMenuScreen(account.email ?: "", ProviderType.GOOGLE, account.givenName ?: "")
+                            val userCurrent = FirebaseAuth.getInstance().currentUser
+                            val userApp = UserApp(account.displayName.toString(), account.familyName.toString(), account.email.toString(), "usuario")
+                            DataBaseShareData().writeNewUserApp(this, userCurrent?.uid.toString(), userApp, object : BasicEventCallback{
+                                override fun onSuccess(dataSnapshot: DataSnapshot) {
+                                    mainMenuScreen(account.email ?: "", ProviderType.GOOGLE, account.givenName ?: "", dataSnapshot.child(MainMenu.ROL).value.toString())
+                                }
+
+                                override fun onCancel() {
+                                    TODO("Not yet implemented")
+                                }
+
+                                override fun databaseFailure() {
+                                    TODO("Not yet implemented")
+                                }
+
+                            })
                         }else{
                             Alerts().showAlert(
-                                "Error que se esperaba",
+                                "Error esperado",
                                 "No se a iniciado sesion",
                                 "Aceptar",
                                 this
@@ -120,7 +126,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }catch (e: ApiException){
                 Alerts().showAlert(
-                    "Revise su conexion a internet",
+                    "Error",
                     "No se a iniciado sesion",
                     "Aceptar",
                     this

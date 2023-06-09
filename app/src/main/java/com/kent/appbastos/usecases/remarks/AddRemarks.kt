@@ -2,6 +2,7 @@ package com.kent.appbastos.usecases.remarks
 
 import android.content.Context
 import android.content.Intent
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -16,17 +17,31 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.kent.appbastos.R
 import com.kent.appbastos.model.firebase.DataBaseShareData
+import com.kent.appbastos.model.firebase.DateTime
 import com.kent.appbastos.model.firebase.Debts
 import com.kent.appbastos.model.values.CashSaleClass
 import com.kent.appbastos.model.values.CreditSaleClass
 import com.kent.appbastos.usecases.share.Share
-import java.time.LocalDateTime
 
 
 class AddRemarks : AppCompatActivity() {
+
+    lateinit var keyInventory: String
+    lateinit var newAmount: String
+    override fun onStart() {
+        super.onStart()
+        //Key Inventory and new amount
+        keyInventory = intent.extras?.getString("keyInventory").toString()
+        newAmount = intent.extras?.getFloat("amountInventory").toString()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_remarks)
+
+        //Key Inventory and new amount
+        keyInventory = intent.extras?.getString("keyInventory").toString()
+        newAmount = intent.extras?.getString("amountInventory").toString()
 
         //Variables Temp
         val txtTempTEXT: String
@@ -64,6 +79,8 @@ class AddRemarks : AppCompatActivity() {
         val btnContinue: Button = findViewById(R.id.btnContinue)
         val btnCancel: Button = findViewById(R.id.btnCancel)
 
+
+        //Button continue
         btnContinue.setOnClickListener {
             if(title.toString() == "CashSale"){
                 if(dateCashSaleClass.saveArchive(this)){
@@ -72,6 +89,7 @@ class AddRemarks : AppCompatActivity() {
                 else Toast.makeText(this, "No se guardo", Toast.LENGTH_LONG).show()
             }else{
                 if(dateCreditSaleClass.saveArchive(this)){
+
                     //Save data in the database
                     val debts = Debts(
                         dateCreditSaleClass.valueTotal,
@@ -79,7 +97,7 @@ class AddRemarks : AppCompatActivity() {
                         dateCreditSaleClass.valueAmount.toInt(),
                         dateCreditSaleClass.valueUnit,
                         dateCreditSaleClass.valueTotal)
-                    DataBaseShareData().writeDebts(debts, dateCreditSaleClass.nameClient)
+                    DataBaseShareData().writeDebts(this, debts, dateCreditSaleClass.nameClient, keyInventory, newAmount)
 
                     Toast.makeText(this, "Se grabo correctamente", Toast.LENGTH_LONG).show()
                 }
@@ -102,6 +120,11 @@ class AddRemarks : AppCompatActivity() {
     }
 
     private fun fillClassCash(): CashSaleClass {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
         //Text of topics
         val nameClient = this.intent.extras?.getString("nameClient").toString()
         val nameProduct = this.intent.extras?.getString("nameProduct").toString()
@@ -119,12 +142,16 @@ class AddRemarks : AppCompatActivity() {
             valueAmount.toFloat(),
             valueUnit.toFloat(),
             valueUnit.toFloat() * valueAmount.toInt(),
-            LocalDateTime.now(),
+            DateTime(day, month, year),
             "#Consecutivo",
             type
         )
     }
     private fun fillClassCredit(): CreditSaleClass{
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
         //Text of topics
         val nameClient = this.intent.extras?.getString("nameClient").toString()
         val numberClient = this.intent.extras?.getString("numberClient").toString()
@@ -133,7 +160,7 @@ class AddRemarks : AppCompatActivity() {
         val valueAmount = this.intent.extras?.getInt("valueAmount").toString()
         val type = this.intent.extras?.getString("type").toString()
         val total = valueUnit.toFloat() * valueAmount.toInt()
-        val localDataTIme: LocalDateTime = LocalDateTime.now()
+        val dateTime = DateTime(day, month, year)
 
         return CreditSaleClass(
             "MARCA",
@@ -143,7 +170,7 @@ class AddRemarks : AppCompatActivity() {
             valueUnit.toFloat(),
             valueAmount.toFloat(),
             total,
-            localDataTIme,
+            dateTime,
             "#Consecutivo",
             type
         )

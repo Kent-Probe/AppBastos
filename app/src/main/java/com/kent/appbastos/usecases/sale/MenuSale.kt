@@ -2,10 +2,11 @@ package com.kent.appbastos.usecases.sale
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.kent.appbastos.R
 
 class MenuSale : AppCompatActivity() {
@@ -22,6 +23,9 @@ class MenuSale : AppCompatActivity() {
         //Variables Buttons
         val btnCashSale: Button = findViewById(R.id.btnCashSale)
         val btnCreditSale: Button = findViewById(R.id.btnCreditSale)
+        findViewById<ImageButton?>(R.id.btnBack).setOnClickListener {
+            finish()
+        }
 
         btnCashSale.setOnClickListener {
             val intent = Intent(this, CashSale::class.java)

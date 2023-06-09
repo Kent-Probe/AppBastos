@@ -1,5 +1,6 @@
 package com.kent.appbastos.usecases.inventory.addInventory
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,12 @@ class AddInventory : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_inventary)
+
+        //Change name user
+        val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val profile = pref.getString("profile", null).toString()
+        val txtUserName:TextView = findViewById(R.id.txtUserName)
+        txtUserName.text = profile
 
         //Spinner
         val type: Spinner = findViewById(R.id.type)
@@ -30,7 +37,9 @@ class AddInventory : AppCompatActivity() {
         //Buttons
         val btnContinue: Button = findViewById(R.id.btnContinue)
         val btnCancel: Button = findViewById(R.id.btnCancel)
-
+        findViewById<ImageButton?>(R.id.btnBack).setOnClickListener {
+            finish()
+        }
 
         btnContinue.setOnClickListener {
             val amountView: TextView = findViewById(R.id.amount)

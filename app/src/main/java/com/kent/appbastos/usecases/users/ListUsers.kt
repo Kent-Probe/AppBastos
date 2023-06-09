@@ -17,6 +17,7 @@ import com.kent.appbastos.model.EventCallBackSuccess
 import com.kent.appbastos.model.adapter.RecyclerViewAdapterListUsers
 import com.kent.appbastos.model.firebase.DataBaseShareData
 import com.kent.appbastos.model.firebase.User
+import com.kent.appbastos.usecases.mainPrincipal.MainMenu
 
 class ListUsers : AppCompatActivity() {
 
@@ -40,6 +41,10 @@ class ListUsers : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_users)
 
+        //Data share
+        val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val rol = pref.getString(MainMenu.ROL, null).toString()
+
         //fill recycle view
         val listUserRecyclerView: RecyclerView = findViewById(R.id.listUserId)
 
@@ -47,8 +52,9 @@ class ListUsers : AppCompatActivity() {
         val floatButtonBack: FloatingActionButton = findViewById(R.id.exitBtn)
         val floatBtnAddUser: FloatingActionButton = findViewById(R.id.btnAddUser)
 
+        //Only admin
         val isOfCreditSale: Boolean = this.intent.extras?.getBoolean("creditSale") == true
-        if(isOfCreditSale){
+        if(isOfCreditSale || rol != "admin"){
             floatBtnAddUser.visibility = View.GONE
         }
 

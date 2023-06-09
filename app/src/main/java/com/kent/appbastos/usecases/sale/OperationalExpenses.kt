@@ -2,15 +2,16 @@ package com.kent.appbastos.usecases.sale
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.kent.appbastos.R
+import com.kent.appbastos.model.validate.ValidateEmpty
 import com.kent.appbastos.usecases.launcher.VALUES_SAVE
 import com.kent.appbastos.usecases.remarks.AddRemarks
-import com.kent.appbastos.model.validate.ValidateEmpty
 import java.util.*
 
 class OperationalExpenses : AppCompatActivity() {
@@ -27,6 +28,9 @@ class OperationalExpenses : AppCompatActivity() {
         //Variables of buttons
         val btnContinue: Button = findViewById(R.id.btnContinue)
         val btnCancel: Button = findViewById(R.id.btnCancel)
+        findViewById<ImageButton?>(R.id.btnBack).setOnClickListener {
+            finish()
+        }
 
         //Click buttons
         btnContinue.setOnClickListener {

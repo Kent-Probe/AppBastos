@@ -1,7 +1,10 @@
 package com.kent.appbastos.usecases.users
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
@@ -22,10 +25,17 @@ class RegisterUser : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_user)
 
+        val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val profile = pref.getString("profile", null).toString()
+        val txtUserName: TextView = findViewById(R.id.txtUserName)
+        txtUserName.text = profile
 
         //Buttons of the layer
         val btnContinue: Button = findViewById(R.id.btnContinue)
         val btnCancel: Button = findViewById(R.id.btnCancel)
+        findViewById<ImageButton?>(R.id.btnBack).setOnClickListener {
+            finish()
+        }
 
         //Fields of the layer
         var nameUser: TextInputEditText

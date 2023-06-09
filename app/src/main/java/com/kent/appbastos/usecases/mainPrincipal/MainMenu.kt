@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.kent.appbastos.R
 import com.kent.appbastos.usecases.dashboard.DashBoard
+import com.kent.appbastos.usecases.debts.Payment
 import com.kent.appbastos.usecases.sale.MenuSale
 import com.kent.appbastos.usecases.sale.OperationalExpenses
-import com.kent.appbastos.usecases.debts.Payment
 
 class MainMenu : AppCompatActivity() {
 
@@ -22,7 +22,7 @@ class MainMenu : AppCompatActivity() {
         const val EMAIL = "email"
         const val PROVIDER = "provider"
         const val PROFILE = "profile"
-
+        const val ROL = "rol"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,13 +34,14 @@ class MainMenu : AppCompatActivity() {
         val email = bundle?.getString(EMAIL)
         val provider = bundle?.getString(PROVIDER)
         val profile = bundle?.getString(PROFILE)
-
+        val rol = bundle?.getString(ROL)
 
         //Guardar Datos
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
         pref.putString(EMAIL, email)
         pref.putString(PROVIDER, provider)
         pref.putString(PROFILE, profile)
+        pref.putString(ROL, rol)
         pref.apply()
 
         //Variables of buttons

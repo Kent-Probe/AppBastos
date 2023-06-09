@@ -37,7 +37,14 @@ class DashBoard : AppCompatActivity() {
         }
 
         val nameProfile = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString("profile", null).toString()
+        val rol = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString("rol", null).toString()
         textUserView.text = nameProfile
+
+        if(rol != "admin"){
+            btnAddInventory.visibility = Button.GONE
+        }else{
+            btnAddInventory.visibility = Button.VISIBLE
+        }
 
         btnRegisterUser.setOnClickListener {
             val intent = Intent(this, ListUsers::class.java)

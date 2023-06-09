@@ -2,6 +2,7 @@ package com.kent.appbastos.usecases.debts
 
 import android.content.Context
 import android.content.Intent
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -16,8 +17,8 @@ import com.kent.appbastos.R
 import com.kent.appbastos.model.CallBackDebts
 import com.kent.appbastos.model.adapter.RecyclerViewAdapterDebts
 import com.kent.appbastos.model.firebase.DataBaseShareData
+import com.kent.appbastos.model.firebase.DateTime
 import com.kent.appbastos.model.firebase.Debts
-import java.time.LocalDateTime
 
 class ListDebts : AppCompatActivity() {
 
@@ -62,11 +63,17 @@ class ListDebts : AppCompatActivity() {
     private fun setupRecyclerView(recyclerView: RecyclerView, context: Context, key: String, txtDebtsPresents: TextView){
         val messagesListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                val calendar = Calendar.getInstance()
+                val year: Int = calendar.get(Calendar.YEAR)
+                val month: Int = calendar.get(Calendar.MONTH) + 1
+                val day: Int = calendar.get(Calendar.DAY_OF_MONTH)
+
+
                 listDebts.clear()
                 snapshot.children.forEach { child ->
                     val debts = Debts(
                         debts = child.child(DEBTS).value.toString().toFloat(),
-                        dateTime = LocalDateTime.now(),
+                        dateTime = DateTime(day, month, year),
                         amount = child.child(AMOUNT).value.toString().toInt(),
                         valueUnit = child.child(VALUE_UNIT).value.toString().toFloat(),
                         valueTotal = child.child(VALUE_TOTAL).value.toString().toFloat(),
