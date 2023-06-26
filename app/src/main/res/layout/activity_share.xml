@@ -109,7 +109,7 @@
             android:id="@+id/btnShare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/style_primary_button"
             android:text="@string/txtBtnShare"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
@@ -123,7 +123,7 @@
             android:id="@+id/btnPrintOut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/style_primary_button"
             android:text="@string/txtBtnPrintOut"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
@@ -137,7 +137,7 @@
             android:id="@+id/btnBackHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/style_primary_button"
             android:text="@string/txtBtnBackHome"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />

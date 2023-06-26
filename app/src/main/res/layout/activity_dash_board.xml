@@ -103,7 +103,7 @@
             android:id="@+id/btnRegisterUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/style_primary_button"
             android:text="@string/txtBtnRegisterUser"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
@@ -116,21 +116,8 @@
             android:id="@+id/btnAddInventory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/style_primary_button"
             android:text="@string/txtBtnAddInventory"
-            android:textColor="@color/white"
-            tools:ignore="TextContrastCheck" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <Button
-            android:id="@+id/btnDelBasedatos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
-            android:text="ELiminar base de datos"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
 

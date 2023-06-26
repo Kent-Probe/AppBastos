@@ -103,7 +103,7 @@
             android:id="@+id/btnCashSale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/style_primary_button"
             android:text="@string/txtCashSale"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
@@ -116,7 +116,7 @@
             android:id="@+id/btnCreditSale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/style_primary_button"
             android:text="@string/txtCreditSale"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />

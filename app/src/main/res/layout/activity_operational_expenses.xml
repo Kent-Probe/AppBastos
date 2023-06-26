@@ -179,7 +179,7 @@
                 android:id="@+id/btnContinue"
                 android:layout_width="@dimen/dimBtn"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_rounded"
+                android:background="@drawable/style_primary_button"
                 android:text="@string/txtBtnContinue"
                 android:textColor="@color/white"
                 tools:ignore="TextContrastCheck" />
@@ -193,7 +193,7 @@
                     android:id="@+id/btnCancel"
                     android:layout_width="@dimen/dimBtn"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/button_rounded"
+                    android:background="@drawable/style_primary_button"
                     android:text="@string/txtBtnCancel"
                     android:textColor="@color/white"
                     tools:ignore="TextContrastCheck" />

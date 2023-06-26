@@ -8,8 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#3DDC84</color>
+
     <color name="bluePrimary">#607eff</color>
     <color name="blueSecondary">#24c6f7</color>
+    <color name="bluePrimary_black">#5872E4</color>
+    <color name="blueSecondary_black">#20ADD8</color>
+
     <color name="colorHint">#FF534D4D</color>
     <color name="lineHint">#070000</color>
     <color name="lineHintNext">#000000</color>

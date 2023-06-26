@@ -84,7 +84,7 @@
             android:id="@+id/btnRegisterSale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/style_primary_button"
             android:text="@string/txtBtnRegisterSale"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
@@ -98,7 +98,7 @@
             android:id="@+id/btnAddPayment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/style_primary_button"
             android:text="@string/txtBtnAddPayment"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
@@ -111,7 +111,7 @@
             android:id="@+id/btnOperationalExpenses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/style_primary_button"
             android:text="@string/txtOperationalExpenses"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
@@ -124,7 +124,7 @@
             android:id="@+id/btnDashBoard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/style_primary_button"
             android:text="@string/txtDashboard"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
@@ -137,10 +137,9 @@
             android:id="@+id/btnLogOut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/style_primary_button"
             android:text="@string/txtLogOut"
-            android:textColor="@color/white"
-            tools:ignore="TextContrastCheck" />
+            android:textColor="@color/white" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
