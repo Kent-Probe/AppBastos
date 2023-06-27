@@ -20,11 +20,19 @@
     <string name="txtRemarks" translatable="false">Comentarios</string>
     <string name="txtAlertDialog" translatable="false">Este cliente tiene una deuda abierta. ¿Que desea hacer?</string>
     <string name="txtUsers">Clientes registrados</string>
+    <string name="txtInventory">Inventario</string>
     <string name="txtClientsDebts">Deudas del cliente</string>
     <string name="txtRegisterUserName">Nombre del usuario</string>
     <string name="txtNumberUser">Numero de telefono</string>
     <string name="txtAmountDebts">Cantidad: </string>
     <string name="txtDebtsTotal">Total: </string>
+
+    <string name="txtInventoryAmount">Cantidad: </string>
+    <string name="txtInventoryAmountMin">Cantidad minima: </string>
+    <string name="txtInventoryFlete">Flete: </string>
+    <string name="txtInventoryName">Nombre: </string>
+    <string name="txtInventoryProvider">Provedor: </string>
+    <string name="txtInventoryValueBase">Valor Base: </string>
 
     //Txt Onboard
     <string name="txtOnboarding_1">Aplicacion para la gestion de mercado en </string>
@@ -60,11 +68,14 @@
     <string name="txtBtnRegisterSale">Registrar Venta</string>
     <string name="txtBtnRegisterUser">Administrar clientes</string>
     <string name="txtBtnAddInventory">Agregar Inventario</string>
+    <string name="txtBtnListInventory">Instancias en inventario</string>
 
     <!-- Description of images -->
     <string name="descLogo">Logo de la aplicacion de AppBastos</string>
     <string name="descGradiant">Gradiante que se usara en todas las screen</string>
     <string name="descUserImage">Imagen de usuario</string>
+    <string name="descX">Boton de cancelar y/o regresar</string>
+    <string name="descPlus">Boton de agregar</string>
 
     <!-- Description of buttons -->
     <string name="descBtnBack">Boton que al presionar cuelve a la pantalla anterior</string>

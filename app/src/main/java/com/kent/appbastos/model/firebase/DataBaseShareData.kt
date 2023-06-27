@@ -2,7 +2,10 @@ package com.kent.appbastos.model.firebase
 
 import android.content.Context
 import android.widget.Toast
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.Query
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.kent.appbastos.model.BasicEventCallback
@@ -29,7 +32,6 @@ class DataBaseShareData () {
         const val AMOUNT = "amount"
 
         //key value
-        const val KEY = "key"
     }
     private fun increment(valueS: String, increment: Float): Float{
         return valueS.toFloat() + increment
@@ -148,34 +150,6 @@ class DataBaseShareData () {
         })
     }
 
-    fun delDatabase(context: Context){
-
-        val childEventListener = object  : ChildEventListener{
-            override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
-                database.child(INVENTORY).child(dataSnapshot.key.toString()).removeValue()
-            }
-
-            override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
-                Toast.makeText(context, "cambio", Toast.LENGTH_LONG).show()
-            }
-
-            override fun onChildRemoved(dataSnapshot: DataSnapshot) {
-                //Toast.makeText(context, "removio", Toast.LENGTH_LONG).show()
-            }
-
-            override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {
-                Toast.makeText(context, "movio", Toast.LENGTH_LONG).show()
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                Toast.makeText(context, "cancelar", Toast.LENGTH_LONG).show()
-            }
-        }
-
-        database.child(INVENTORY).limitToFirst(100).addChildEventListener(childEventListener)
-
-    }
-
     fun checkDebts(type: String, callBack: BasicEventCallback){
         val inventory: Query = database.child(INVENTORY)
 
@@ -196,7 +170,7 @@ class DataBaseShareData () {
 
 data class DateTime(val day: Int, val month: Int, val year: Int)
 
-data class Inventory(val amount: Float, val provider: String, val valueBase: Float, val name:String, val amountMin:Float, val flete:String)
+data class Inventory(val amount: Float, val provider: String, val valueBase: Float, val name:String, val amountMin:Float, val flete:String, val key:String? = null)
 
 data class Debts(val debts: Float, val dateTime: DateTime, val amount: Int, val valueUnit: Float, val valueTotal: Float, val key: String? = null)
 

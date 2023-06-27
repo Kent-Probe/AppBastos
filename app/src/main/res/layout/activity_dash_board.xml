@@ -113,13 +113,14 @@
             android:layout_height="10dp" />
 
         <Button
-            android:id="@+id/btnAddInventory"
+            android:id="@+id/btnListInventory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/style_primary_button"
-            android:text="@string/txtBtnAddInventory"
+            android:text="@string/txtBtnListInventory"
             android:textColor="@color/white"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="TextContrastCheck"/>
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

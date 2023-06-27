@@ -8,7 +8,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.kent.appbastos.R
-import com.kent.appbastos.usecases.inventory.addInventory.AddInventory
+import com.kent.appbastos.usecases.inventory.listInventory.ListInventory
 import com.kent.appbastos.usecases.users.ListUsers
 
 class DashBoard : AppCompatActivity() {
@@ -22,27 +22,21 @@ class DashBoard : AppCompatActivity() {
         val textUserView: TextView = findViewById(R.id.txtUserName)
 
         //Variables of the button
-        val btnRegisterUser: Button = findViewById(R.id.btnRegisterUser)
-        val btnAddInventory: Button = findViewById(R.id.btnAddInventory)
         val btnBack: ImageButton = findViewById(R.id.btnBack)
+        val btnRegisterUser: Button = findViewById(R.id.btnRegisterUser)
+        val btnListInventory: Button = findViewById(R.id.btnListInventory)
 
         val nameProfile = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString("profile", null).toString()
         val rol = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString("rol", null).toString()
         textUserView.text = nameProfile
-
-        if(rol != "admin"){
-            btnAddInventory.visibility = Button.GONE
-        }else{
-            btnAddInventory.visibility = Button.VISIBLE
-        }
 
         btnRegisterUser.setOnClickListener {
             val intent = Intent(this, ListUsers::class.java)
             startActivity(intent)
         }
 
-        btnAddInventory.setOnClickListener {
-            val intent = Intent(this, AddInventory::class.java)
+        btnListInventory.setOnClickListener {
+            val intent= Intent(this, ListInventory::class.java)
             startActivity(intent)
         }
 
