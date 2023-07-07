@@ -14,7 +14,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.kent.appbastos.R
-import com.kent.appbastos.model.CallBackDebts
+import com.kent.appbastos.model.util.CallBackDebts
 import com.kent.appbastos.model.adapter.RecyclerViewAdapterDebts
 import com.kent.appbastos.model.firebase.DataBaseShareData
 import com.kent.appbastos.model.firebase.DateTime

@@ -1,4 +1,4 @@
-package com.kent.appbastos.model
+package com.kent.appbastos.model.util
 
 import com.kent.appbastos.model.firebase.Debts
 

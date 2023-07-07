@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kent.appbastos.R
-import com.kent.appbastos.model.CallBackDebts
+import com.kent.appbastos.model.util.CallBackDebts
 import com.kent.appbastos.model.firebase.Debts
 
 class RecyclerViewAdapterDebts(private val values: List<Debts>, private val eventCallBack: CallBackDebts):

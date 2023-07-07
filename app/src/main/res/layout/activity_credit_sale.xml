@@ -146,16 +146,14 @@
             android:id="@+id/inputType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/txtNameProduct"
+            android:hint="@string/txtType"
             android:textColorHint="@color/colorHint"
             app:hintTextColor="@color/lineHint">
 
-            <androidx.appcompat.widget.AppCompatSpinner
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/type"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:contentDescription="@string/txtType"
-                style="@style/Widget.AppCompat.Spinner.Underlined"/>
+                android:layout_height="48dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

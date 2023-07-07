@@ -8,7 +8,7 @@ import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.kent.appbastos.model.BasicEventCallback
+import com.kent.appbastos.model.util.BasicEventCallback
 import java.util.*
 
 class DataBaseShareData () {
@@ -47,7 +47,7 @@ class DataBaseShareData () {
         database.child(INVENTORY).child(keyInventory).child("amount").setValue(newAmount.toFloat())
 
         database.child(DEBTS).child(nameClient).push().setValue(debts)
-        checkClientExist(nameClient, object : BasicEventCallback{
+        checkClientExist(nameClient, object : BasicEventCallback {
             override fun onSuccess(dataSnapshot: DataSnapshot) {
                 dataSnapshot.children.forEach { child ->
                     val updates: MutableMap<String, Any> = hashMapOf(
@@ -137,7 +137,8 @@ class DataBaseShareData () {
                     provider = data[2],
                     amountMin = data[3].toFloat(),
                     flete = data[4],
-                    name = data[5]
+                    name = data[5],
+                    category = data[6]
                 )
                 database.child(INVENTORY).push().setValue(inventory)
                 Toast.makeText(context, "Datos agregados con exito", Toast.LENGTH_LONG).show()
@@ -170,13 +171,13 @@ class DataBaseShareData () {
 
 data class DateTime(val day: Int, val month: Int, val year: Int)
 
-data class Inventory(val amount: Float, val provider: String, val valueBase: Float, val name:String, val amountMin:Float, val flete:String, val key:String? = null)
+data class Inventory(val amount: Float, val provider: String, val valueBase: Float, val name:String, val amountMin:Float, val flete:String, val category: String, val key:String? = null)
 
 data class Debts(val debts: Float, val dateTime: DateTime, val amount: Int, val valueUnit: Float, val valueTotal: Float, val key: String? = null)
 
 data class CashSale(val amount: Float, val valueUnit: Float)
 
-data class CreditSale(val amount: Float, val valueUnit: Float, val debut: Float)
+data class CreditSaleFirebase(val amount: Float, val valueUnit: Float, val debut: Float)
 
 data class UserApp(val firstName: String, val lastName: String, val email: String, val rol: String, val key: String? = null)
 

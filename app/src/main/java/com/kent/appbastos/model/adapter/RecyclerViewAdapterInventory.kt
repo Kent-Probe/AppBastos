@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kent.appbastos.R
 import com.kent.appbastos.model.firebase.Inventory
-import com.kent.appbastos.model.values.CallBackInventory
+import com.kent.appbastos.model.util.CallBackInventory
 
 class RecyclerViewAdapterInventory(private val values: List<Inventory>, private val eventCallBack: CallBackInventory):
     RecyclerView.Adapter<RecyclerViewAdapterInventory.ViewHolder>() {

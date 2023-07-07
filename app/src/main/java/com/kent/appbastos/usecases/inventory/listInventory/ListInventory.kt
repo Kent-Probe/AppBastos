@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,9 +16,10 @@ import com.kent.appbastos.R
 import com.kent.appbastos.model.adapter.RecyclerViewAdapterInventory
 import com.kent.appbastos.model.firebase.DataBaseShareData
 import com.kent.appbastos.model.firebase.Inventory
-import com.kent.appbastos.model.values.CallBackInventory
+import com.kent.appbastos.model.util.CallBackInventory
 import com.kent.appbastos.usecases.inventory.addInventory.AddInventory
 import com.kent.appbastos.usecases.mainPrincipal.MainMenu
+import com.kent.appbastos.usecases.sale.CreditSale
 
 class ListInventory : AppCompatActivity() {
 
@@ -32,11 +34,14 @@ class ListInventory : AppCompatActivity() {
         const val NAME = "name"
         const val PROVIDER = "provider"
         const val VALUE_BASE = "valueBase"
+        const val CATEGORY = "category"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_inventory)
+
+        val creditSale = intent.extras?.getBoolean("creditSale")
 
         //Data share
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
@@ -65,19 +70,19 @@ class ListInventory : AppCompatActivity() {
         }
 
         listInventory.clear()
-        setupRecyclerView(listInventoryRecyclerView, this)
+        setupRecyclerView(this, listInventoryRecyclerView, creditSale)
 
     }
 
     //Function of Recycler View with Database
-    private fun setupRecyclerView(recyclerView: RecyclerView, context: Context) {
+    private fun setupRecyclerView(context: Context, recyclerView: RecyclerView, creditSale: Boolean?) {
 
         val messagesListener = object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 listInventory.clear()
-                val key: String? = dataSnapshot.key
                 dataSnapshot.children.forEach { child ->
+                    val key: String? = child.key
                     val inventory =
                         Inventory(
                             amount = child.child(AMOUNT).value.toString().toFloat(),
@@ -86,14 +91,29 @@ class ListInventory : AppCompatActivity() {
                             name = child.child(NAME).value.toString(),
                             amountMin = child.child(AMOUNT_MIN).value.toString().toFloat(),
                             flete = child.child(FLETE).value.toString(),
+                            category = child.child(CATEGORY).value.toString(),
                             key = key,
                         )
                     inventory.let { listInventory.add(inventory) }
                 }
                 recyclerView.layoutManager = LinearLayoutManager(context)
-                recyclerView.adapter = RecyclerViewAdapterInventory(listInventory, object : CallBackInventory{
+                recyclerView.adapter = RecyclerViewAdapterInventory(listInventory, object :
+                    CallBackInventory {
                     override fun onSuccess(inventory: Inventory) {
-                        TODO("Not yet implemented")
+                        if (creditSale == true) {
+                            val intent = Intent(context, CreditSale::class.java).apply {
+                                putExtra("key", inventory.key)
+                                putExtra(NAME, inventory.name)
+                                putExtra(PROVIDER, inventory.provider)
+                                putExtra(CATEGORY, inventory.category)
+                                putExtra(VALUE_BASE, inventory.valueBase)
+                                putExtra(AMOUNT, inventory.amount)
+                                putExtra(AMOUNT_MIN, inventory.amountMin)
+                            }
+                            startActivity(intent)
+                            finish()
+                        }
+                        Toast.makeText(context, "Inventaio de ${inventory.name}", Toast.LENGTH_SHORT).show()
                     }
 
                 })

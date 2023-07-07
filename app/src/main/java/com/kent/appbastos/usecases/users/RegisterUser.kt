@@ -11,7 +11,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.DataSnapshot
 import com.kent.appbastos.R
-import com.kent.appbastos.model.BasicEventCallback
+import com.kent.appbastos.model.util.BasicEventCallback
 import com.kent.appbastos.model.firebase.DataBaseShareData
 import com.kent.appbastos.model.validate.ValidateEmpty
 import java.util.*
@@ -78,7 +78,8 @@ class RegisterUser : AppCompatActivity() {
             val toastCancel: Toast = Toast.makeText(this, "Se encontro una instancia", Toast.LENGTH_LONG)
             val toastFailure: Toast = Toast.makeText(this, "Error en base de datos", Toast.LENGTH_LONG)
             if(ValidateEmpty().validate(texts, inputLayout)){
-                DataBaseShareData().checkClientExist(nameUser.text.toString(), object : BasicEventCallback{
+                DataBaseShareData().checkClientExist(nameUser.text.toString(), object :
+                    BasicEventCallback {
                     override fun onSuccess(dataSnapshot: DataSnapshot) {
                         if(!dataSnapshot.exists()){
                             database.writeNewUser(name = nameUserText, number = numberText)

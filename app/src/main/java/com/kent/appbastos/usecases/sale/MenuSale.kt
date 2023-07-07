@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.kent.appbastos.R
+import com.kent.appbastos.usecases.inventory.listInventory.ListInventory
 
 class MenuSale : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +34,9 @@ class MenuSale : AppCompatActivity() {
         }
 
         btnCreditSale.setOnClickListener {
-            val intent = Intent(this, CreditSale::class.java)
+            val intent = Intent(this, ListInventory::class.java).apply {
+                putExtra("creditSale", true)
+            }
             startActivity(intent)
         }
     }

@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.kent.appbastos.R
-import com.kent.appbastos.model.EventButtonsCallBack
+import com.kent.appbastos.model.util.EventButtonsCallBack
 
 
 class Alerts {

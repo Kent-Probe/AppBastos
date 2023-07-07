@@ -13,10 +13,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.kent.appbastos.R
-import com.kent.appbastos.model.EventCallBackSuccess
 import com.kent.appbastos.model.adapter.RecyclerViewAdapterListUsers
 import com.kent.appbastos.model.firebase.DataBaseShareData
 import com.kent.appbastos.model.firebase.User
+import com.kent.appbastos.model.util.EventCallBackSuccess
 import com.kent.appbastos.usecases.mainPrincipal.MainMenu
 
 class ListUsers : AppCompatActivity() {
@@ -90,7 +90,8 @@ class ListUsers : AppCompatActivity() {
                     user.let { listUsers.add(user) }
                 }
                 recyclerView.layoutManager = LinearLayoutManager(context)
-                recyclerView.adapter = RecyclerViewAdapterListUsers(listUsers, object : EventCallBackSuccess{
+                recyclerView.adapter = RecyclerViewAdapterListUsers(listUsers, object :
+                    EventCallBackSuccess {
                     override fun onSuccess(user: User) {
                         if(isCreditSale){
                             val intent = Intent().apply {

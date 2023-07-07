@@ -92,6 +92,7 @@ class AddInventory : AppCompatActivity() {
             }
 
             texts.add(type.selectedItem.toString())
+            texts.add("media calidad")
 
             DataBaseShareData().addInventory(texts, this)
             finish()

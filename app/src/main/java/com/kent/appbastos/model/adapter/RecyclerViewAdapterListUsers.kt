@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.kent.appbastos.R
-import com.kent.appbastos.model.EventCallBackSuccess
+import com.kent.appbastos.model.util.EventCallBackSuccess
 import com.kent.appbastos.model.firebase.User
 
 class RecyclerViewAdapterListUsers(private val values:List<User>, private val eventCallBackSuccess: EventCallBackSuccess):

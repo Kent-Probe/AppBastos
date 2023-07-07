@@ -4,22 +4,22 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.database.DataSnapshot
 import com.kent.appbastos.R
-import com.kent.appbastos.model.BasicEventCallback
-import com.kent.appbastos.model.EventButtonsCallBack
 import com.kent.appbastos.model.alerts.Alerts
-import com.kent.appbastos.model.firebase.DataBaseShareData
+import com.kent.appbastos.model.util.EventButtonsCallBack
 import com.kent.appbastos.model.validate.ValidateEmpty
 import com.kent.appbastos.usecases.remarks.AddRemarks
 import com.kent.appbastos.usecases.users.ListUsers
 import com.kent.appbastos.usecases.users.ListUsers.Companion.PHONE
 import com.kent.appbastos.usecases.users.ListUsers.Companion.USERNAME
+import java.text.DecimalFormat
 import java.util.*
 
 class CreditSale : AppCompatActivity() {
@@ -41,29 +41,61 @@ class CreditSale : AppCompatActivity() {
         }
     }
 
+    companion object{
+        const val KEY = "key"
+        const val PROVIDER = "provider"
+        const val NAME = "name"
+        const val CATEGORY = "category"
+        const val VALUE_BASE = "valueBase"
+        const val AMOUNT = "amount"
+        const val AMOUNT_MIN = "amountMin"
+
+        const val ERROR = "error"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_credit_sale)
+
+        //variable util
+        val context: Context = this
+        val layoutInflater = layoutInflater
 
         //variable input text
         numberClientView = findViewById(R.id.numberClient)
         inputNumberClient = findViewById(R.id.inputNumberClient)
 
-        //Spinner
-        val type:Spinner = findViewById(R.id.type)
+        //variable intent, data of the listInventory (Screen)
+        val data :MutableMap<String, Any> = hashMapOf(
+            KEY to intent.extras?.getString(KEY, ERROR).toString(),
+            NAME to intent.extras?.getString(NAME, ERROR).toString(),
+            PROVIDER to intent.extras?.getString(PROVIDER, ERROR).toString(),
+            CATEGORY to intent.extras?.getString(CATEGORY, ERROR).toString(),
+            VALUE_BASE to intent.extras?.getFloat(VALUE_BASE, 0f).toString().toFloat(),
+            AMOUNT to intent.extras?.getFloat(AMOUNT, 0f).toString().toFloat(),
+            AMOUNT_MIN to intent.extras?.getFloat(AMOUNT_MIN, 0f).toString().toFloat()
+        )
 
-        //Options
-        val options = arrayOf("v", "m")
+        //Value of format and more string with format
+        val format = DecimalFormat("$#,### COP")
+        val valueBase = data[VALUE_BASE].toString().toFloat()
+        var isRepeated: Boolean
+        var valueRepeated = -100f
 
-        //Adapter
-        val adapter = ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, options)
+        //Variables of screen (textView) with default data
+        val type:TextView = findViewById(R.id.type)
+        val category:TextView = findViewById(R.id.nameProduct)
 
-        //Adapter with the spinner
-        type.adapter = adapter
-        type.setSelection(0)
+        //assign default values (variables of the screen)
+        type.text = data[NAME].toString()
+        category.text = data[CATEGORY].toString()
+
+        //disable textView
+        type.isEnabled = false
+        category.isEnabled = false
 
 
-        //Change value of name Profile
+        //Change value of name Profile (data in memory cache)
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val profile = pref.getString("profile", null).toString()
         val txtUserName:TextView = findViewById(R.id.txtUserName)
@@ -90,145 +122,96 @@ class CreditSale : AppCompatActivity() {
 
         //Click Buttons
         btnContinue.setOnClickListener {
-
             //Variables de los TextInputLayout
-            val inputNameProduct: TextInputLayout = findViewById(R.id.inputNameProduct)
             val inputValueUnit: TextInputLayout = findViewById(R.id.inputValueUnit)
             val inputValueAmount: TextInputLayout = findViewById(R.id.inputAmount)
 
             //Variables del  editText
-            val nameProductView: TextView = findViewById(R.id.nameProduct)
             val valueUnitView: TextView = findViewById(R.id.valueUnit)
             val valueAmountView: TextView = findViewById(R.id.amount)
 
             //Variables de los text del TextInputLayout
-
-            val nameProduct: String = nameProductView.text.toString()
             val valueUnit: String = valueUnitView.text.toString()
             val valueAmount: String = valueAmountView.text.toString()
 
             //Arrays -2
             val texts: Vector<String> = Vector(
                 listOf(
-                    nameProduct,
                     valueUnit,
                     valueAmount
                 )
             )
             val inputsLayouts: Vector<TextInputLayout> = Vector(
                 listOf(
-                    inputNameProduct,
                     inputValueUnit,
                     inputValueAmount
                 )
             )
+
+            if (btnSeeUser.text.toString() == R.string.txtNameClient.toString() || btnSeeUser.text == null || btnSeeUser.text == ""){
+                btnSeeUser.error = "Debe seleccionar un cliente"
+                return@setOnClickListener
+            }else{
+                btnSeeUser.error = null
+            }
+
+            isRepeated = valueRepeated != valueUnit.toFloatOrNull()
+
+            //Validate data of the screen with the Inventory
+            if (valueAmount.isNotEmpty() && data[AMOUNT].toString().toFloat() < valueAmount.toFloat()) {
+                inputValueAmount.isErrorEnabled = true
+                inputValueAmount.error = "No hay suficiente inventario"
+                return@setOnClickListener
+            }else{
+                inputValueAmount.isErrorEnabled = false
+            }
+
+            if(valueUnit.isNotEmpty() && valueBase > valueUnit.toFloat() && isRepeated) {
+                Alerts().showAlertSelection(
+                    layoutInflater,
+                    context,
+                    "Alerta el valor minimo es de ${format.format(valueBase)}, desea continuar",
+                    "Continuar",
+                    "Cambiar",
+                    object : EventButtonsCallBack {
+                        override fun buttonUp(alertDialog: AlertDialog) {
+                            valueRepeated = valueUnit.toFloat()
+                            isRepeated = false
+                            alertDialog.hide()
+                        }
+
+                        override fun buttonDown(alertDialog: AlertDialog) {
+                            valueUnitView.text = ""
+                            alertDialog.hide()
+                        }
+
+                    }
+                )
+            }else{
+                valueRepeated = -100f
+            }
 
             //validate empty fields
             if (!ValidateEmpty().validate(texts, inputsLayouts)) {
                 return@setOnClickListener
             }
 
-            if (btnSeeUser.text.toString() == R.string.txtNameClient.toString() || btnSeeUser.text == null || btnSeeUser.text == ""){
-                btnSeeUser.error = "Debe seleccionar un cliente"
-                return@setOnClickListener
+            val amountInventory = data[AMOUNT].toString().toFloat() - valueAmount.toFloat()
+
+            val intent = Intent(context, AddRemarks::class.java).apply {
+                putExtra("nameClient", btnSeeUser.text)
+                putExtra("numberClient", numberText)
+                putExtra("nameProduct", data[CATEGORY].toString())
+                putExtra("valueUnit", valueUnit.toFloat())
+                putExtra("valueAmount", valueAmount.toInt())
+                putExtra("type", data[NAME].toString())
+                putExtra("title", "creditSale")
+                putExtra("keyInventory", data[KEY].toString())
+                putExtra("amountInventory", amountInventory)
+
             }
-            btnSeeUser.error = null
-            val itemType = type.selectedItem.toString()
-            val context: Context = this
-            val layoutInflater = layoutInflater
-
-            DataBaseShareData().checkDebts(itemType, object : BasicEventCallback {
-                override fun onSuccess(dataSnapshot: DataSnapshot) {
-                    inputValueAmount.isErrorEnabled = false
-                    inputValueUnit.isErrorEnabled = false
-
-                    var amount: String? = ""
-                    var valueBase: String? = ""
-
-                    var key: String? = ""
-                    dataSnapshot.children.forEach {
-                        key = it.key.toString()
-                        amount = it.child("amount").value.toString()
-                        valueBase = it.child("valueBase").value.toString()
-
-                    }
-
-                    if(amount.isNullOrEmpty()){
-                        Toast.makeText(context, "Error en la base de datos", Toast.LENGTH_LONG).show()
-                        return
-                    }
-
-                    if(valueBase.isNullOrEmpty()){
-                        Toast.makeText(context, "Error en la base de datos", Toast.LENGTH_LONG).show()
-                        return
-                    }
-
-                    val amountDatabase = amount!!.toFloat()
-                    val valueBaseDatabase = valueBase!!.toFloat()
-                    val amountScreen = valueAmount.toFloat()
-                    val valueUnitScreen = valueUnit.toFloat()
-
-                    if(amountDatabase < amountScreen){
-                        inputValueAmount.isErrorEnabled = true
-                        inputValueAmount.error = "No hay suficiente inventario"
-                        return
-                    }
-
-                    if(valueBaseDatabase > valueUnitScreen){
-                        var validate = true
-                        Alerts().showAlertSelection(
-                            layoutInflater,
-                            context,
-                            "Alerta el valor minimo es de $valueBaseDatabase",
-                            "Continuar",
-                            "Cancelar",
-                            object : EventButtonsCallBack {
-                                override fun buttonUp(alertDialog: AlertDialog) {
-                                    validate = false
-                                    alertDialog.hide()
-                                }
-
-                                override fun buttonDown(alertDialog: AlertDialog) {
-                                    valueUnitView.text = ""
-                                    validate = true
-                                    alertDialog.hide()
-                                }
-
-                            }
-                        )
-                        if(!validate) return
-                    }
-
-                    val amountInventory = amountDatabase - amountScreen
-
-                    val intent = Intent(context, AddRemarks::class.java).apply {
-                        putExtra("nameClient", btnSeeUser.text)
-                        putExtra("numberClient", numberText)
-                        putExtra("nameProduct", nameProduct)
-                        putExtra("valueUnit", valueUnit.toFloat())
-                        putExtra("valueAmount", valueAmount.toInt())
-                        putExtra("type", itemType)
-                        putExtra("title", "creditSale")
-                        putExtra("keyInventory", key)
-                        putExtra("amountInventory", amountInventory)
-                    }
-                    startActivity(intent)
-                    finish()
-                }
-
-                override fun onCancel() {
-                    Toast.makeText(context, "Error con el inventario", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-
-                override fun databaseFailure() {
-                    Toast.makeText(context, "Datos agregados con exito", Toast.LENGTH_LONG).show()
-                    finish()
-                }
-
-            })
-            //finish()
-
+            startActivity(intent)
+            finish()
         }
 
         btnCancel.setOnClickListener {

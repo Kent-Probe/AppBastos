@@ -28,6 +28,7 @@ class AddRemarks : AppCompatActivity() {
 
     lateinit var keyInventory: String
     lateinit var newAmount: String
+
     override fun onStart() {
         super.onStart()
         //Key Inventory and new amount

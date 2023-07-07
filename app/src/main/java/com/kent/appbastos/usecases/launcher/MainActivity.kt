@@ -16,10 +16,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DataSnapshot
 import com.kent.appbastos.R
-import com.kent.appbastos.model.BasicEventCallback
 import com.kent.appbastos.model.alerts.Alerts
 import com.kent.appbastos.model.firebase.DataBaseShareData
 import com.kent.appbastos.model.firebase.UserApp
+import com.kent.appbastos.model.util.BasicEventCallback
 import com.kent.appbastos.usecases.mainPrincipal.MainMenu
 
 enum class ProviderType{
@@ -100,7 +100,8 @@ class MainActivity : AppCompatActivity() {
                         if(it.isSuccessful){
                             val userCurrent = FirebaseAuth.getInstance().currentUser
                             val userApp = UserApp(account.displayName.toString(), account.familyName.toString(), account.email.toString(), "usuario")
-                            DataBaseShareData().writeNewUserApp(this, userCurrent?.uid.toString(), userApp, object : BasicEventCallback{
+                            DataBaseShareData().writeNewUserApp(this, userCurrent?.uid.toString(), userApp, object :
+                                BasicEventCallback {
                                 override fun onSuccess(dataSnapshot: DataSnapshot) {
                                     mainMenuScreen(account.email ?: "", ProviderType.GOOGLE, account.givenName ?: "", dataSnapshot.child(MainMenu.ROL).value.toString())
                                 }
