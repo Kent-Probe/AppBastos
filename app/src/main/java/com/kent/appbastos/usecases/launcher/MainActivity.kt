@@ -20,14 +20,12 @@ import com.kent.appbastos.model.alerts.Alerts
 import com.kent.appbastos.model.firebase.DataBaseShareData
 import com.kent.appbastos.model.firebase.UserApp
 import com.kent.appbastos.model.util.BasicEventCallback
+import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.usecases.mainPrincipal.MainMenu
 
 enum class ProviderType{
     GOOGLE
 }
-
-//Value for save
-const val VALUES_SAVE = "com.kent.appbastos.profile"
 
 class MainActivity : AppCompatActivity() {
 
@@ -66,20 +64,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun mainMenuScreen(email:String, provider: ProviderType, profile:String, rol: String){
         val intent = Intent(this, MainMenu::class.java).apply {
-            putExtra("email", email)
-            putExtra("provider", provider.name)
-            putExtra("profile", profile)
-            putExtra("rol", rol)
+            putExtra(Keys.EMAIL, email)
+            putExtra(Keys.PROVIDER_SESSION, provider.name)
+            putExtra(Keys.PROFILE, profile)
+            putExtra(Keys.ROL, rol)
         }
         startActivity(intent)
     }
 
     private fun session(){
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val profile = pref.getString("profile", null).toString()
-        val email = pref.getString("email", null)
-        val rol = pref.getString("rol", null).toString()
-        val provider = pref.getString("provider", null)
+        val profile = pref.getString(Keys.PROFILE, null).toString()
+        val email = pref.getString(Keys.EMAIL, null)
+        val rol = pref.getString(Keys.ROL, null).toString()
+        val provider = pref.getString(Keys.PROVIDER_SESSION, null)
 
         if(email != null && provider != null){
             mainMenuScreen(email, ProviderType.valueOf(provider), profile, rol)
@@ -99,11 +97,11 @@ class MainActivity : AppCompatActivity() {
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
                         if(it.isSuccessful){
                             val userCurrent = FirebaseAuth.getInstance().currentUser
-                            val userApp = UserApp(account.displayName.toString(), account.familyName.toString(), account.email.toString(), "usuario")
+                            val userApp = UserApp(account.displayName.toString(), account.familyName.toString(), account.email.toString(), Keys.ROL_USER)
                             DataBaseShareData().writeNewUserApp(this, userCurrent?.uid.toString(), userApp, object :
                                 BasicEventCallback {
                                 override fun onSuccess(dataSnapshot: DataSnapshot) {
-                                    mainMenuScreen(account.email ?: "", ProviderType.GOOGLE, account.givenName ?: "", dataSnapshot.child(MainMenu.ROL).value.toString())
+                                    mainMenuScreen(account.email ?: "", ProviderType.GOOGLE, account.givenName ?: "", dataSnapshot.child(Keys.ROL).value.toString())
                                 }
 
                                 override fun onCancel() {
@@ -117,9 +115,9 @@ class MainActivity : AppCompatActivity() {
                             })
                         }else{
                             Alerts().showAlert(
-                                "Error esperado",
-                                "No se a iniciado sesion",
-                                "Aceptar",
+                                title = Keys.ALERT_TITLE_ERROR,
+                                message = Keys.ALERT_MSM,
+                                positiveButton = Keys.ALERT_BUTTON,
                                 this
                             )
                         }
@@ -127,9 +125,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }catch (e: ApiException){
                 Alerts().showAlert(
-                    "Error",
-                    "No se a iniciado sesion",
-                    "Aceptar",
+                    title = Keys.ALERT_TITLE_ERROR,
+                    message = Keys.ALERT_MSM,
+                    positiveButton = Keys.ALERT_BUTTON,
                     this
                 )
             }

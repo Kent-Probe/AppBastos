@@ -2,19 +2,16 @@ package com.kent.appbastos.usecases.share
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.kent.appbastos.R
-import com.kent.appbastos.model.values.CashSaleClass
-import java.io.File
+import com.kent.appbastos.model.util.Keys
 
 class Share : AppCompatActivity() {
-
-    private lateinit var privateRootDir: File
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +20,7 @@ class Share : AppCompatActivity() {
 
         //Change value of name Profile
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val profile = pref.getString("profile", null).toString()
+        val profile = pref.getString(Keys.PROFILE, null).toString()
         val txtUserName: TextView = findViewById(R.id.txtUserName)
         txtUserName.text = profile
 
@@ -46,7 +43,7 @@ class Share : AppCompatActivity() {
 
         //COnstruccion
         btnPrintOut.setOnClickListener {
-            Toast.makeText(this, "En construccion", Toast.LENGTH_LONG)
+            Toast.makeText(this, Keys.TOAST_MSM_BUILD, Toast.LENGTH_LONG).show()
         }
     }
 

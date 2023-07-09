@@ -6,7 +6,8 @@
     <string name="txtUserName" translatable="false">Nombre del usuario*</string>
     <string name="txtName" translatable="false">Nombre*</string>
     <string name="txtNameClient" translatable="false">Nombre del cliente*</string>
-    <string name="txtNameProduct" translatable="false">Nombre del Prodcto*</string>
+    <string name="txtCategoryProduct" translatable="false">Categoria*</string>
+    <string name="txtNameProduct" translatable="false">Categoria*</string>
     <string name="txtValue" translatable="false">Valor por unidad*</string>
     <string name="txtValueMin" translatable="false">Precio Base*</string>
     <string name="txtType" translatable="false">Tipo*</string>
@@ -32,6 +33,7 @@
     <string name="txtInventoryAmountMin">Cantidad minima: </string>
     <string name="txtInventoryFlete">Flete: </string>
     <string name="txtInventoryName">Nombre: </string>
+    <string name="txtCategory">Categoria: </string>
     <string name="txtInventoryProvider">Provedor: </string>
     <string name="txtInventoryValueBase">Valor Base: </string>
 

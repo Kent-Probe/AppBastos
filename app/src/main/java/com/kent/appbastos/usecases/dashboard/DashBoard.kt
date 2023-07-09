@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.kent.appbastos.R
+import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.usecases.inventory.listInventory.ListInventory
 import com.kent.appbastos.usecases.users.ListUsers
 
@@ -26,8 +27,8 @@ class DashBoard : AppCompatActivity() {
         val btnRegisterUser: Button = findViewById(R.id.btnRegisterUser)
         val btnListInventory: Button = findViewById(R.id.btnListInventory)
 
-        val nameProfile = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString("profile", null).toString()
-        val rol = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString("rol", null).toString()
+        val nameProfile = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString( Keys.PROFILE, null).toString()
+        //val rol = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString(Keys.ROL, null).toString()
         textUserView.text = nameProfile
 
         btnRegisterUser.setOnClickListener {

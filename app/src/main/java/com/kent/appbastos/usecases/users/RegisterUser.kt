@@ -11,8 +11,9 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.DataSnapshot
 import com.kent.appbastos.R
-import com.kent.appbastos.model.util.BasicEventCallback
 import com.kent.appbastos.model.firebase.DataBaseShareData
+import com.kent.appbastos.model.util.BasicEventCallback
+import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.model.validate.ValidateEmpty
 import java.util.*
 
@@ -26,7 +27,7 @@ class RegisterUser : AppCompatActivity() {
         setContentView(R.layout.activity_register_user)
 
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val profile = pref.getString("profile", null).toString()
+        val profile = pref.getString(Keys.PROFILE, null).toString()
         val txtUserName: TextView = findViewById(R.id.txtUserName)
         txtUserName.text = profile
 
@@ -74,15 +75,19 @@ class RegisterUser : AppCompatActivity() {
                     nameUserText
                 )
             )
-            val toastSuccess: Toast = Toast.makeText(this, "Se grabo correctamente", Toast.LENGTH_LONG)
-            val toastCancel: Toast = Toast.makeText(this, "Se encontro una instancia", Toast.LENGTH_LONG)
-            val toastFailure: Toast = Toast.makeText(this, "Error en base de datos", Toast.LENGTH_LONG)
+            val toastSuccess: Toast = Toast.makeText(this, Keys.TOAST_ADD_SUCCESSFULLY, Toast.LENGTH_LONG)
+            val toastCancel: Toast = Toast.makeText(this, Keys.TOAST_NOT_FIND, Toast.LENGTH_LONG)
+            val toastFailure: Toast = Toast.makeText(this, Keys.TOAST_ERROR_DATABASE, Toast.LENGTH_LONG)
+
             if(ValidateEmpty().validate(texts, inputLayout)){
                 DataBaseShareData().checkClientExist(nameUser.text.toString(), object :
                     BasicEventCallback {
                     override fun onSuccess(dataSnapshot: DataSnapshot) {
                         if(!dataSnapshot.exists()){
-                            database.writeNewUser(name = nameUserText, number = numberText)
+                            database.writeNewUser(
+                                name = nameUserText,
+                                number = numberText
+                            )
                             toastSuccess.show()
                             finish()
                         }

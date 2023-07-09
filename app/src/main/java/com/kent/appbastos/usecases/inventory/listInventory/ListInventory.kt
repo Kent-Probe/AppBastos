@@ -15,10 +15,12 @@ import com.google.firebase.database.ValueEventListener
 import com.kent.appbastos.R
 import com.kent.appbastos.model.adapter.RecyclerViewAdapterInventory
 import com.kent.appbastos.model.firebase.DataBaseShareData
+import com.kent.appbastos.model.firebase.DateTime
 import com.kent.appbastos.model.firebase.Inventory
 import com.kent.appbastos.model.util.CallBackInventory
+import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.usecases.inventory.addInventory.AddInventory
-import com.kent.appbastos.usecases.mainPrincipal.MainMenu
+import com.kent.appbastos.usecases.sale.CashSale
 import com.kent.appbastos.usecases.sale.CreditSale
 
 class ListInventory : AppCompatActivity() {
@@ -26,26 +28,15 @@ class ListInventory : AppCompatActivity() {
     private val listInventory:MutableList<Inventory> = ArrayList()
     private val database = DataBaseShareData().database
 
-    companion object{
-        const val INVENTORY = "inventory"
-        const val AMOUNT = "amount"
-        const val AMOUNT_MIN = "amountMin"
-        const val FLETE = "flete"
-        const val NAME = "name"
-        const val PROVIDER = "provider"
-        const val VALUE_BASE = "valueBase"
-        const val CATEGORY = "category"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_inventory)
 
-        val creditSale = intent.extras?.getBoolean("creditSale")
+        val titleScreen = intent.extras?.getString(Keys.TITLE)
 
         //Data share
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val rol = pref.getString(MainMenu.ROL, null).toString()
+        val rol = pref.getString(Keys.ROL, null).toString()
 
         //fill recycle view
         val listInventoryRecyclerView: RecyclerView = findViewById(R.id.listInventory)
@@ -54,7 +45,7 @@ class ListInventory : AppCompatActivity() {
         val floatButtonBack: FloatingActionButton = findViewById(R.id.exitBtn)
         val floatBtnAddInventory: FloatingActionButton = findViewById(R.id.btnAddInventory)
 
-        if(rol != "admin"){
+        if(rol != Keys.ROL_ADMIN){
             floatBtnAddInventory.visibility = Button.GONE
         }else{
             floatBtnAddInventory.visibility = Button.VISIBLE
@@ -70,12 +61,12 @@ class ListInventory : AppCompatActivity() {
         }
 
         listInventory.clear()
-        setupRecyclerView(this, listInventoryRecyclerView, creditSale)
+        setupRecyclerView(this, listInventoryRecyclerView, titleScreen)
 
     }
 
     //Function of Recycler View with Database
-    private fun setupRecyclerView(context: Context, recyclerView: RecyclerView, creditSale: Boolean?) {
+    private fun setupRecyclerView(context: Context, recyclerView: RecyclerView, titleScreen: String?) {
 
         val messagesListener = object : ValueEventListener {
 
@@ -85,13 +76,18 @@ class ListInventory : AppCompatActivity() {
                     val key: String? = child.key
                     val inventory =
                         Inventory(
-                            amount = child.child(AMOUNT).value.toString().toFloat(),
-                            provider = child.child(PROVIDER).value.toString(),
-                            valueBase = child.child(VALUE_BASE).value.toString().toFloat(),
-                            name = child.child(NAME).value.toString(),
-                            amountMin = child.child(AMOUNT_MIN).value.toString().toFloat(),
-                            flete = child.child(FLETE).value.toString(),
-                            category = child.child(CATEGORY).value.toString(),
+                            amount = child.child(Keys.AMOUNT).value.toString().toFloat(),
+                            provider = child.child(Keys.PROVIDER).value.toString(),
+                            valueBase = child.child(Keys.VALUE_BASE).value.toString().toFloat(),
+                            name = child.child(Keys.NAME).value.toString(),
+                            amountMin = child.child(Keys.AMOUNT_MIN).value.toString().toFloat(),
+                            flete = child.child(Keys.FLETE).value.toString(),
+                            category = child.child(Keys.CATEGORY).value.toString(),
+                            date = DateTime(
+                                day = child.child(Keys.DATE_TIME).child(Keys.DAY).value.toString().toInt(),
+                                month = child.child(Keys.DATE_TIME).child(Keys.MONTH).value.toString().toInt(),
+                                year = child.child(Keys.DATE_TIME).child(Keys.YEAR).value.toString().toInt()
+                            ),
                             key = key,
                         )
                     inventory.let { listInventory.add(inventory) }
@@ -100,30 +96,44 @@ class ListInventory : AppCompatActivity() {
                 recyclerView.adapter = RecyclerViewAdapterInventory(listInventory, object :
                     CallBackInventory {
                     override fun onSuccess(inventory: Inventory) {
-                        if (creditSale == true) {
-                            val intent = Intent(context, CreditSale::class.java).apply {
-                                putExtra("key", inventory.key)
-                                putExtra(NAME, inventory.name)
-                                putExtra(PROVIDER, inventory.provider)
-                                putExtra(CATEGORY, inventory.category)
-                                putExtra(VALUE_BASE, inventory.valueBase)
-                                putExtra(AMOUNT, inventory.amount)
-                                putExtra(AMOUNT_MIN, inventory.amountMin)
+                        if (!titleScreen.isNullOrEmpty()) {
+                            if(titleScreen == Keys.CREDIT_SALE){
+                                val intent = Intent(context, CreditSale::class.java).apply {
+                                    putExtra(Keys.KEY, inventory.key)
+                                    putExtra(Keys.NAME, inventory.name)
+                                    putExtra(Keys.PROVIDER, inventory.provider)
+                                    putExtra(Keys.CATEGORY, inventory.category)
+                                    putExtra(Keys.VALUE_BASE, inventory.valueBase)
+                                    putExtra(Keys.AMOUNT, inventory.amount)
+                                    putExtra(Keys.AMOUNT_MIN, inventory.amountMin)
+                                }
+                                startActivity(intent)
+                                finish()
+                            }else {
+                                val intent = Intent(context, CashSale::class.java).apply {
+                                    putExtra(Keys.KEY, inventory.key)
+                                    putExtra(Keys.NAME, inventory.name)
+                                    putExtra(Keys.PROVIDER, inventory.provider)
+                                    putExtra(Keys.CATEGORY, inventory.category)
+                                    putExtra(Keys.VALUE_BASE, inventory.valueBase)
+                                    putExtra(Keys.AMOUNT, inventory.amount)
+                                    putExtra(Keys.AMOUNT_MIN, inventory.amountMin)
+                                }
+                                startActivity(intent)
+                                finish()
                             }
-                            startActivity(intent)
-                            finish()
                         }
-                        Toast.makeText(context, "Inventaio de ${inventory.name}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, String.format(Keys.TOAST_MSM_INVENTORY, inventory.name), Toast.LENGTH_SHORT).show()
                     }
 
                 })
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.e("TAG", "messages:onCancelled:")
+                Log.e("TAG", "messages:onCancelled: EN LISTINVENTORY (REVISAR)")
             }
         }
-        database.child(INVENTORY).addListenerForSingleValueEvent(messagesListener)
+        database.child(Keys.INVENTORY).addListenerForSingleValueEvent(messagesListener)
     }
 }
 

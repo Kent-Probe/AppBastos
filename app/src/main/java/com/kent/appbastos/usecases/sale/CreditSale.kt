@@ -3,6 +3,8 @@ package com.kent.appbastos.usecases.sale
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -10,16 +12,15 @@ import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.kent.appbastos.R
 import com.kent.appbastos.model.alerts.Alerts
 import com.kent.appbastos.model.util.EventButtonsCallBack
+import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.model.validate.ValidateEmpty
 import com.kent.appbastos.usecases.remarks.AddRemarks
 import com.kent.appbastos.usecases.users.ListUsers
-import com.kent.appbastos.usecases.users.ListUsers.Companion.PHONE
-import com.kent.appbastos.usecases.users.ListUsers.Companion.USERNAME
-import java.text.DecimalFormat
 import java.util.*
 
 class CreditSale : AppCompatActivity() {
@@ -35,23 +36,12 @@ class CreditSale : AppCompatActivity() {
     private val responseLauncher = registerForActivityResult(StartActivityForResult()){
         if (it.resultCode == RESULT_OK){
             inputNumberClient.visibility = View.VISIBLE
-            numberClientView.text = it.data?.getStringExtra(PHONE)
-            btnSeeUser.text = it.data?.getStringExtra(USERNAME)
-            numberText = it.data?.getStringExtra(PHONE).toString()
+            numberClientView.text = it.data?.getStringExtra(Keys.PHONE)
+            btnSeeUser.text = it.data?.getStringExtra(Keys.USERNAME)
+            numberText = it.data?.getStringExtra(Keys.PHONE).toString()
         }
     }
 
-    companion object{
-        const val KEY = "key"
-        const val PROVIDER = "provider"
-        const val NAME = "name"
-        const val CATEGORY = "category"
-        const val VALUE_BASE = "valueBase"
-        const val AMOUNT = "amount"
-        const val AMOUNT_MIN = "amountMin"
-
-        const val ERROR = "error"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,28 +57,50 @@ class CreditSale : AppCompatActivity() {
 
         //variable intent, data of the listInventory (Screen)
         val data :MutableMap<String, Any> = hashMapOf(
-            KEY to intent.extras?.getString(KEY, ERROR).toString(),
-            NAME to intent.extras?.getString(NAME, ERROR).toString(),
-            PROVIDER to intent.extras?.getString(PROVIDER, ERROR).toString(),
-            CATEGORY to intent.extras?.getString(CATEGORY, ERROR).toString(),
-            VALUE_BASE to intent.extras?.getFloat(VALUE_BASE, 0f).toString().toFloat(),
-            AMOUNT to intent.extras?.getFloat(AMOUNT, 0f).toString().toFloat(),
-            AMOUNT_MIN to intent.extras?.getFloat(AMOUNT_MIN, 0f).toString().toFloat()
+            Keys.KEY to intent.extras?.getString(Keys.KEY, Keys.ERROR).toString(),
+            Keys.NAME to intent.extras?.getString(Keys.NAME, Keys.ERROR).toString(),
+            Keys.PROVIDER to intent.extras?.getString(Keys.PROVIDER, Keys.ERROR).toString(),
+            Keys.CATEGORY to intent.extras?.getString(Keys.CATEGORY, Keys.ERROR).toString(),
+            Keys.VALUE_BASE to intent.extras?.getFloat(Keys.VALUE_BASE, 0f).toString().toFloat(),
+            Keys.AMOUNT to intent.extras?.getFloat(Keys.AMOUNT, 0f).toString().toFloat(),
+            Keys.AMOUNT_MIN to intent.extras?.getFloat(Keys.AMOUNT_MIN, 0f).toString().toFloat()
         )
 
         //Value of format and more string with format
-        val format = DecimalFormat("$#,### COP")
-        val valueBase = data[VALUE_BASE].toString().toFloat()
+        val format = Keys.FORMAT_PRICE
+        val valueBase = data[Keys.VALUE_BASE].toString().toFloat()
         var isRepeated: Boolean
         var valueRepeated = -100f
 
         //Variables of screen (textView) with default data
         val type:TextView = findViewById(R.id.type)
-        val category:TextView = findViewById(R.id.nameProduct)
+        val category:TextView = findViewById(R.id.categoryProduct)
+        val valueAmountView: TextView = findViewById(R.id.amount)
+        val valueUnitView: TextInputEditText = findViewById(R.id.valueUnit)
+
+        //Assign format the text edit
+        valueUnitView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                valueUnitView.removeTextChangedListener(this)
+                val cleanString = s.toString().replace("[$.,COP\\s]".toRegex(), "")
+                val textFormat = formatTextPrice(cleanString)
+                valueUnitView.setText(textFormat)
+                valueUnitView.setSelection(textFormat.length - 4)
+                valueUnitView.addTextChangedListener(this)
+            }
+        })
 
         //assign default values (variables of the screen)
-        type.text = data[NAME].toString()
-        category.text = data[CATEGORY].toString()
+        type.text = data[Keys.NAME].toString()
+        category.text = data[Keys.CATEGORY].toString()
 
         //disable textView
         type.isEnabled = false
@@ -97,7 +109,7 @@ class CreditSale : AppCompatActivity() {
 
         //Change value of name Profile (data in memory cache)
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val profile = pref.getString("profile", null).toString()
+        val profile = pref.getString(Keys.PROFILE, null).toString()
         val txtUserName:TextView = findViewById(R.id.txtUserName)
         txtUserName.text = profile
 
@@ -113,7 +125,7 @@ class CreditSale : AppCompatActivity() {
         btnSeeUser = findViewById(R.id.btnNameUserAdd)
         btnSeeUser.setOnClickListener {
             val intent = Intent(this, ListUsers::class.java).apply {
-                putExtra("creditSale", true)
+                putExtra(Keys.CREDIT_SALE, true)
             }
             responseLauncher.launch(intent)
             btnSeeUser.error = null
@@ -126,15 +138,11 @@ class CreditSale : AppCompatActivity() {
             val inputValueUnit: TextInputLayout = findViewById(R.id.inputValueUnit)
             val inputValueAmount: TextInputLayout = findViewById(R.id.inputAmount)
 
-            //Variables del  editText
-            val valueUnitView: TextView = findViewById(R.id.valueUnit)
-            val valueAmountView: TextView = findViewById(R.id.amount)
-
             //Variables de los text del TextInputLayout
-            val valueUnit: String = valueUnitView.text.toString()
             val valueAmount: String = valueAmountView.text.toString()
+            val valueUnit: String = valueUnitView.text.toString().replace("[$.,COP\\s]".toRegex(), "")
 
-            //Arrays -2
+            //Arrays (2) With data of the fields
             val texts: Vector<String> = Vector(
                 listOf(
                     valueUnit,
@@ -148,8 +156,9 @@ class CreditSale : AppCompatActivity() {
                 )
             )
 
+            //Validate selection Client
             if (btnSeeUser.text.toString() == R.string.txtNameClient.toString() || btnSeeUser.text == null || btnSeeUser.text == ""){
-                btnSeeUser.error = "Debe seleccionar un cliente"
+                btnSeeUser.error = Keys.ERROR_WITHOUT_CLIENT
                 return@setOnClickListener
             }else{
                 btnSeeUser.error = null
@@ -158,30 +167,34 @@ class CreditSale : AppCompatActivity() {
             isRepeated = valueRepeated != valueUnit.toFloatOrNull()
 
             //Validate data of the screen with the Inventory
-            if (valueAmount.isNotEmpty() && data[AMOUNT].toString().toFloat() < valueAmount.toFloat()) {
+            if (valueAmount.isNotEmpty() && data[Keys.AMOUNT].toString().toFloat() < valueAmount.toFloat()) {
                 inputValueAmount.isErrorEnabled = true
-                inputValueAmount.error = "No hay suficiente inventario"
+                inputValueAmount.error = Keys.ERROR_WITHOUT_INVENTORY
                 return@setOnClickListener
             }else{
                 inputValueAmount.isErrorEnabled = false
             }
 
+            var continueScreen = true
+
             if(valueUnit.isNotEmpty() && valueBase > valueUnit.toFloat() && isRepeated) {
+                continueScreen = false
                 Alerts().showAlertSelection(
                     layoutInflater,
                     context,
-                    "Alerta el valor minimo es de ${format.format(valueBase)}, desea continuar",
-                    "Continuar",
-                    "Cambiar",
+                    String.format(Keys.ALERT_MSM_VALUE_MIN, format.format(valueBase)),
+                    Keys.BUTTON_CONTINUE,
+                    Keys.BUTTON_CHANGE,
                     object : EventButtonsCallBack {
                         override fun buttonUp(alertDialog: AlertDialog) {
                             valueRepeated = valueUnit.toFloat()
                             isRepeated = false
+                            continueScreen = true
                             alertDialog.hide()
                         }
 
                         override fun buttonDown(alertDialog: AlertDialog) {
-                            valueUnitView.text = ""
+                            valueUnitView.setText("")
                             alertDialog.hide()
                         }
 
@@ -196,27 +209,35 @@ class CreditSale : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val amountInventory = data[AMOUNT].toString().toFloat() - valueAmount.toFloat()
+            val amountInventory = data[Keys.AMOUNT].toString().toFloat() - valueAmount.toFloat()
 
-            val intent = Intent(context, AddRemarks::class.java).apply {
-                putExtra("nameClient", btnSeeUser.text)
-                putExtra("numberClient", numberText)
-                putExtra("nameProduct", data[CATEGORY].toString())
-                putExtra("valueUnit", valueUnit.toFloat())
-                putExtra("valueAmount", valueAmount.toInt())
-                putExtra("type", data[NAME].toString())
-                putExtra("title", "creditSale")
-                putExtra("keyInventory", data[KEY].toString())
-                putExtra("amountInventory", amountInventory)
-
+            if(continueScreen){
+                val intent = Intent(context, AddRemarks::class.java).apply {
+                    putExtra(Keys.NAME_CLIENT, btnSeeUser.text)
+                    putExtra(Keys.NUMBER_CLIENT, numberText)
+                    putExtra(Keys.CATEGORY, data[Keys.CATEGORY].toString())
+                    putExtra(Keys.VALUE_UNIT, valueUnit.toFloat())
+                    putExtra(Keys.VALUE_AMOUNT, valueAmount.toInt())
+                    putExtra(Keys.TYPE, data[Keys.NAME].toString())
+                    putExtra(Keys.TITLE, Keys.CREDIT_SALE)
+                    putExtra(Keys.KEY_INVENTORY, data[Keys.KEY].toString())
+                    putExtra(Keys.PROVIDER, data[Keys.PROVIDER].toString())
+                    putExtra(Keys.FLETE, data[Keys.FLETE].toString())
+                    putExtra(Keys.AMOUNT_INVENTORY, amountInventory)
+                }
+                startActivity(intent)
+                finish()
             }
-            startActivity(intent)
-            finish()
         }
 
         btnCancel.setOnClickListener {
             finish()
         }
+    }
+
+    private fun formatTextPrice(text: String): String {
+        val float = text.toFloatOrNull() ?: 0f
+        return Keys.FORMAT_PRICE.format(float)
     }
 
 }

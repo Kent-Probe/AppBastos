@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.kent.appbastos.R
+import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.usecases.dashboard.DashBoard
 import com.kent.appbastos.usecases.debts.Payment
 import com.kent.appbastos.usecases.sale.MenuSale
@@ -17,31 +18,23 @@ import com.kent.appbastos.usecases.sale.OperationalExpenses
 
 class MainMenu : AppCompatActivity() {
 
-    companion object{
-        //date of the auth
-        const val EMAIL = "email"
-        const val PROVIDER = "provider"
-        const val PROFILE = "profile"
-        const val ROL = "rol"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
 
         //Variables of share data
         val bundle = intent.extras
-        val email = bundle?.getString(EMAIL)
-        val provider = bundle?.getString(PROVIDER)
-        val profile = bundle?.getString(PROFILE)
-        val rol = bundle?.getString(ROL)
+        val email = bundle?.getString(Keys.EMAIL)
+        val provider = bundle?.getString(Keys.PROVIDER)
+        val profile = bundle?.getString(Keys.PROFILE)
+        val rol = bundle?.getString(Keys.ROL)
 
         //Guardar Datos
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
-        pref.putString(EMAIL, email)
-        pref.putString(PROVIDER, provider)
-        pref.putString(PROFILE, profile)
-        pref.putString(ROL, rol)
+        pref.putString(Keys.EMAIL, email)
+        pref.putString(Keys.PROVIDER, provider)
+        pref.putString(Keys.PROFILE, profile)
+        pref.putString(Keys.ROL, rol)
         pref.apply()
 
         //Variables of buttons
@@ -54,14 +47,15 @@ class MainMenu : AppCompatActivity() {
         //Variables of text view
         val textUserView: TextView = findViewById(R.id.txtUserName)
 
-        val nameProfile = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString("profile", null).toString()
+        val nameProfile = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString(Keys.PROFILE, null).toString()
         textUserView.text = nameProfile
         btnLogOut.setOnClickListener {
             //Deleted Dates
             val preferences = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
-            preferences.remove(EMAIL)
-            preferences.remove(PROVIDER)
-            preferences.remove(PROFILE)
+            preferences.remove(Keys.EMAIL)
+            preferences.remove(Keys.PROVIDER)
+            preferences.remove(Keys.PROFILE)
+            preferences.remove(Keys.ROL)
             preferences.apply()
 
             FirebaseAuth.getInstance().signOut()

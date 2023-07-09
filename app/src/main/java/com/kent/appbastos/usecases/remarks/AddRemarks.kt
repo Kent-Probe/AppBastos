@@ -19,6 +19,8 @@ import com.kent.appbastos.R
 import com.kent.appbastos.model.firebase.DataBaseShareData
 import com.kent.appbastos.model.firebase.DateTime
 import com.kent.appbastos.model.firebase.Debts
+import com.kent.appbastos.model.firebase.InventoryOfDebts
+import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.model.values.CashSaleClass
 import com.kent.appbastos.model.values.CreditSaleClass
 import com.kent.appbastos.usecases.share.Share
@@ -26,27 +28,31 @@ import com.kent.appbastos.usecases.share.Share
 
 class AddRemarks : AppCompatActivity() {
 
-    lateinit var keyInventory: String
-    lateinit var newAmount: String
+    private lateinit var keyInventory: String
+    private lateinit var newAmount: String
 
     override fun onStart() {
         super.onStart()
         //Key Inventory and new amount
-        keyInventory = intent.extras?.getString("keyInventory").toString()
-        newAmount = intent.extras?.getFloat("amountInventory").toString()
+        keyInventory = intent.extras?.getString(Keys.KEY_INVENTORY).toString()
+        newAmount = intent.extras?.getFloat(Keys.AMOUNT_INVENTORY).toString()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_remarks)
 
-        //Key Inventory and new amount
-        keyInventory = intent.extras?.getString("keyInventory").toString()
-        newAmount = intent.extras?.getString("amountInventory").toString()
+        //Key Inventory and new amount and more inventory
+        keyInventory = intent.extras?.getString(Keys.KEY_INVENTORY).toString()
+        newAmount = intent.extras?.getString(Keys.AMOUNT_INVENTORY).toString()
+        val category = intent.extras?.getString(Keys.CATEGORY, "")
+        val provider = intent.extras?.getString(Keys.PROVIDER, "")
+        val name = intent.extras?.getString(Keys.TYPE, "")
+        val flete = intent.extras?.getString(Keys.FLETE, "")
 
         //Variables Temp
         val txtTempTEXT: String
-        val title = intent.extras?.getString("title")
+        val title = intent.extras?.getString(Keys.TITLE)
 
         //Texts of field
         val txtRemarks: TextView = findViewById(R.id.txtRemarks)
@@ -55,7 +61,7 @@ class AddRemarks : AppCompatActivity() {
         var dateCashSaleClass = CashSaleClass()
         var dateCreditSaleClass = CreditSaleClass()
 
-        if(title.toString() == "CashSale"){
+        if(title.toString() == Keys.CASH_SALE){
             //Date for the class
             dateCashSaleClass = fillClassCash()
             txtTempTEXT = dateCashSaleClass.dateOfClass()
@@ -70,7 +76,7 @@ class AddRemarks : AppCompatActivity() {
 
         //Change value of name Profile
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val profile = pref.getString("profile", null).toString()
+        val profile = pref.getString(Keys.PROFILE, null).toString()
         val txtUserName:TextView = findViewById(R.id.txtUserName)
 
         txtUserName.text = profile
@@ -83,26 +89,34 @@ class AddRemarks : AppCompatActivity() {
 
         //Button continue
         btnContinue.setOnClickListener {
-            if(title.toString() == "CashSale"){
+            if(title.toString() == Keys.CASH_SALE){
                 if(dateCashSaleClass.saveArchive(this)){
-                    Toast.makeText(this, "Se grabo correctamente", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, Keys.TOAST_ADD_SUCCESSFULLY, Toast.LENGTH_LONG).show()
                 }
-                else Toast.makeText(this, "No se guardo", Toast.LENGTH_LONG).show()
+                else Toast.makeText(this, Keys.TOAST_NOT_ADD, Toast.LENGTH_LONG).show()
             }else{
                 if(dateCreditSaleClass.saveArchive(this)){
 
                     //Save data in the database
                     val debts = Debts(
-                        dateCreditSaleClass.valueTotal,
-                        dateCreditSaleClass.dateTime,
-                        dateCreditSaleClass.valueAmount.toInt(),
-                        dateCreditSaleClass.valueUnit,
-                        dateCreditSaleClass.valueTotal)
+                        debts = dateCreditSaleClass.valueTotal,
+                        dateTime = dateCreditSaleClass.dateTime,
+                        amount = dateCreditSaleClass.valueAmount.toInt(),
+                        valueUnit = dateCreditSaleClass.valueUnit,
+                        valueTotal = dateCreditSaleClass.valueTotal,
+                        inventoryOfDebts = InventoryOfDebts(
+                            category = category.toString(),
+                            name = name.toString(),
+                            provider = provider.toString(),
+                            flete = flete.toString(),
+                            key = keyInventory
+                        )
+                    )
                     DataBaseShareData().writeDebts(this, debts, dateCreditSaleClass.nameClient, keyInventory, newAmount)
 
-                    Toast.makeText(this, "Se grabo correctamente", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, Keys.TOAST_ADD_SUCCESSFULLY, Toast.LENGTH_LONG).show()
                 }
-                else Toast.makeText(this, "No se guardo", Toast.LENGTH_LONG).show()
+                else Toast.makeText(this, Keys.TOAST_NOT_ADD, Toast.LENGTH_LONG).show()
             }
 
             val intent = Intent(this, Share::class.java).apply {
@@ -127,18 +141,18 @@ class AddRemarks : AppCompatActivity() {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         //Text of topics
-        val nameClient = this.intent.extras?.getString("nameClient").toString()
-        val nameProduct = this.intent.extras?.getString("nameProduct").toString()
-        val valueUnit = this.intent.extras?.getFloat("valueUnit").toString()
-        val valueAmount = this.intent.extras?.getInt("valueAmount").toString()
-        val type = this.intent.extras?.getString("type").toString()
+        val nameClient = this.intent.extras?.getString(Keys.NAME_CLIENT).toString()
+        val category = this.intent.extras?.getString(Keys.CATEGORY).toString()
+        val valueUnit = this.intent.extras?.getFloat(Keys.VALUE_UNIT).toString()
+        val valueAmount = this.intent.extras?.getInt(Keys.VALUE_AMOUNT).toString()
+        val type = this.intent.extras?.getString(Keys.TYPE).toString()
 
         DataBaseShareData().writeNewCashSale()
 
         //Date for the class
         return CashSaleClass(
             nameClient,
-            nameProduct,
+            category,
             "MARCA",
             valueAmount.toFloat(),
             valueUnit.toFloat(),
@@ -153,13 +167,14 @@ class AddRemarks : AppCompatActivity() {
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH) + 1
         val day = calendar.get(Calendar.DAY_OF_MONTH)
+
         //Text of topics
-        val nameClient = this.intent.extras?.getString("nameClient").toString()
-        val numberClient = this.intent.extras?.getString("numberClient").toString()
-        val nameProduct = this.intent.extras?.getString("nameProduct").toString()
-        val valueUnit = this.intent.extras?.getFloat("valueUnit").toString()
-        val valueAmount = this.intent.extras?.getInt("valueAmount").toString()
-        val type = this.intent.extras?.getString("type").toString()
+        val nameClient = this.intent.extras?.getString(Keys.NAME_CLIENT).toString()
+        val numberClient = this.intent.extras?.getString(Keys.NUMBER_CLIENT).toString()
+        val category = this.intent.extras?.getString(Keys.CATEGORY).toString()
+        val valueUnit = this.intent.extras?.getFloat(Keys.VALUE_UNIT).toString()
+        val valueAmount = this.intent.extras?.getInt(Keys.VALUE_AMOUNT).toString()
+        val type = this.intent.extras?.getString(Keys.TYPE).toString()
         val total = valueUnit.toFloat() * valueAmount.toInt()
         val dateTime = DateTime(day, month, year)
 
@@ -167,7 +182,7 @@ class AddRemarks : AppCompatActivity() {
             "MARCA",
             nameClient,
             numberClient,
-            nameProduct,
+            category,
             valueUnit.toFloat(),
             valueAmount.toFloat(),
             total,
@@ -182,15 +197,15 @@ class AddRemarks : AppCompatActivity() {
         val firebase = Firebase.database.reference
         val eventListener: ValueEventListener = object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.child("creditSale").children.forEach{child ->
+                snapshot.child(Keys.CREDIT_SALE).children.forEach{child ->
                     string += "\n---------------------"
                     string += "\n\t" + child.key
-                    string += "\n\t" + child.child("amount").value.toString()
+                    string += "\n\t" + child.child(Keys.AMOUNT).value.toString()
                 }
                 txtView.text = string
             }
             override fun onCancelled(error: DatabaseError) {
-                Log.e("TAG", "Error")
+                Log.e("TAG", "Error en add remarks")
                 string = "Error"
             }
         }

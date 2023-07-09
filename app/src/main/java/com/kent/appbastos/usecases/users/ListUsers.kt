@@ -17,25 +17,12 @@ import com.kent.appbastos.model.adapter.RecyclerViewAdapterListUsers
 import com.kent.appbastos.model.firebase.DataBaseShareData
 import com.kent.appbastos.model.firebase.User
 import com.kent.appbastos.model.util.EventCallBackSuccess
-import com.kent.appbastos.usecases.mainPrincipal.MainMenu
+import com.kent.appbastos.model.util.Keys
 
 class ListUsers : AppCompatActivity() {
 
     private val listUsers:MutableList<User> = ArrayList()
     private val database = DataBaseShareData().database
-
-    companion object{
-        //Properties
-        const val USERNAME = "username"
-        const val NUMBER = "number"
-        const val NUMBER_DEBTS= "numberDebts"
-        const val PHONE = "phone"
-        const val KEY = "key"
-        const val DEBTS = "debts"
-
-        const val USER = "users"
-        const val CLIENT = "clients"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +30,7 @@ class ListUsers : AppCompatActivity() {
 
         //Data share
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val rol = pref.getString(MainMenu.ROL, null).toString()
+        val rol = pref.getString(Keys.ROL, null).toString()
 
         //fill recycle view
         val listUserRecyclerView: RecyclerView = findViewById(R.id.listUserId)
@@ -53,8 +40,8 @@ class ListUsers : AppCompatActivity() {
         val floatBtnAddUser: FloatingActionButton = findViewById(R.id.btnAddUser)
 
         //Only admin
-        val isOfCreditSale: Boolean = this.intent.extras?.getBoolean("creditSale") == true
-        if(isOfCreditSale || rol != "admin"){
+        val isOfCreditSale: Boolean = this.intent.extras?.getBoolean(Keys.CREDIT_SALE) == true
+        if(isOfCreditSale || rol != Keys.ROL_ADMIN){
             floatBtnAddUser.visibility = View.GONE
         }
 
@@ -81,10 +68,10 @@ class ListUsers : AppCompatActivity() {
                 dataSnapshot.children.forEach { child ->
                     val user =
                         User(
-                            username = child.child(USERNAME).value.toString(),
-                            number = child.child(NUMBER).value.toString(),
-                            numberDebts = child.child(NUMBER_DEBTS).value.toString().toFloat(),
-                            debts = child.child(DEBTS).value.toString().toFloat(),
+                            username = child.child(Keys.USERNAME).value.toString(),
+                            number = child.child(Keys.NUMBER).value.toString(),
+                            numberDebts = child.child(Keys.NUMBER_DEBTS).value.toString().toFloat(),
+                            debts = child.child(Keys.DEBTS).value.toString().toFloat(),
                             key = child.key
                         )
                     user.let { listUsers.add(user) }
@@ -95,9 +82,9 @@ class ListUsers : AppCompatActivity() {
                     override fun onSuccess(user: User) {
                         if(isCreditSale){
                             val intent = Intent().apply {
-                                putExtra(USERNAME, user.username)
-                                putExtra(PHONE, user.number)
-                                putExtra(KEY, user.key)
+                                putExtra(Keys.USERNAME, user.username)
+                                putExtra(Keys.PHONE, user.number)
+                                putExtra(Keys.KEY, user.key)
                             }
                             setResult(RESULT_OK, intent)
                             finish()
@@ -108,10 +95,10 @@ class ListUsers : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.e("TAG", "messages:onCancelled:")
+                Log.e("TAG", "messages:onCancelled: ERROR EN LIST USER")
             }
         }
-        database.child(USER).child(CLIENT).addListenerForSingleValueEvent(messagesListener)
+        database.child(Keys.USER).child(Keys.CLIENT).addListenerForSingleValueEvent(messagesListener)
     }
 
     /*

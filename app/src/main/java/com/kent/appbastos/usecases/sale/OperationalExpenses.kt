@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.kent.appbastos.R
+import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.model.validate.ValidateEmpty
-import com.kent.appbastos.usecases.launcher.VALUES_SAVE
 import com.kent.appbastos.usecases.remarks.AddRemarks
 import java.util.*
 
@@ -21,7 +21,7 @@ class OperationalExpenses : AppCompatActivity() {
 
         //Change value of name Profile
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val profile = pref.getString("profile", null).toString()
+        val profile = pref.getString(Keys.PROFILE, null).toString()
         val txtUserName:TextView = findViewById(R.id.txtUserName)
         txtUserName.text = profile
 
@@ -66,12 +66,8 @@ class OperationalExpenses : AppCompatActivity() {
                 )
             )
 
-            val textsValue = "Gastos operacionales.$typeOperational.$description.$value"
-
             if (ValidateEmpty().validate(texts, inputsLayouts)) {
-                val intent = Intent(this, AddRemarks::class.java).apply {
-                    putExtra(VALUES_SAVE, textsValue)
-                }
+                val intent = Intent(this, AddRemarks::class.java)
                 startActivity(intent)
                 finish()
             }

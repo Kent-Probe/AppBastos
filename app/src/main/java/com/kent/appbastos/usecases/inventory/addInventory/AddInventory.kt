@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.kent.appbastos.R
 import com.kent.appbastos.model.firebase.DataBaseShareData
+import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.model.validate.ValidateEmpty
 import java.util.*
 
@@ -17,7 +18,7 @@ class AddInventory : AppCompatActivity() {
 
         //Change name user
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val profile = pref.getString("profile", null).toString()
+        val profile = pref.getString(Keys.PROFILE, null).toString()
         val txtUserName:TextView = findViewById(R.id.txtUserName)
         txtUserName.text = profile
 
@@ -47,18 +48,21 @@ class AddInventory : AppCompatActivity() {
             val providerView: TextView = findViewById(R.id.provider)
             val amountMinView: TextView = findViewById(R.id.amountMin)
             val fleteView: TextView = findViewById(R.id.flete)
+            val categoryView: TextView = findViewById(R.id.categoryProduct)
 
             val inputAmount: TextInputLayout = findViewById(R.id.inputAmount)
             val inputValue: TextInputLayout = findViewById(R.id.inputValue)
             val inputProvider: TextInputLayout = findViewById(R.id.inputProvider)
             val inputAmountMin: TextInputLayout = findViewById(R.id.inputAmountMin)
             val inputFlete: TextInputLayout = findViewById(R.id.inputFlete)
+            val inputCategory: TextInputLayout = findViewById(R.id.inputCategoryProduct)
 
             val textAmount = amountView.text.toString()
             val textValue = valueView.text.toString()
             val textProvider = providerView.text.toString()
             val textAmountMin = amountMinView.text.toString()
             val textFlete = fleteView.text.toString()
+            val txtCategory = categoryView.text.toString()
 
             //Arrays
             val texts: Vector<String> = Vector(
@@ -67,7 +71,8 @@ class AddInventory : AppCompatActivity() {
                     textValue,
                     textProvider,
                     textAmountMin,
-                    textFlete
+                    textFlete,
+                    txtCategory
                 )
             )
 
@@ -77,22 +82,22 @@ class AddInventory : AppCompatActivity() {
                     inputValue,
                     inputProvider,
                     inputAmountMin,
-                    inputFlete
+                    inputFlete,
+                    inputCategory
                 )
             )
 
             if(!ValidateEmpty().validate(texts, inputLayouts)) {
-                Toast.makeText(this, "Algun dato no es valido", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, Keys.TOAST_SOME_DATA_NOT_VALID, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
             if(!ValidateEmpty().validateMin(textAmount, textAmountMin, inputAmount, inputAmountMin) ){
-                Toast.makeText(this, "Dato no valido", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, Keys.TOAST_DATA_NOT_VALID, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
             texts.add(type.selectedItem.toString())
-            texts.add("media calidad")
 
             DataBaseShareData().addInventory(texts, this)
             finish()

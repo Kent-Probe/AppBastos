@@ -125,6 +125,28 @@
             android:layout_height="10dp" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputCategoryProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/txtCategoryProduct"
+            android:textColorHint="@color/colorHint"
+            app:hintTextColor="@color/lineHint">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/categoryProduct"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:backgroundTint="@color/lineHint"
+                android:inputType="number"
+                android:textColorLink="#000000" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -141,6 +163,7 @@
                 android:textColorLink="#000000" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />

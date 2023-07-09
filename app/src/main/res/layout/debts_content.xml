@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="wrap_content"
         android:layout_margin="12dp"
         app:cardCornerRadius="12dp"
         android:background="#1AA88282"
@@ -47,6 +47,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
+                android:text="@string/txtDebt"
+                android:textColor="@color/black"
+                android:textAlignment="textStart"/>
+
+            <TextView
+                android:id="@+id/txtNameInventory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/txtDebt"
+                android:textColor="@color/black"
+                android:textAlignment="textStart"/>
+
+            <TextView
+                android:id="@+id/txtCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/txtDebt"
+                android:textColor="@color/black"
+                android:textAlignment="textStart"/>
+
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="20dp"
                 android:text="@string/txtDebt"
                 android:textColor="@color/black"
                 android:textAlignment="textStart"/>

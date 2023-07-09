@@ -73,6 +73,18 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/categoryTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="120dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/txtInventoryName"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
                 android:id="@+id/providerTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,6 +98,17 @@
 
             <TextView
                 android:id="@+id/valueBaseTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="120dp"
+                android:text="@string/txtInventoryValueBase"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/dateTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
