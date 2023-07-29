@@ -86,11 +86,17 @@ class ListInventory : AppCompatActivity() {
                             date = DateTime(
                                 day = child.child(Keys.DATE_TIME).child(Keys.DAY).value.toString().toInt(),
                                 month = child.child(Keys.DATE_TIME).child(Keys.MONTH).value.toString().toInt(),
-                                year = child.child(Keys.DATE_TIME).child(Keys.YEAR).value.toString().toInt()
+                                year = child.child(Keys.DATE_TIME).child(Keys.YEAR).value.toString().toInt(),
+                                hour = child.child(Keys.DATE_TIME).child(Keys.HOUR).value.toString().toInt(),
+                                minute = child.child(Keys.DATE_TIME).child(Keys.MINUTE).value.toString().toInt(),
+                                second = child.child(Keys.DATE_TIME).child(Keys.SECOND).value.toString().toInt(),
+                                milliSecond = child.child(Keys.DATE_TIME).child(Keys.MILLISECOND).value.toString().toInt()
                             ),
                             key = key,
                         )
-                    inventory.let { listInventory.add(inventory) }
+                    inventory.let {
+                        if(it.amount != 0f) listInventory.add(inventory)
+                    }
                 }
                 recyclerView.layoutManager = LinearLayoutManager(context)
                 recyclerView.adapter = RecyclerViewAdapterInventory(listInventory, object :
@@ -106,6 +112,7 @@ class ListInventory : AppCompatActivity() {
                                     putExtra(Keys.VALUE_BASE, inventory.valueBase)
                                     putExtra(Keys.AMOUNT, inventory.amount)
                                     putExtra(Keys.AMOUNT_MIN, inventory.amountMin)
+                                    putExtra(Keys.FLETE, inventory.flete)
                                 }
                                 startActivity(intent)
                                 finish()
@@ -118,6 +125,7 @@ class ListInventory : AppCompatActivity() {
                                     putExtra(Keys.VALUE_BASE, inventory.valueBase)
                                     putExtra(Keys.AMOUNT, inventory.amount)
                                     putExtra(Keys.AMOUNT_MIN, inventory.amountMin)
+                                    putExtra(Keys.FLETE, inventory.flete)
                                 }
                                 startActivity(intent)
                                 finish()

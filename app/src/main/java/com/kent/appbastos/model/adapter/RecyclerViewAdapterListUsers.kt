@@ -7,8 +7,9 @@ import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.kent.appbastos.R
-import com.kent.appbastos.model.util.EventCallBackSuccess
 import com.kent.appbastos.model.firebase.User
+import com.kent.appbastos.model.util.EventCallBackSuccess
+import com.kent.appbastos.model.util.Keys
 
 class RecyclerViewAdapterListUsers(private val values:List<User>, private val eventCallBackSuccess: EventCallBackSuccess):
     RecyclerView.Adapter<RecyclerViewAdapterListUsers.ViewHolder>() {
@@ -28,7 +29,7 @@ class RecyclerViewAdapterListUsers(private val values:List<User>, private val ev
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val user = values[position]
         holder.nameUser.text = user.username
-        holder.numberUser.text = user.number
+        holder.numberUser.text = Keys.formatNumber(user.number.toString())
         holder.amountDebts.text = concatenate("Cantidad: ", user.numberDebts?.toInt().toString())
         holder.debts.text = concatenate("Total: ", user.debts.toString())
 

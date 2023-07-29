@@ -2,7 +2,7 @@ package com.kent.appbastos.model.values
 
 import android.content.Context
 import com.kent.appbastos.model.firebase.DateTime
-import com.kent.appbastos.usecases.remarks.AddRemarks
+import com.kent.appbastos.usecases.receipt.Receipt
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -19,7 +19,7 @@ class CashSaleClass(
     var consecut: String,
     var type: String
 ) {
-    constructor() : this("","","",0f,0f,0f, DateTime(0,0 ,0),"", "")
+    constructor() : this("","","",0f,0f,0f, DateTime(0,0 ,0, 0, 0, 0, 0),"", "")
 
 
     //Methods of Archive
@@ -46,7 +46,7 @@ class CashSaleClass(
         return successful
     }
 
-    fun openArchive(context: AddRemarks):String{
+    fun openArchive(context: Receipt):String{
         var successful: String
         try {
             val archive =

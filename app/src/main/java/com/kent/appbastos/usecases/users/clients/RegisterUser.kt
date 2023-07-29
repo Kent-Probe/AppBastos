@@ -1,4 +1,4 @@
-package com.kent.appbastos.usecases.users
+package com.kent.appbastos.usecases.users.clients
 
 import android.content.Context
 import android.os.Bundle

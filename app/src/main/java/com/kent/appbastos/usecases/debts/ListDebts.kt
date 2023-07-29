@@ -59,8 +59,12 @@ class ListDebts : AppCompatActivity() {
                             day = child.child(Keys.DATE_TIME).child(Keys.DAY).value.toString().toInt(),
                             month = child.child(Keys.DATE_TIME).child(Keys.MONTH).value.toString().toInt(),
                             year = child.child(Keys.DATE_TIME).child(Keys.YEAR).value.toString().toInt(),
+                            hour = child.child(Keys.DATE_TIME).child(Keys.HOUR).value.toString().toInt(),
+                            minute = child.child(Keys.DATE_TIME).child(Keys.MINUTE).value.toString().toInt(),
+                            second = child.child(Keys.DATE_TIME).child(Keys.SECOND).value.toString().toInt(),
+                            milliSecond = child.child(Keys.DATE_TIME).child(Keys.MILLISECOND).value.toString().toInt()
                         ),
-                        amount = child.child(Keys.AMOUNT).value.toString().toInt(),
+                        amount = child.child(Keys.AMOUNT).value.toString().toFloat(),
                         valueUnit = child.child(Keys.VALUE_UNIT).value.toString().toFloat(),
                         valueTotal = child.child(Keys.VALUE_TOTAL).value.toString().toFloat(),
                         inventoryOfDebts = InventoryOfDebts(

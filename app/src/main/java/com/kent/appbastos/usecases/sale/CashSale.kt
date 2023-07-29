@@ -14,10 +14,11 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.kent.appbastos.R
 import com.kent.appbastos.model.alerts.Alerts
+import com.kent.appbastos.model.util.BtnFractions
 import com.kent.appbastos.model.util.EventButtonsCallBack
 import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.model.validate.ValidateEmpty
-import com.kent.appbastos.usecases.remarks.AddRemarks
+import com.kent.appbastos.usecases.receipt.Receipt
 import java.util.*
 
 
@@ -35,19 +36,54 @@ class CashSale : AppCompatActivity() {
             Keys.CATEGORY to intent.extras?.getString(Keys.CATEGORY, Keys.ERROR).toString(),
             Keys.VALUE_BASE to intent.extras?.getFloat(Keys.VALUE_BASE, 0f).toString().toFloat(),
             Keys.AMOUNT to intent.extras?.getFloat(Keys.AMOUNT, 0f).toString().toFloat(),
-            Keys.AMOUNT_MIN to intent.extras?.getFloat(Keys.AMOUNT_MIN, 0f).toString().toFloat()
+            Keys.AMOUNT_MIN to intent.extras?.getFloat(Keys.AMOUNT_MIN, 0f).toString().toFloat(),
+            Keys.FLETE to intent.extras?.getString(Keys.FLETE, Keys.ERROR).toString()
         )
 
         //Value of format and more string with format
         val valueBase = data[Keys.VALUE_BASE].toString().toFloat()
         var isRepeated: Boolean
         var valueRepeated = -100f
+        var amount = -100f
+
+        //Variables de los TextInputLayout
+        val inputValueUnit: TextInputLayout = findViewById(R.id.inputValueUnit)
+        val inputValueAmount: TextInputLayout = findViewById(R.id.inputAmount)
 
         //Variables of screen (textView) with default data
         val type:TextView = findViewById(R.id.type)
         val category:TextView = findViewById(R.id.categoryProduct)
         val valueAmountView: TextInputEditText = findViewById(R.id.amount)
         val valueUnitView: TextInputEditText = findViewById(R.id.valueUnit)
+
+        //Click at Icon
+        inputValueAmount.setEndIconOnClickListener {
+            Alerts().showAlertSelection(layoutInflater, this, "Fraccion", "Cancelar", object : BtnFractions{
+                override fun btn1(alertDialog: AlertDialog) {
+                    valueAmountView.setText("1/2")
+                    alertDialog.dismiss()
+                }
+
+                override fun btn2(alertDialog: AlertDialog) {
+                    valueAmountView.setText("3/4")
+                    alertDialog.dismiss()
+                }
+
+                override fun btn3(alertDialog: AlertDialog) {
+                    valueAmountView.setText("1/4")
+                    alertDialog.dismiss()
+                }
+
+                override fun btn4(alertDialog: AlertDialog) {
+                    valueAmountView.setText("1/8")
+                    alertDialog.dismiss()
+                }
+
+                override fun btnCancel(alertDialog: AlertDialog) {
+                    alertDialog.dismiss()
+                }
+            })
+        }
 
         //Assign format the text edit
         valueUnitView.addTextChangedListener(object : TextWatcher {
@@ -75,10 +111,22 @@ class CashSale : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 valueAmountView.removeTextChangedListener(this)
-                val cleanString = s.toString().replace("[$.,und\\s]".toRegex(), "")
-                val textFormat = formatTextAmount(cleanString)
-                valueAmountView.setText(textFormat)
-                valueAmountView.setSelection(textFormat.length - 4)
+                val ch = "/"
+                var cleanString: String? = s.toString().replace("[$.,/und\\s]".toRegex(), "")
+
+                if(cleanString.isNullOrEmpty()) cleanString = "0"
+
+                if (ch in s.toString() && s.toString().length == 3){
+                    amount = toDecimal(cleanString)
+                    val textFormat = formatTextAmountFractions(s.toString())
+                    valueAmountView.setText(textFormat)
+                    valueAmountView.setSelection(textFormat.length - 4)
+                }else{
+                    amount = cleanString.toFloat()
+                    val textFormat = formatTextAmount(cleanString)
+                    valueAmountView.setText(textFormat)
+                    valueAmountView.setSelection(textFormat.length - 4)
+                }
                 valueAmountView.addTextChangedListener(this)
             }
 
@@ -107,17 +155,13 @@ class CashSale : AppCompatActivity() {
         //Click buttons
         btnContinue.setOnClickListener {
 
-            //Variables de los TextInputLayout
-            val inputValueUnit: TextInputLayout = findViewById(R.id.inputValueUnit)
-            val inputValueAmount: TextInputLayout = findViewById(R.id.inputAmount)
-
             //Variables del  editText
             val nameClientView: TextView = findViewById(R.id.nameClient)
 
             //Variables de los text del TextInputLayout
             var nameClient: String = nameClientView.text.toString()
             val valueUnit: String = valueUnitView.text.toString().replace("[$.,COP\\s]".toRegex(), "")
-            val valueAmount: String = valueAmountView.text.toString().replace("[$.,und\\s]".toRegex(), "")
+            val valueAmount: String = amount.toString()
 
             //Arrays
             val texts = Vector<String>()
@@ -186,11 +230,11 @@ class CashSale : AppCompatActivity() {
                 val amountInventory = data[Keys.AMOUNT].toString().toFloat() - valueAmount.toFloat()
 
                 if(continueScreen){
-                    val intent = Intent(this, AddRemarks::class.java).apply {
+                    val intent = Intent(this, Receipt::class.java).apply {
                         putExtra(Keys.NAME_CLIENT, nameClient)
                         putExtra(Keys.CATEGORY, data[Keys.CATEGORY].toString())
                         putExtra(Keys.VALUE_UNIT, valueUnit.toFloat())
-                        putExtra(Keys.VALUE_AMOUNT, valueAmount.toInt())
+                        putExtra(Keys.AMOUNT, valueAmount.toFloat())
                         putExtra(Keys.TYPE, data[Keys.NAME].toString())
                         putExtra(Keys.TITLE, Keys.CASH_SALE)
                         putExtra(Keys.KEY_INVENTORY, data[Keys.KEY].toString())
@@ -223,5 +267,14 @@ class CashSale : AppCompatActivity() {
     private fun formatTextAmount(text: String): String {
         val float = text.toFloatOrNull() ?: 0f
         return Keys.FORMAT_AMOUNT.format(float)
+    }
+
+    private fun formatTextAmountFractions(text: String): String {
+        return Keys.FORMAT_AMOUNT_FRACTION.format(text)
+    }
+
+    private fun toDecimal(fraction: String): Float{
+        val values: CharArray = fraction.toCharArray()
+        return values[0].toString().toFloat()/ values[1].toString().toFloat()
     }
 }

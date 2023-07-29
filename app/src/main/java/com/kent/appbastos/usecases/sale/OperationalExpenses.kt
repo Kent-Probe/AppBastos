@@ -11,7 +11,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.kent.appbastos.R
 import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.model.validate.ValidateEmpty
-import com.kent.appbastos.usecases.remarks.AddRemarks
+import com.kent.appbastos.usecases.receipt.Receipt
 import java.util.*
 
 class OperationalExpenses : AppCompatActivity() {
@@ -67,7 +67,7 @@ class OperationalExpenses : AppCompatActivity() {
             )
 
             if (ValidateEmpty().validate(texts, inputsLayouts)) {
-                val intent = Intent(this, AddRemarks::class.java)
+                val intent = Intent(this, Receipt::class.java)
                 startActivity(intent)
                 finish()
             }

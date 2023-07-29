@@ -1,5 +1,6 @@
 package com.kent.appbastos.model.util
 
+import com.google.i18n.phonenumbers.PhoneNumberUtil
 import java.text.DecimalFormat
 
 object Keys {
@@ -12,6 +13,8 @@ object Keys {
     const val CREDIT_SALE = "creditSale"
     const val CASH_SALE = "CashSale"
     const val CLIENT = "clients"
+    const val USERS_APP = "usersApp"
+    const val USER = "users"
 
     //Data share firebase and memory and fields
 
@@ -41,7 +44,13 @@ object Keys {
     const val DAY = "day"
     const val MONTH = "month"
     const val YEAR = "year"
+    const val HOUR = "hour"
+    const val MINUTE = "minute"
+    const val SECOND = "second"
+    const val MILLISECOND = "milliSecond"
+
     const val VALUE_UNIT = "valueUnit"
+    const val REFERENCE = "reference"
     const val VALUE_TOTAL = "valueTotal"
     const val AMOUNT_MIN = "amountMin"
     const val FLETE = "flete"
@@ -53,15 +62,18 @@ object Keys {
     const val NUMBER = "number"
     const val NUMBER_DEBTS= "numberDebts"
     const val PHONE = "phone"
-    const val USER = "users"
-    const val USERS_APP = "usersApp"
     const val CLIENTS = "clients"
     const val DEBTS_TOTAL = "debts"
+    const val FIRST_NAME = "firstName"
+    const val LAST_NAME = "lastName"
 
     //Error
     const val ERROR = "error"
+    const val TEMP = "temporal"
 
-
+    //value of response ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    const val MSM_LOADING = "cargando..."
+    const val MSM_RESPONSE_NEGATIVE = "sin coincidencias"
 
     //Text's visible ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -75,7 +87,7 @@ object Keys {
     const val ERROR_GREATER_THAT_MIN = "Error: debe ser mayor que la cantidad minima"
     const val ERROR_GREATER = "Error: debe ser menor que la cantidad"
 
-    //TOAST MSM-------------------------------------------------------------------------------------
+    //TOAST MSM------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //MSM Toast Successfully
     const val TOAST_ADD_PAYMENT = "Se agrego el pago"
     const val TOAST_ADD_SUCCESSFULLY = "Se agrego correctamente"
@@ -112,5 +124,45 @@ object Keys {
     //Format
     val FORMAT_PRICE = DecimalFormat("$#,### COP")
     val FORMAT_AMOUNT = DecimalFormat("##.# und")
-    const val FORMAT_DATE = "%d de %s del %d"
+    const val FORMAT_AMOUNT_FRACTION = "%s und"
+    const val FORMAT_DATE = "%d de %s del %d, %d:%d"
+    const val FORMAT_STRING = "%s %s"
+    const val FORMAT_TITLE_RECEIPT = "Detalles de la venta a %s"
+
+    //Format receipt
+    const val FORMAT_RECEIPT_DATE_TIME = "Fecha: %s"
+    const val FORMAT_RECEIPT_CLIENT = "Nombre del cliente: %s"
+    const val FORMAT_RECEIPT_TYPE = "Tipo del producto: %s"
+    const val FORMAT_RECEIPT_CATEGORY = "Categoria del producto: %s"
+    const val FORMAT_RECEIPT_VALUE_TOTAL = "Valor total: %s"
+    const val FORMAT_RECEIPT_VALUE_UNIT = "Valor por unidad: %s"
+    const val FORMAT_RECEIPT_AMOUNT = "Cantidad: %s"
+    const val FORMAT_RECEIPT_REFERENCE = "Referencia: %s"
+    const val FORMAT_RECEIPT_NUMBER = "Numero: %s"
+
+    //Format number
+    fun formatNumber(phone: String): String {
+        val phoneNumberUtil = PhoneNumberUtil.getInstance()
+        val number = phoneNumberUtil.parse("+57${phone}", "CO")
+        return phoneNumberUtil.format(number, PhoneNumberUtil.PhoneNumberFormat.NATIONAL)
+    }
+
+
+    fun getMonthName(monthNumber: Int): String {
+        return when (monthNumber) {
+            1 -> "Enero"
+            2 -> "Febrero"
+            3 -> "Marzo"
+            4 -> "Abril"
+            5 -> "Mayo"
+            6 -> "Junio"
+            7 -> "Julio"
+            8 -> "Agosto"
+            9 -> "Septiembre"
+            10 -> "Octubre"
+            11 -> "Noviembre"
+            12 -> "Diciembre"
+            else -> "El número de mes debe estar entre 1 y 12."
+        }
+    }
 }

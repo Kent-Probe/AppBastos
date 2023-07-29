@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/layout_background_dialog">
+    android:background="@drawable/layout_background_dialog"
+    android:gravity="center">
+
     <TextView
         android:id="@+id/textDialog"
         android:layout_width="wrap_content"
@@ -13,15 +17,65 @@
         android:textSize="24sp"
         android:text="@string/txtAlertDialog"
         android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:gravity="center"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="3"
+        android:layout_marginHorizontal="20dp">
+
+
+        <!-- Botón 1 -->
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="#FFFFFF"
+            android:layout_margin="20dp"
+            android:text="1/2" />
+
+        <!-- Botón 2 -->
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="#FFFFFF"
+            android:layout_margin="20dp"
+            android:text="3/4" />
+
+        <!-- Botón 3 -->
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="#FFFFFF"
+            android:layout_margin="20dp"
+            android:text="1/4" />
+
+
+        <!-- Botón 4 -->
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="#FFFFFF"
+            android:layout_margin="20dp"
+            android:text="1/8" />
+
+
+    </GridLayout>
+
+    <!-- Botón Cero -->
+    <Button
+        android:id="@+id/btnCancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:isScrollContainer="true">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        android:text="Cancelar"
+        android:layout_margin="20dp"
+        android:background="#FFFFFF" />
 
 
 

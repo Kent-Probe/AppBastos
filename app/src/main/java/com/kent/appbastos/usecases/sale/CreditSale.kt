@@ -19,9 +19,11 @@ import com.kent.appbastos.model.alerts.Alerts
 import com.kent.appbastos.model.util.EventButtonsCallBack
 import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.model.validate.ValidateEmpty
-import com.kent.appbastos.usecases.remarks.AddRemarks
-import com.kent.appbastos.usecases.users.ListUsers
+import com.kent.appbastos.usecases.receipt.Receipt
+import com.kent.appbastos.usecases.users.clients.ListUsers
 import java.util.*
+
+
 
 class CreditSale : AppCompatActivity() {
 
@@ -35,13 +37,14 @@ class CreditSale : AppCompatActivity() {
     //Response of the activity
     private val responseLauncher = registerForActivityResult(StartActivityForResult()){
         if (it.resultCode == RESULT_OK){
+            val phone = it.data?.getStringExtra(Keys.PHONE).toString()
             inputNumberClient.visibility = View.VISIBLE
-            numberClientView.text = it.data?.getStringExtra(Keys.PHONE)
             btnSeeUser.text = it.data?.getStringExtra(Keys.USERNAME)
-            numberText = it.data?.getStringExtra(Keys.PHONE).toString()
+            numberClientView.text = Keys.formatNumber(phone)
+            numberText = phone
+
         }
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +53,7 @@ class CreditSale : AppCompatActivity() {
         //variable util
         val context: Context = this
         val layoutInflater = layoutInflater
+        var amount = -100f
 
         //variable input text
         numberClientView = findViewById(R.id.numberClient)
@@ -63,7 +67,8 @@ class CreditSale : AppCompatActivity() {
             Keys.CATEGORY to intent.extras?.getString(Keys.CATEGORY, Keys.ERROR).toString(),
             Keys.VALUE_BASE to intent.extras?.getFloat(Keys.VALUE_BASE, 0f).toString().toFloat(),
             Keys.AMOUNT to intent.extras?.getFloat(Keys.AMOUNT, 0f).toString().toFloat(),
-            Keys.AMOUNT_MIN to intent.extras?.getFloat(Keys.AMOUNT_MIN, 0f).toString().toFloat()
+            Keys.AMOUNT_MIN to intent.extras?.getFloat(Keys.AMOUNT_MIN, 0f).toString().toFloat(),
+            Keys.FLETE to intent.extras?.getString(Keys.FLETE, Keys.ERROR).toString()
         )
 
         //Value of format and more string with format
@@ -73,10 +78,10 @@ class CreditSale : AppCompatActivity() {
         var valueRepeated = -100f
 
         //Variables of screen (textView) with default data
-        val type:TextView = findViewById(R.id.type)
-        val category:TextView = findViewById(R.id.categoryProduct)
-        val valueAmountView: TextView = findViewById(R.id.amount)
-        val valueUnitView: TextInputEditText = findViewById(R.id.valueUnit)
+        val type :TextView = findViewById(R.id.type)
+        val category :TextView = findViewById(R.id.categoryProduct)
+        val valueAmountView :TextInputEditText = findViewById(R.id.amount)
+        val valueUnitView :TextInputEditText = findViewById(R.id.valueUnit)
 
         //Assign format the text edit
         valueUnitView.addTextChangedListener(object : TextWatcher {
@@ -97,6 +102,36 @@ class CreditSale : AppCompatActivity() {
                 valueUnitView.addTextChangedListener(this)
             }
         })
+        valueAmountView.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                valueAmountView.removeTextChangedListener(this)
+                val ch = "/"
+                var cleanString: String? = s.toString().replace("[$.,/und\\s]".toRegex(), "")
+
+                if(cleanString.isNullOrEmpty()) cleanString = "0"
+
+                if (ch in s.toString() && s.toString().length == 3){
+                    amount = toDecimal(cleanString)
+                    val textFormat = formatTextAmountFractions(s.toString())
+                    valueAmountView.setText(textFormat)
+                    valueAmountView.setSelection(textFormat.length - 4)
+                }else{
+                    amount = cleanString.toFloat()
+                    val textFormat = formatTextAmount(cleanString)
+                    valueAmountView.setText(textFormat)
+                    valueAmountView.setSelection(textFormat.length - 4)
+                }
+                valueAmountView.addTextChangedListener(this)
+            }
+
+        })
+
 
         //assign default values (variables of the screen)
         type.text = data[Keys.NAME].toString()
@@ -139,7 +174,7 @@ class CreditSale : AppCompatActivity() {
             val inputValueAmount: TextInputLayout = findViewById(R.id.inputAmount)
 
             //Variables de los text del TextInputLayout
-            val valueAmount: String = valueAmountView.text.toString()
+            val valueAmount: String = amount.toString()
             val valueUnit: String = valueUnitView.text.toString().replace("[$.,COP\\s]".toRegex(), "")
 
             //Arrays (2) With data of the fields
@@ -212,12 +247,12 @@ class CreditSale : AppCompatActivity() {
             val amountInventory = data[Keys.AMOUNT].toString().toFloat() - valueAmount.toFloat()
 
             if(continueScreen){
-                val intent = Intent(context, AddRemarks::class.java).apply {
+                val intent = Intent(context, Receipt::class.java).apply {
                     putExtra(Keys.NAME_CLIENT, btnSeeUser.text)
                     putExtra(Keys.NUMBER_CLIENT, numberText)
                     putExtra(Keys.CATEGORY, data[Keys.CATEGORY].toString())
                     putExtra(Keys.VALUE_UNIT, valueUnit.toFloat())
-                    putExtra(Keys.VALUE_AMOUNT, valueAmount.toInt())
+                    putExtra(Keys.AMOUNT, valueAmount.toFloat())
                     putExtra(Keys.TYPE, data[Keys.NAME].toString())
                     putExtra(Keys.TITLE, Keys.CREDIT_SALE)
                     putExtra(Keys.KEY_INVENTORY, data[Keys.KEY].toString())
@@ -238,6 +273,20 @@ class CreditSale : AppCompatActivity() {
     private fun formatTextPrice(text: String): String {
         val float = text.toFloatOrNull() ?: 0f
         return Keys.FORMAT_PRICE.format(float)
+    }
+
+    private fun formatTextAmount(text: String): String {
+        val float = text.toFloatOrNull() ?: 0f
+        return Keys.FORMAT_AMOUNT.format(float)
+    }
+
+    private fun formatTextAmountFractions(text: String): String {
+        return Keys.FORMAT_AMOUNT_FRACTION.format(text)
+    }
+
+    private fun toDecimal(fraction: String): Float{
+        val values: CharArray = fraction.toCharArray()
+        return values[0].toString().toFloat()/ values[1].toString().toFloat()
     }
 
 }

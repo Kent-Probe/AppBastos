@@ -113,6 +113,20 @@
             android:layout_height="10dp" />
 
         <Button
+            android:id="@+id/btnAdminUserApp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/style_primary_button"
+            android:text="@string/txtBtnAdminUser"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            tools:ignore="TextContrastCheck" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <Button
             android:id="@+id/btnListInventory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,6 +1,19 @@
 <resources>
     <string name="app_name" translatable="false">AppBastos</string>
 
+    <!-- text's in the receipt -->
+    <string name="txtNameClientReceipt" translatable="false">Nombre del cliente: </string>
+    <string name="txtNameProductReceipt" translatable="false">Producto: </string>
+    <string name="txtCategoryReceipt" translatable="false">Categoria: </string>
+    <string name="txtValueUnitReceipt" translatable="false">Valor por unidad: </string>
+    <string name="txtValueAmountReceipt" translatable="false">Cantidad: </string>
+    <string name="txtTotalReceipt" translatable="false">Valor Total: </string>
+    <string name="txtReference" translatable="false">Referencia: </string>
+    <string name="txtDateTimeReceipt" translatable="false">Fecha: </string>
+    <string name="txtNumberClient" translatable="false">Numero del cliente: </string>
+
+    <!--Text general -->
+    <string name="txtBasic" translatable="false">Cargando... </string>
 
     <!-- Textos en campos -->
     <string name="txtUserName" translatable="false">Nombre del usuario*</string>
@@ -17,11 +30,13 @@
     <string name="txtProvider" translatable="false">Provedor</string>
     <string name="txtValueOperational" translatable="false">Valor*</string>
     <string name="txtDescription" translatable="false">Descripcion*</string>
+    <string name="txtDescFraction" translatable="false">Boton que abre las fracciones</string>
     <string name="txtPaymentValue" translatable="false">Pago*</string>
     <string name="txtTypeOperational" translatable="false">Tipo de operacion*</string>
     <string name="txtRemarks" translatable="false">Comentarios</string>
     <string name="txtAlertDialog" translatable="false">Este cliente tiene una deuda abierta. ¿Que desea hacer?</string>
     <string name="txtUsers">Clientes registrados</string>
+    <string name="txtUsersApp">Usuarios de la plataforma</string>
     <string name="txtInventory">Inventario</string>
     <string name="txtClientsDebts">Deudas del cliente</string>
     <string name="txtRegisterUserName">Nombre del usuario</string>
@@ -57,19 +72,22 @@
     <string name="txtPayment" translatable="false">Pago</string>
     <string name="txtDashboard" translatable="false">DashBoard</string>
     <string name="txtAddInventory" translatable="false">Agregar inventario</string>
+    <string name="txtDetailsTitle" translatable="false">Detalles de la venta a %s</string>
 
 
     <!-- texts in buttons -->
     <string name="txtBtnLogin" translatable="false">Ingresar con google</string>
     <string name="txtBtnContinue" translatable="false">Continuar</string>
     <string name="txtBtnCancel" translatable="false">Cancelar</string>
-    <string name="txtBtnShare" translatable="false">Enviar</string>
+    <string name="txtBtnShare" translatable="false">Compartir por WhatsApp</string>
     <string name="txtBtnPrintOut">Imprimir</string>
     <string name="txtBtnBackHome">Registrar otra venta</string>
     <string name="txtBtnOpenNewDebt">Abrir una nueva deuda</string>
     <string name="txtBtnAddPayment">Agregar pago</string>
     <string name="txtBtnRegisterSale">Registrar Venta</string>
     <string name="txtBtnRegisterUser">Administrar clientes</string>
+    <string name="txtBtnAdminUser">Administrar usuarios</string>
+    <string name="txtBtnChangeRol">Cambiar ROL</string>
     <string name="txtBtnAddInventory">Agregar Inventario</string>
     <string name="txtBtnListInventory">Instancias en inventario</string>
 

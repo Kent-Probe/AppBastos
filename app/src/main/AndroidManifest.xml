@@ -11,6 +11,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.kent.appbastos.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+
+        <activity
+            android:name=".usecases.users.usersApp.ListUserApp"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".usecases.inventory.listInventory.ListInventory"
             android:exported="false">
@@ -40,14 +59,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".usecases.users.RegisterUser"
+            android:name=".usecases.users.clients.RegisterUser"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".usecases.users.ListUsers"
+            android:name=".usecases.users.clients.ListUsers"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -82,7 +101,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".usecases.remarks.AddRemarks"
+            android:name=".usecases.receipt.Receipt"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -130,6 +149,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <service
             android:name=".services.MyFirebaseMessagingService"
             android:exported="false">
@@ -137,22 +157,23 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-            See README(https://goo.gl/l4GJaQ) for more. -->
+        <!--
+ Set custom default icon. This is used when no icon is set for incoming notification messages.
+            See README(https://goo.gl/l4GJaQ) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher_foreground" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/bluePrimary" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
-
-
-
     </application>
+
 </manifest>

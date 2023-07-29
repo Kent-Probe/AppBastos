@@ -13,12 +13,20 @@ import com.kent.appbastos.model.util.BasicEventCallback
 import com.kent.appbastos.model.util.Keys
 import java.util.*
 
-class DataBaseShareData () {
+class DataBaseShareData {
 
     val database = Firebase.database.reference
 
     private fun increment(valueS: String, increment: Float): Float{
         return valueS.toFloat() + increment
+    }
+
+    fun updateRolUserApp(key: String){
+        database.child(Keys.USER).child(Keys.USERS_APP).child(key).child(Keys.ROL).setValue(Keys.ROL_ADMIN)
+    }
+
+    fun addEventOnlyListenerUserApp(messagesListener: ValueEventListener){
+        database.child(Keys.USER).child(Keys.USERS_APP).addListenerForSingleValueEvent(messagesListener)
     }
 
     //Write payment
@@ -120,6 +128,10 @@ class DataBaseShareData () {
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH) + 1
         val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val hour = calendar.get(Calendar.HOUR)
+        val minute = calendar.get(Calendar.MINUTE)
+        val second = calendar.get(Calendar.SECOND)
+        val milliSecond = calendar.get(Calendar.MILLISECOND)
 
         database.child(Keys.INVENTORY).addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -131,7 +143,7 @@ class DataBaseShareData () {
                     flete = data[4],
                     category = data[5],
                     name = data[6],
-                    date = DateTime(day, month, year)
+                    date = DateTime(day, month, year, hour, minute, second, milliSecond)
                 )
                 database.child(Keys.INVENTORY).push().setValue(inventory)
                 Toast.makeText(context, Keys.TOAST_ADD_SUCCESSFULLY, Toast.LENGTH_LONG).show()
@@ -146,13 +158,13 @@ class DataBaseShareData () {
 
 }
 
-data class DateTime(val day: Int, val month: Int, val year: Int)
+data class DateTime(val day: Int, val month: Int, val year: Int, val hour: Int, val minute: Int, val second: Int, val milliSecond: Int)
 
 data class Inventory(val amount: Float, val provider: String, val valueBase: Float, val name:String, val amountMin:Float, val flete:String, val category: String, val date: DateTime, val key:String? = null)
 
 data class InventoryOfDebts(val provider: String, val name:String, val flete:String, val category: String, val key:String? = null)
 
-data class Debts(val debts: Float, val dateTime: DateTime, val amount: Int, val valueUnit: Float, val valueTotal: Float, val inventoryOfDebts: InventoryOfDebts, val key: String? = null)
+data class Debts(val debts: Float, val dateTime: DateTime, val amount: Float, val valueUnit: Float, val valueTotal: Float, val inventoryOfDebts: InventoryOfDebts, val key: String? = null)
 
 data class CashSale(val amount: Float, val valueUnit: Float)
 

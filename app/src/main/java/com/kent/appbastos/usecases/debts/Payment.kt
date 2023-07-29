@@ -17,7 +17,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.kent.appbastos.R
 import com.kent.appbastos.model.firebase.DataBaseShareData
 import com.kent.appbastos.model.util.Keys
-import com.kent.appbastos.usecases.users.ListUsers
+import com.kent.appbastos.usecases.users.clients.ListUsers
 
 class Payment : AppCompatActivity() {
 

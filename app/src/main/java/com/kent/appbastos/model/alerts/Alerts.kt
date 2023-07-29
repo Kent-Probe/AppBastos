@@ -7,7 +7,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.kent.appbastos.R
+import com.kent.appbastos.model.util.BtnFractions
 import com.kent.appbastos.model.util.EventButtonsCallBack
+
 
 
 class Alerts {
@@ -44,6 +46,32 @@ class Alerts {
         btnDown.setOnClickListener {
             eventButtons.buttonDown(alertDialog)
         }
+    }
+
+    fun showAlertSelection(layoutInflater: LayoutInflater, context: Context, txtDialog: String, txtBtn: String, btnFractions: BtnFractions){
+        val dialogAlert = AlertDialog.Builder(context)
+        val view: View = layoutInflater.inflate(R.layout.dialog_custom, null)
+
+        dialogAlert.setView(view)
+
+        val alertDialog = dialogAlert.create()
+        alertDialog.show()
+
+        //txt Title and text button
+        view.findViewById<TextView>(R.id.textDialog).text = txtDialog
+        view.findViewById<Button>(R.id.btnCancel).text = txtBtn
+
+        //Buttons
+        view.findViewById<Button>(R.id.btn1).setOnClickListener { btnFractions.btn1(alertDialog) }
+
+        view.findViewById<Button>(R.id.btn2).setOnClickListener { btnFractions.btn2(alertDialog) }
+
+        view.findViewById<Button>(R.id.btn3).setOnClickListener { btnFractions.btn3(alertDialog) }
+
+        view.findViewById<Button>(R.id.btn4).setOnClickListener { btnFractions.btn4(alertDialog) }
+
+        view.findViewById<Button>(R.id.btnCancel).setOnClickListener { btnFractions.btnCancel(alertDialog) }
+
     }
 
 

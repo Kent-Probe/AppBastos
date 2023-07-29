@@ -25,6 +25,8 @@
     <color name="black_overlay">#66000000</color>
     <color name="greenWhite">#0000FF9F</color>
     <color name="greenBlack">#2C9782</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="grayWhite">#E7E9EA</color>
 
     //indicator color
     <color name="inactive">#C4C4C4</color>

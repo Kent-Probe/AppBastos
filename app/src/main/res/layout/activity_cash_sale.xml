@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -194,15 +195,20 @@
             android:layout_height="wrap_content"
             android:hint="@string/txtAmount"
             android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
+            app:hintTextColor="@color/lineHint"
+            app:endIconDrawable="@drawable/ic_fractions"
+            app:endIconMode="custom"
+            app:endIconTintMode="multiply"
+            app:endIconTint="@color/colorHint"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/amount"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lineHint"
-                android:textColorLink="#000000"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:textColorLink="#000000" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

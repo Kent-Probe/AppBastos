@@ -57,7 +57,7 @@ class RecyclerViewAdapterInventory(private val values: List<Inventory>, private 
         holder.category.text = concatenate("Categoria: ", inventory.category)
         holder.provider.text = concatenate("Provedor: ", inventory.provider)
         holder.valueBase.text = concatenate("Valor base: ", Keys.FORMAT_PRICE.format(inventory.valueBase))
-        holder.date.text = Keys.FORMAT_DATE.format(inventory.date.day, getMonthName(inventory.date.month), inventory.date.year)
+        holder.date.text = Keys.FORMAT_DATE.format(inventory.date.day, Keys.getMonthName(inventory.date.month), inventory.date.year, inventory.date.hour, inventory.date.minute, inventory.date.second)
 
 
         holder.itemView.setOnClickListener {
@@ -66,22 +66,4 @@ class RecyclerViewAdapterInventory(private val values: List<Inventory>, private 
     }
 
     override fun getItemCount() = values.size
-
-    private fun getMonthName(monthNumber: Int): String {
-        return when (monthNumber) {
-            1 -> "Enero"
-            2 -> "Febrero"
-            3 -> "Marzo"
-            4 -> "Abril"
-            5 -> "Mayo"
-            6 -> "Junio"
-            7 -> "Julio"
-            8 -> "Agosto"
-            9 -> "Septiembre"
-            10 -> "Octubre"
-            11 -> "Noviembre"
-            12 -> "Diciembre"
-            else -> "El número de mes debe estar entre 1 y 12."
-        }
-    }
 }

@@ -1,4 +1,4 @@
-package com.kent.appbastos.usecases.users
+package com.kent.appbastos.usecases.users.clients
 
 import android.content.Context
 import android.content.Intent
@@ -32,7 +32,7 @@ class ListUsers : AppCompatActivity() {
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val rol = pref.getString(Keys.ROL, null).toString()
 
-        //fill recycle view
+        //variable recycle view
         val listUserRecyclerView: RecyclerView = findViewById(R.id.listUserId)
 
         //Val button
