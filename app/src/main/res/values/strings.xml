@@ -1,6 +1,17 @@
 <resources>
     <string name="app_name" translatable="false">AppBastos</string>
 
+    <!--Text's in radio Button -->
+    <string name="txtFilterNameClient" translatable="false">Filtrar por cliente</string>
+    <string name="txtFilterNumberTel" translatable="false">Filtrar por numero cliente</string>
+    <string name="txtFilterRef" translatable="false">Filtrar por Referencia</string>
+    <string name="txtFilterSale" translatable="false">Filtrar por tipo de venta</string>
+    <string name="txtFilterDate" translatable="false">Filtrar por fecha</string>
+
+    <!-- Text's in toolbar-->
+    <string name="txtToolbarSearchRef" translatable="false">Buscar por referencia</string>
+    <string name="txtToolbarSearchDate" translatable="false">Buscar por fecha</string>
+
     <!-- text's in the receipt -->
     <string name="txtNameClientReceipt" translatable="false">Nombre del cliente: </string>
     <string name="txtNameProductReceipt" translatable="false">Producto: </string>
@@ -15,7 +26,8 @@
     <!--Text general -->
     <string name="txtBasic" translatable="false">Cargando... </string>
 
-    <!-- Textos en campos -->
+    <!-- text in field's -->
+    <string name="txtDate" translatable="false">Fecha...</string>
     <string name="txtUserName" translatable="false">Nombre del usuario*</string>
     <string name="txtName" translatable="false">Nombre*</string>
     <string name="txtNameClient" translatable="false">Nombre del cliente*</string>
@@ -52,7 +64,7 @@
     <string name="txtInventoryProvider">Provedor: </string>
     <string name="txtInventoryValueBase">Valor Base: </string>
 
-    //Txt Onboard
+    <!-- Txt Onboard-->
     <string name="txtOnboarding_1">Aplicacion para la gestion de mercado en </string>
     <string name="txtOnboarding_2">Aplicacion</string>
     <string name="txtBtnSkip">Omitir</string>
@@ -72,6 +84,9 @@
     <string name="txtPayment" translatable="false">Pago</string>
     <string name="txtDashboard" translatable="false">DashBoard</string>
     <string name="txtAddInventory" translatable="false">Agregar inventario</string>
+    <string name="txtReceipts" translatable="false">Recibos</string>
+    <string name="txtRef" translatable="false">Referencia #%s</string>
+
     <string name="txtDetailsTitle" translatable="false">Detalles de la venta a %s</string>
 
 
@@ -79,6 +94,8 @@
     <string name="txtBtnLogin" translatable="false">Ingresar con google</string>
     <string name="txtBtnContinue" translatable="false">Continuar</string>
     <string name="txtBtnCancel" translatable="false">Cancelar</string>
+    <string name="txtBtnApply" translatable="false">Aplicar</string>
+    <string name="txtBtnAnnul" translatable="false">Anular</string>
     <string name="txtBtnShare" translatable="false">Compartir por WhatsApp</string>
     <string name="txtBtnPrintOut">Imprimir</string>
     <string name="txtBtnBackHome">Registrar otra venta</string>
@@ -90,6 +107,8 @@
     <string name="txtBtnChangeRol">Cambiar ROL</string>
     <string name="txtBtnAddInventory">Agregar Inventario</string>
     <string name="txtBtnListInventory">Instancias en inventario</string>
+    <string name="txtBtnListReceipt">Recibos</string>
+    <string name="txtBtnGeneralSub">Abono general</string>
 
     <!-- Description of images -->
     <string name="descLogo">Logo de la aplicacion de AppBastos</string>
@@ -229,5 +248,12 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+
+
+    <!-- String in code -->
+    <!-- Button:: -->
+    <string name="code_apply" translatable="false">Aplicar</string>
+    <string name="code_search" translatable="false">Buscar</string>
+
 
 </resources>

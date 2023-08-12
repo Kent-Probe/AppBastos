@@ -32,7 +32,7 @@ class ListUserApp : AppCompatActivity() {
         setContentView(R.layout.activity_list_user_app)
         val context = this
 
-        //Text view center response
+        //Text view center response, hide and show response too
         val response = findViewById<AppCompatTextView>(R.id.response)
         response.visibility = AppCompatTextView.VISIBLE
         response.text = Keys.MSM_LOADING
@@ -58,7 +58,7 @@ class ListUserApp : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // Acción cuando se presiona el botón de búsqueda
-                if(query != null && query.isNotEmpty()){
+                if(query != null && query.isNotEmpty() && query.isNotBlank()){
                     listUsers.clear()
                     setupRecyclerView(listUserRecyclerView, context, response, query)
                 }else{
@@ -70,7 +70,12 @@ class ListUserApp : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 // Acción cuando se cambia el texto del SearchView
-                return false
+                if(newText != null && (newText.isEmpty() || newText.isBlank())){
+                    //fill recycler view
+                    listUsers.clear()
+                    setupRecyclerView(listUserRecyclerView, context, response)
+                }
+                return true
             }
         })
 

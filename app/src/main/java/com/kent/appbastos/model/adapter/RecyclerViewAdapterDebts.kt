@@ -47,13 +47,23 @@ class RecyclerViewAdapterDebts(private val values: List<Debts>, private val even
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val debts = values[position]
         val monthName: String = getMonthName(debts.dateTime.month)
+        val hour = if (debts.dateTime.hour.toString().length == 1){
+            "0" + debts.dateTime.hour
+        }else{
+            debts.dateTime.hour.toString()
+        }
+        val second = if(debts.dateTime.second.toString().length == 1){
+            "0" + debts.dateTime.second
+        }else{
+            debts.dateTime.second.toString()
+        }
 
         holder.debts.text = concatenate("Total: ", Keys.FORMAT_PRICE.format(debts.valueTotal))
         holder.valueUnit.text = concatenate("Valor por unidad: ", Keys.FORMAT_PRICE.format(debts.valueUnit))
         holder.amount.text = concatenate("Cantidad: ", Keys.FORMAT_AMOUNT.format(debts.amount))
         holder.category.text = concatenate("categoria: ", debts.inventoryOfDebts.category)
         holder.name.text = concatenate("Tipo: ", debts.inventoryOfDebts.name)
-        holder.date.text = Keys.FORMAT_DATE.format(debts.dateTime.day, monthName, debts.dateTime.year)
+        holder.date.text = Keys.FORMAT_DATE_STRING.format(debts.dateTime.day, monthName, debts.dateTime.year, hour, second)
 
 
         holder.itemView.setOnClickListener {

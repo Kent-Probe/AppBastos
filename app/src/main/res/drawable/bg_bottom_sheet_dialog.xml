@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle" >
+                    <corners
+                        android:topRightRadius="20dp"
+                        android:topLeftRadius="20dp"/>
+                    <solid android:color="@color/white"/>
+                </shape>
+            </item>
+            <item
+                android:gravity="top|center"
+                android:drawable="@drawable/ic_baseline_horizontal_rule">
+            </item>
+        </layer-list>
+    </item>
+</selector>

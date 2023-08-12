@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -27,6 +29,12 @@ class ListUsers : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_users)
+        val context = this
+
+        //Text view center response, hide and show response too
+        val response = findViewById<AppCompatTextView>(R.id.response)
+        response.visibility = AppCompatTextView.VISIBLE
+        response.text = Keys.MSM_LOADING
 
         //Data share
         val pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
@@ -54,12 +62,42 @@ class ListUsers : AppCompatActivity() {
             finish()
         }
         listUsers.clear()
-        setupRecyclerView(listUserRecyclerView, this, isOfCreditSale)
+        setupRecyclerView(listUserRecyclerView, this, isOfCreditSale, response)
+
+        //val search view
+        val searchView = findViewById<SearchView>(R.id.search_bar)
+        searchView.clearFocus()
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Acción cuando se presiona el botón de búsqueda
+                if(query != null && query.isNotEmpty() && query.isNotBlank()){
+                    listUsers.clear()
+                    setupRecyclerView(listUserRecyclerView, context, isOfCreditSale, response, query)
+                }else{
+                    listUsers.clear()
+                    setupRecyclerView(listUserRecyclerView, context, isOfCreditSale, response)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Acción cuando se cambia el texto del SearchView
+                if(newText != null && (newText.isEmpty() || newText.isBlank())){
+                    //fill recycler view
+                    listUsers.clear()
+                    setupRecyclerView(listUserRecyclerView, context, isOfCreditSale, response)
+                }
+                return true
+            }
+        })
+
+        response.visibility = AppCompatTextView.GONE
+        listUserRecyclerView.visibility = RecyclerView.VISIBLE
 
     }
 
     //Function of Recycler View with Database
-    private fun setupRecyclerView(recyclerView: RecyclerView, context: Context, isCreditSale: Boolean) {
+    private fun setupRecyclerView(recyclerView: RecyclerView, context: Context, isCreditSale: Boolean, textViewResponse: AppCompatTextView, text: String? = null) {
 
         val messagesListener = object : ValueEventListener {
 
@@ -76,6 +114,28 @@ class ListUsers : AppCompatActivity() {
                         )
                     user.let { listUsers.add(user) }
                 }
+
+                //validate text input search view
+                if(text != null){
+                    val filterList = listUsers.filter {
+                        it.username!!.contains(text, true)
+                    }
+                    listUsers.clear()
+                    filterList.forEach { listUsers.add(it) }
+
+                    if(filterList.isEmpty()){
+                        recyclerView.visibility = RecyclerView.GONE
+                        textViewResponse.visibility = AppCompatTextView.VISIBLE
+                        textViewResponse.text = Keys.MSM_RESPONSE_NEGATIVE
+                    }else{
+                        recyclerView.visibility = RecyclerView.VISIBLE
+                        textViewResponse.visibility = RecyclerView.GONE
+                    }
+                }else{
+                    recyclerView.visibility = RecyclerView.VISIBLE
+                    textViewResponse.visibility = AppCompatTextView.GONE
+                }
+
                 recyclerView.layoutManager = LinearLayoutManager(context)
                 recyclerView.adapter = RecyclerViewAdapterListUsers(listUsers, object :
                     EventCallBackSuccess {

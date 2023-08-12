@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".usecases.inventory.addInventory.AddInventory">
 
     <LinearLayout
@@ -13,10 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/border_gradiant"
         android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,204 +86,210 @@
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gradiantHome"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtNameProduct"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/type"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:contentDescription="@string/txtType"
-                style="@style/Widget.AppCompat.Spinner.Underlined"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputCategoryProduct"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtCategoryProduct"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/categoryProduct"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="number"
-                android:textColorLink="#000000" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtAmount"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/amount"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="number"
-                android:textColorLink="#000000" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputValue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtValueMin"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/value"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="number"
-                android:textColorLink="#000000" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputProvider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtProvider"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/provider"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:backgroundTint="@color/lineHint"
-            android:inputType="textCapWords"
-            android:textColorLink="#000000" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputAmountMin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtAmountMin"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/amountMin"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="number"
-                android:textColorLink="#000000" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputFlete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtFlete"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/flete"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="textCapSentences"
-                android:textColorLink="#000000" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideOverlay">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnContinue"
-                android:layout_width="@dimen/dimBtn"
-                android:layout_height="wrap_content"
-                android:background="@drawable/style_primary_button"
-                android:text="@string/txtBtnContinue"
-                android:textColor="@color/white"
-                tools:ignore="TextContrastCheck" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
 
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="end">
+                android:hint="@string/txtNameProduct"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/type"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/txtType" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputCategoryProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txtCategoryProduct"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/categoryProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/lineHint"
+                    android:inputType="text"
+                    android:textColorLink="#000000" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txtAmount"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/lineHint"
+                    android:inputType="number"
+                    android:textColorLink="#000000" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txtValueMin"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/value"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/lineHint"
+                    android:inputType="number"
+                    android:textColorLink="#000000" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputProvider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txtProvider"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/provider"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/lineHint"
+                    android:inputType="textCapWords"
+                    android:textColorLink="#000000" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputAmountMin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txtAmountMin"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/amountMin"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/lineHint"
+                    android:inputType="number"
+                    android:textColorLink="#000000" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputFlete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txtFlete"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/flete"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/lineHint"
+                    android:inputType="textCapSentences"
+                    android:textColorLink="#000000" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnCancel"
+                    android:id="@+id/btnContinue"
                     android:layout_width="@dimen/dimBtn"
                     android:layout_height="wrap_content"
                     android:background="@drawable/style_primary_button"
-                    android:text="@string/txtBtnCancel"
+                    android:text="@string/txtBtnContinue"
                     android:textColor="@color/white"
                     tools:ignore="TextContrastCheck" />
 
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end">
+
+                    <Button
+                        android:id="@+id/btnCancel"
+                        android:layout_width="@dimen/dimBtn"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/style_primary_button"
+                        android:text="@string/txtBtnCancel"
+                        android:textColor="@color/white"
+                        tools:ignore="TextContrastCheck" />
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

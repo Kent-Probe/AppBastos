@@ -73,12 +73,6 @@ class DataBaseShareData {
         database.child(Keys.USER).child(Keys.CLIENTS).push().setValue(user)
     }
 
-    //Write new cash sale
-    fun writeNewCashSale(){
-        val cashSale = CashSale(0f, 0f)
-        database.child(Keys.CASH_SALE).setValue(cashSale)
-    }
-
     //Write new User App on firebase realtime database
     fun writeNewUserApp(context: Context, userUID: String, userApp: UserApp, callBack: BasicEventCallback){
         val databaseUser = database.child(Keys.USER).child(Keys.USERS_APP).child(userUID)
@@ -133,24 +127,36 @@ class DataBaseShareData {
         val second = calendar.get(Calendar.SECOND)
         val milliSecond = calendar.get(Calendar.MILLISECOND)
 
-        database.child(Keys.INVENTORY).addListenerForSingleValueEvent(object : ValueEventListener{
+        val inventory = Inventory(
+            amount = data[0].toFloat(),
+            valueBase = data[1].toFloat(),
+            provider = data[2],
+            amountMin = data[3].toFloat(),
+            flete = data[4],
+            category = data[5],
+            name = data[6],
+            date = DateTime(day, month, year, hour, minute, second, milliSecond)
+        )
+        database.child(Keys.INVENTORY).push().setValue(inventory)
+        Toast.makeText(context, Keys.TOAST_ADD_SUCCESSFULLY, Toast.LENGTH_LONG).show()
+    }
+
+    fun writeReceipt(title: String, receipt: Receipt){
+        database.child(Keys.RECEIPT).child(title).push().setValue(receipt)
+    }
+
+    fun readAllReceipt(listener: ValueEventListener){
+        database.child(Keys.RECEIPT).addListenerForSingleValueEvent(listener)
+    }
+
+    fun readLastDebt(nameClient: String, callBack: BasicEventCallback){
+        database.child(Keys.DEBTS).child(nameClient).addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                val inventory = Inventory(
-                    amount = data[0].toFloat(),
-                    valueBase = data[1].toFloat(),
-                    provider = data[2],
-                    amountMin = data[3].toFloat(),
-                    flete = data[4],
-                    category = data[5],
-                    name = data[6],
-                    date = DateTime(day, month, year, hour, minute, second, milliSecond)
-                )
-                database.child(Keys.INVENTORY).push().setValue(inventory)
-                Toast.makeText(context, Keys.TOAST_ADD_SUCCESSFULLY, Toast.LENGTH_LONG).show()
+                callBack.onSuccess(snapshot)
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(context, Keys.TOAST_ERROR_SAVE_DATA, Toast.LENGTH_LONG).show()
+                callBack.onCancel()
             }
 
         })
@@ -158,15 +164,15 @@ class DataBaseShareData {
 
 }
 
+data class Receipt(val reference: String, val dateTime: String, val nameClient: String, val product: String, val category: String, val valueUnit: String, val amount: String, val valueTotal: String, val number:String? = null, val key: String? = null )
+
 data class DateTime(val day: Int, val month: Int, val year: Int, val hour: Int, val minute: Int, val second: Int, val milliSecond: Int)
 
 data class Inventory(val amount: Float, val provider: String, val valueBase: Float, val name:String, val amountMin:Float, val flete:String, val category: String, val date: DateTime, val key:String? = null)
 
 data class InventoryOfDebts(val provider: String, val name:String, val flete:String, val category: String, val key:String? = null)
 
-data class Debts(val debts: Float, val dateTime: DateTime, val amount: Float, val valueUnit: Float, val valueTotal: Float, val inventoryOfDebts: InventoryOfDebts, val key: String? = null)
-
-data class CashSale(val amount: Float, val valueUnit: Float)
+data class Debts(val debts: Float?, val dateTime: DateTime, val amount: Float, val valueUnit: Float, val valueTotal: Float, val inventoryOfDebts: InventoryOfDebts, val key: String? = null)
 
 //data class CreditSaleFirebase(val amount: Float, val valueUnit: Float, val debut: Float)
 

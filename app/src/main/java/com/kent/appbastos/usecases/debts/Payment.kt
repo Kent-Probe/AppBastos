@@ -93,6 +93,7 @@ class Payment : AppCompatActivity() {
         btnSeeUser = findViewById(R.id.btnNameUserAdd)
         btnSeeDebts.text = Keys.DEBTS_ES
         btnSeeUser.setOnClickListener {
+            btnSeeDebts.text = Keys.DEBTS_ES
             val intent = Intent(this, ListUsers::class.java).apply {
                 putExtra(Keys.CREDIT_SALE, true)
             }
@@ -101,12 +102,15 @@ class Payment : AppCompatActivity() {
         }
 
         btnSeeDebts.setOnClickListener {
-            val intent = Intent(this, ListDebts::class.java).apply {
-                putExtra(Keys.KEY, btnSeeUser.text)
+            try{
+                btnSeeDebts.error = null
+                val intent = Intent(this, ListDebts::class.java).apply {
+                    putExtra(Keys.KEY, btnSeeUser.text)
+                }
+                responseLauncherDebts.launch(intent)
+            }catch (e: Exception){
+                Toast.makeText(this, "Erro: ${e.message}", Toast.LENGTH_LONG).show()
             }
-            responseLauncherDebts.launch(intent)
-            btnSeeDebts.text = Keys.DEBTS_ES
-            //btnSeeDebts.visibility = View.GONE
         }
 
         btnCancel.setOnClickListener {
@@ -117,6 +121,10 @@ class Payment : AppCompatActivity() {
         }
 
         btnContinue.setOnClickListener {
+            if((btnSeeDebts.text as String).equals(Keys.DEBTS_ES, true)){
+                btnSeeDebts.error = "Deuda no seleccionada"
+                return@setOnClickListener
+            }
             val paymentNumber = payment.text.toString().replace("[$.,COP\\s]".toRegex(), "").toFloatOrNull() ?: 0f
             if(btnSeeDebts.visibility == View.VISIBLE){
                 btnSeeUser.error = null
@@ -131,7 +139,7 @@ class Payment : AppCompatActivity() {
                 } else if (paymentNumber > valueTotal) {
                     inputPayment.isErrorEnabled = true
                     inputPayment.error = Keys.ERROR_DEBTS_GREATER
-                } else {
+                } else{
                     inputPayment.isErrorEnabled = false
                     val totalCurrency = valueTotal - paymentNumber
                     DataBaseShareData().addPayment(btnSeeUser.text.toString(), key, totalCurrency)

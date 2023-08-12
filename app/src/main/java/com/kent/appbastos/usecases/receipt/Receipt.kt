@@ -11,10 +11,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.kent.appbastos.R
-import com.kent.appbastos.model.firebase.DataBaseShareData
-import com.kent.appbastos.model.firebase.DateTime
-import com.kent.appbastos.model.firebase.Debts
-import com.kent.appbastos.model.firebase.InventoryOfDebts
+import com.kent.appbastos.model.firebase.*
+import com.kent.appbastos.model.firebase.Receipt
 import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.usecases.share.Share
 
@@ -147,6 +145,22 @@ class Receipt : AppCompatActivity() {
                 putExtra(Keys.REFERENCE, reference)
                 putExtra(Keys.NUMBER_CLIENT, numberClient)
             }
+
+            val number = Keys.formatNumber(numberClient)
+
+            val receipt = Receipt(
+                reference,
+                date,
+                nameClient,
+                nameProduct,
+                category,
+                valueUnit,
+                amount,
+                total,
+                number
+            )
+            DataBaseShareData().writeReceipt(title, receipt)
+
             startActivity(intent)
             finish()
         }

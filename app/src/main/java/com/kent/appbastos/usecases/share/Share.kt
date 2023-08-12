@@ -14,6 +14,7 @@ import com.kent.appbastos.R
 import com.kent.appbastos.model.util.Keys
 import java.io.File
 import java.io.FileOutputStream
+import java.util.*
 
 class Share : AppCompatActivity() {
 
@@ -90,7 +91,7 @@ class Share : AppCompatActivity() {
             val options = BitmapFactory.Options()
             options.inMutable = true
 
-            //create bitmap and add the plantilla, and create canvas with bitmap
+            //create bitmap and add the template, and create canvas with bitmap
             val bitmap = BitmapFactory.decodeResource(applicationContext.resources, R.drawable.plantilla, options)
             val canvas = Canvas(bitmap)
 
@@ -101,31 +102,44 @@ class Share : AppCompatActivity() {
                 textAlign = Paint.Align.LEFT
             }
 
+            val formats = Vector(
+                listOf(
+                    Keys.FORMAT_RECEIPT_DATE_TIME,
+                    Keys.FORMAT_RECEIPT_CLIENT,
+                    Keys.FORMAT_RECEIPT_NUMBER,
+                    Keys.FORMAT_RECEIPT_TYPE,
+                    Keys.FORMAT_RECEIPT_CATEGORY,
+                    Keys.FORMAT_RECEIPT_VALUE_UNIT,
+                    Keys.FORMAT_RECEIPT_AMOUNT,
+                    Keys.FORMAT_RECEIPT_VALUE_TOTAL,
+                    Keys.FORMAT_RECEIPT_REFERENCE
+                )
+            )
+
+            val dataValue = Vector(
+                listOf(
+                    data[Keys.DATE_TIME].toString(),
+                    data[Keys.NAME_CLIENT].toString(),
+                    Keys.formatNumber(data[Keys.NUMBER_CLIENT].toString()),
+                    data[Keys.TYPE].toString(),
+                    data[Keys.CATEGORY].toString(),
+                    data[Keys.VALUE_UNIT].toString(),
+                    data[Keys.AMOUNT].toString(),
+                    data[Keys.VALUE_TOTAL].toString(),
+                    data[Keys.REFERENCE].toString()
+                )
+            )
+
             //val for config position and axis x and y
             val x = 50f
             val y = 370f
-            val h = 100
-            var m = 1
-
-            //Add text at canvas
-            canvas.drawText(Keys.FORMAT_RECEIPT_DATE_TIME.format(data[Keys.DATE_TIME].toString()), x, y, paint)
-            canvas.drawText(Keys.FORMAT_RECEIPT_CLIENT.format(data[Keys.NAME_CLIENT].toString()), x, y + h, paint)
-            if(!data[Keys.NUMBER_CLIENT].isNullOrEmpty() || data[Keys.NUMBER_CLIENT].equals(Keys.ERROR)){
-                m += 1
-                canvas.drawText(Keys.FORMAT_RECEIPT_NUMBER.format(Keys.formatNumber(data[Keys.NUMBER_CLIENT].toString())), x, y + h * m, paint)
+            var h = 0
+            for((n, format) in formats.withIndex()){
+                if(!dataValue[n].equals("null")){
+                    canvas.drawText(format.format(dataValue[n]), x, y + h, paint)
+                    h += 100
+                }
             }
-            m += 1
-            canvas.drawText(Keys.FORMAT_RECEIPT_TYPE.format(data[Keys.TYPE].toString()), x, y + h * m, paint)
-            m += 1
-            canvas.drawText(Keys.FORMAT_RECEIPT_CATEGORY.format(data[Keys.CATEGORY].toString()), x, y + h * m, paint)
-            m += 1
-            canvas.drawText(Keys.FORMAT_RECEIPT_VALUE_UNIT.format(data[Keys.VALUE_UNIT].toString()), x, y + h * m, paint)
-            m += 1
-            canvas.drawText(Keys.FORMAT_RECEIPT_AMOUNT.format(data[Keys.AMOUNT].toString()), x, y + h * m, paint)
-            m += 1
-            canvas.drawText(Keys.FORMAT_RECEIPT_VALUE_TOTAL.format(data[Keys.VALUE_TOTAL].toString()), x, y + h * m, paint)
-            m += 1
-            canvas.drawText(Keys.FORMAT_RECEIPT_REFERENCE.format(data[Keys.REFERENCE].toString()), x, y + h * m, paint)
 
             //create the folder
             val folder = File(applicationContext.getExternalFilesDir(null), "receipt")
@@ -142,6 +156,7 @@ class Share : AppCompatActivity() {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
             stream.flush()
             stream.close()
+
         } catch (e: Exception) {
             setContentView(R.layout.activity_share)
             findViewById<Button>(R.id.btnBackHome).visibility = Button.GONE

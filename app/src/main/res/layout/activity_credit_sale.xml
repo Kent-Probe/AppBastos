@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".usecases.sale.CreditSale">
+    tools:context=".usecases.sale.CreditSale"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/gradiantHome"
@@ -13,10 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/border_gradiant"
         android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,175 +87,180 @@
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gradiantHome"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp">
-
-        <Button
-            android:id="@+id/btnNameUserAdd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/style_user_button"
-            android:drawableStart="@drawable/ic_baseline_people_24"
-            android:drawablePadding="12dp"
-            android:gravity="fill_vertical"
-            android:hint="@string/txtNameClient"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputNumberClient"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:enabled="false"
-            android:hint="@string/txtTelClient"
-            android:textColorHint="@color/colorHint"
-            android:visibility="gone"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/numberClient"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="phone"
-                android:textColorLink="#000000" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtType"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/type"
-                android:layout_width="match_parent"
-                android:layout_height="48dp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputCategoryProduct"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtCategoryProduct"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/categoryProduct"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="text|textCapSentences"
-                android:textColorLink="#000000" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputValueUnit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtValue"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/valueUnit"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="number"
-                android:textColorLink="#000000" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtAmount"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/amount"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="number"
-                android:textColorLink="#000000" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideOverlay">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="vertical">
 
             <Button
-                android:id="@+id/btnContinue"
-                android:layout_width="@dimen/dimBtn"
-                android:layout_height="wrap_content"
-                android:background="@drawable/style_primary_button"
-                android:text="@string/txtBtnContinue"
-                android:textColor="@color/white"
-                tools:ignore="TextContrastCheck" />
-
-            <LinearLayout
+                android:id="@+id/btnNameUserAdd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="end">
+                android:background="@drawable/style_user_button"
+                android:drawableStart="@drawable/ic_baseline_people_24"
+                android:drawablePadding="12dp"
+                android:gravity="fill_vertical"
+                android:hint="@string/txtNameClient"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputNumberClient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:hint="@string/txtTelClient"
+                android:textColorHint="@color/colorHint"
+                android:visibility="gone"
+                app:hintTextColor="@color/lineHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/numberClient"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/lineHint"
+                    android:inputType="phone"
+                    android:textColorLink="#000000" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txtType"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/type"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputCategoryProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txtCategoryProduct"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/categoryProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/lineHint"
+                    android:inputType="text|textCapSentences"
+                    android:textColorLink="#000000" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputValueUnit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txtValue"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/valueUnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/lineHint"
+                    android:inputType="number"
+                    android:textColorLink="#000000" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txtAmount"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/lineHint"
+                    android:inputType="number"
+                    android:textColorLink="#000000" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnCancel"
+                    android:id="@+id/btnContinue"
                     android:layout_width="@dimen/dimBtn"
                     android:layout_height="wrap_content"
                     android:background="@drawable/style_primary_button"
-                    android:text="@string/txtBtnCancel"
+                    android:text="@string/txtBtnContinue"
                     android:textColor="@color/white"
                     tools:ignore="TextContrastCheck" />
 
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end">
+
+                    <Button
+                        android:id="@+id/btnCancel"
+                        android:layout_width="@dimen/dimBtn"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/style_primary_button"
+                        android:text="@string/txtBtnCancel"
+                        android:textColor="@color/white"
+                        tools:ignore="TextContrastCheck" />
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

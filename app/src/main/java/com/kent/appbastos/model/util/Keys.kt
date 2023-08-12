@@ -15,6 +15,7 @@ object Keys {
     const val CLIENT = "clients"
     const val USERS_APP = "usersApp"
     const val USER = "users"
+    const val RECEIPT = "receipt"
 
     //Data share firebase and memory and fields
 
@@ -37,7 +38,7 @@ object Keys {
     const val AMOUNT_INVENTORY = "amountInventory"
     const val NUMBER_CLIENT = "numberClient"
     const val TYPE = "type"
-    const val VALUE_AMOUNT = "valueAmount"
+    const val PRODUCT = "product"
     const val NAME_CLIENT = "nameClient"
     const val AMOUNT = "amount"
     const val DATE_TIME = "dateTime"
@@ -96,16 +97,16 @@ object Keys {
     const val TOAST_SOME_DATA_NOT_VALID = "Algun dato no es valido"
     const val TOAST_DATA_NOT_VALID = "Dato no valido"
     const val TOAST_NOT_FIND = "No se encontro"
-    const val TOAST_NOT_ADD = "No se agrego"
     const val TOAST_ERROR_DATABASE = "Error en base de datos"
     const val TOAST_ERROR_SOME_DATA  = "Error con algun dato"
-    const val TOAST_ERROR_SAVE_DATA  = "Ocurrio un error al guardar los datos"
 
     //MSM Toast Informative
     const val TOAST_MSM_INVENTORY = "Inventaio de repollo %s"
-    const val TOAST_MSM_BUILD = "En construccion..."
     const val WELCOME = "Bienvenidos"
     const val WELCOME_AGAIN = "Bienvenidos de nuevo"
+
+    //MSM Response
+    const val WITHOUT = "Sin coincidencias"
 
     //Alert MSM-------------------------------------------------------------------------------------
     //Title
@@ -126,6 +127,7 @@ object Keys {
     val FORMAT_AMOUNT = DecimalFormat("##.# und")
     const val FORMAT_AMOUNT_FRACTION = "%s und"
     const val FORMAT_DATE = "%d de %s del %d, %d:%d"
+    const val FORMAT_DATE_STRING = "%d de %s del %d, %s:%s"
     const val FORMAT_STRING = "%s %s"
     const val FORMAT_TITLE_RECEIPT = "Detalles de la venta a %s"
 
@@ -142,9 +144,13 @@ object Keys {
 
     //Format number
     fun formatNumber(phone: String): String {
-        val phoneNumberUtil = PhoneNumberUtil.getInstance()
-        val number = phoneNumberUtil.parse("+57${phone}", "CO")
-        return phoneNumberUtil.format(number, PhoneNumberUtil.PhoneNumberFormat.NATIONAL)
+        return try {
+            val phoneNumberUtil = PhoneNumberUtil.getInstance()
+            val number = phoneNumberUtil.parse("+57${phone}", "CO")
+            phoneNumberUtil.format(number, PhoneNumberUtil.PhoneNumberFormat.NATIONAL)
+        }catch (e :Exception){
+            "null"
+        }
     }
 
 

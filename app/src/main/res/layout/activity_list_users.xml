@@ -6,30 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".usecases.users.clients.ListUsers">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/exitBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:contentDescription="@string/descX"
-        android:src="@drawable/ic_baseline_close_24"
-        app:backgroundTint="#FAFAFA"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:textAlignment="center"
-        android:id="@+id/txtTitleClient"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/txtUsers"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:layout_margin="12dp"
-        android:textStyle="bold"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exitBtn" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/txtTitleClient"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="@string/txtUsers"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:layout_marginHorizontal="16dp"
+            android:textStyle="bold"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/exitBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginVertical="16dp"
+            android:contentDescription="@string/descX"
+            android:src="@drawable/ic_baseline_close_24"
+            app:backgroundTint="#FAFAFA"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/colorHint"
+        app:layout_constraintCircleRadius="50dp"
+        android:background="@drawable/background_search_view"
+        app:queryHint="nombre de cliente..."
+        app:hintTextColor="@color/lineHint"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:iconifiedByDefault="false"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/response"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_bar"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="@string/txtBasic"
+        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listUserId"
@@ -39,10 +80,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitleClient"
-        tools:listitem="@layout/user_content">
+        app:layout_constraintTop_toBottomOf="@+id/search_bar"
+        tools:listitem="@layout/user_content"
+        android:visibility="gone">
 
     </androidx.recyclerview.widget.RecyclerView>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddUser"
@@ -54,5 +97,6 @@
         android:visibility="visible"
         app:backgroundTint="@color/teal_200"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="ImageContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

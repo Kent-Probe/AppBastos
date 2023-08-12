@@ -109,6 +109,8 @@
             tools:ignore="TextContrastCheck" />
 
         <Space
+            android:id="@+id/space"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
@@ -132,6 +134,19 @@
             android:layout_height="wrap_content"
             android:background="@drawable/style_primary_button"
             android:text="@string/txtBtnListInventory"
+            android:textColor="@color/white"
+            tools:ignore="TextContrastCheck"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/btnListReceipt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/style_primary_button"
+            android:text="@string/txtBtnListReceipt"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck"/>
 

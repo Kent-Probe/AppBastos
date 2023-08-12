@@ -5,11 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Space
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.kent.appbastos.R
 import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.usecases.inventory.listInventory.ListInventory
+import com.kent.appbastos.usecases.receipt.listReceipt.ListReceipt
 import com.kent.appbastos.usecases.users.clients.ListUsers
 import com.kent.appbastos.usecases.users.usersApp.ListUserApp
 
@@ -28,9 +30,14 @@ class DashBoard : AppCompatActivity() {
         val btnRegisterUser: Button = findViewById(R.id.btnRegisterUser)
         val btnListInventory: Button = findViewById(R.id.btnListInventory)
         val btnAdminUserApp: Button = findViewById(R.id.btnAdminUserApp)
+        val btnListReceipt: Button = findViewById(R.id.btnListReceipt)
+
+        //space in the btn Admin User App
+        val space: Space = findViewById(R.id.space)
 
         //Hide Button only admin
         btnAdminUserApp.visibility = Button.GONE
+        space.visibility = Space.GONE
 
         val nameProfile = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString( Keys.PROFILE, null).toString()
         val rol = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString(Keys.ROL, null).toString()
@@ -39,6 +46,7 @@ class DashBoard : AppCompatActivity() {
         //Show button only admin
         if(rol == Keys.ROL_ADMIN){
             btnAdminUserApp.visibility = Button.VISIBLE
+            space.visibility = Space.VISIBLE
         }
 
         btnRegisterUser.setOnClickListener {
@@ -56,7 +64,10 @@ class DashBoard : AppCompatActivity() {
             startActivity(intent)
         }
 
-
+        btnListReceipt.setOnClickListener {
+            val intent = Intent(this, ListReceipt::class.java)
+            startActivity(intent)
+        }
 
         btnBack.setOnClickListener {
             finish()

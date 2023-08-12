@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".usecases.sale.OperationalExpenses">
 
     <LinearLayout
@@ -93,116 +94,121 @@
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:gravity="start"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gradiantHome">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/InputTypeOperational"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtTypeOperational"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/typeOperational"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="text|textCapSentences"
-                android:textColorLink="#000000" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/InputDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtDescription"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="text|textCapSentences"
-                android:textColorLink="#000000" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/InputValue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txtValueOperational"
-            android:textColorHint="@color/colorHint"
-            app:hintTextColor="@color/lineHint"
-            app:prefixText="$">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/value"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/lineHint"
-                android:inputType="number"
-                android:textColorLink="#000000" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideOverlay">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="start"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnContinue"
-                android:layout_width="@dimen/dimBtn"
-                android:layout_height="wrap_content"
-                android:background="@drawable/style_primary_button"
-                android:text="@string/txtBtnContinue"
-                android:textColor="@color/white"
-                tools:ignore="TextContrastCheck" />
-
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputTypeOperational"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="end">
+                android:layout_height="wrap_content"
+                android:hint="@string/txtTypeOperational"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/typeOperational"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/lineHint"
+                    android:inputType="text|textCapSentences"
+                    android:textColorLink="#000000" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txtDescription"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/lineHint"
+                    android:inputType="text|textCapSentences"
+                    android:textColorLink="#000000" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txtValueOperational"
+                android:textColorHint="@color/colorHint"
+                app:hintTextColor="@color/lineHint"
+                app:prefixText="$">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/value"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/lineHint"
+                    android:inputType="number"
+                    android:textColorLink="#000000" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <Button
-                    android:id="@+id/btnCancel"
+                    android:id="@+id/btnContinue"
                     android:layout_width="@dimen/dimBtn"
                     android:layout_height="wrap_content"
                     android:background="@drawable/style_primary_button"
-                    android:text="@string/txtBtnCancel"
+                    android:text="@string/txtBtnContinue"
                     android:textColor="@color/white"
                     tools:ignore="TextContrastCheck" />
 
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="end">
+
+                    <Button
+                        android:id="@+id/btnCancel"
+                        android:layout_width="@dimen/dimBtn"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/style_primary_button"
+                        android:text="@string/txtBtnCancel"
+                        android:textColor="@color/white"
+                        tools:ignore="TextContrastCheck" />
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
