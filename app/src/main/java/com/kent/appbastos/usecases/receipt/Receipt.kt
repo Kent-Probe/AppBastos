@@ -85,8 +85,8 @@ class Receipt : AppCompatActivity() {
 
         //Data in receipt
         //reference
-        val random = (0..9).random()
-        val reference = "K$random${System.currentTimeMillis()}"
+        val uid = now.day.toString() + now.month.toString() + now.year.toString() + "-" + (0..999).random()
+        val reference = "D${uid}"
         //Data
         val totalNum = data[Keys.VALUE_UNIT].toString().toFloat() * data[Keys.AMOUNT].toString().toFloat()
         val valueUnit = Keys.FORMAT_PRICE.format(data[Keys.VALUE_UNIT].toString().toFloat())
@@ -157,7 +157,9 @@ class Receipt : AppCompatActivity() {
                 valueUnit,
                 amount,
                 total,
-                number
+                number,
+                null,
+                inventory[Keys.KEY_INVENTORY].toString()
             )
             DataBaseShareData().writeReceipt(title, receipt)
 

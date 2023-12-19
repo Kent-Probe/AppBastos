@@ -96,6 +96,7 @@
         android:layout_marginEnd="24dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gradiantHome">
 
@@ -110,9 +111,9 @@
 
         <Space
             android:id="@+id/space"
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            android:layout_height="10dp"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btnAdminUserApp"
@@ -135,7 +136,7 @@
             android:background="@drawable/style_primary_button"
             android:text="@string/txtBtnListInventory"
             android:textColor="@color/white"
-            tools:ignore="TextContrastCheck"/>
+            tools:ignore="TextContrastCheck" />
 
         <Space
             android:layout_width="match_parent"
@@ -148,7 +149,20 @@
             android:background="@drawable/style_primary_button"
             android:text="@string/txtBtnListReceipt"
             android:textColor="@color/white"
-            tools:ignore="TextContrastCheck"/>
+            tools:ignore="TextContrastCheck" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/btnDashBoardInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/style_primary_button"
+            android:text="@string/txtBtnInfoDashBoard"
+            android:textColor="@color/white"
+            tools:ignore="TextContrastCheck" />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

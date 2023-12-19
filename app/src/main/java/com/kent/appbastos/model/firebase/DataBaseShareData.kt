@@ -162,9 +162,24 @@ class DataBaseShareData {
         })
     }
 
+    fun writeNewAmountInventory(amountNew: Float?, keyReceipt: String?)  {
+        database.child(Keys.INVENTORY).child(keyReceipt!!).addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val amountCurrent = snapshot.child(Keys.AMOUNT).value.toString().toFloat()
+                val amountTotal = amountCurrent - amountNew!!
+                database.child(Keys.INVENTORY).child(keyReceipt).child(Keys.AMOUNT).setValue(amountTotal)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
 }
 
-data class Receipt(val reference: String, val dateTime: String, val nameClient: String, val product: String, val category: String, val valueUnit: String, val amount: String, val valueTotal: String, val number:String? = null, val key: String? = null )
+data class Receipt(val reference: String, val dateTime: String, val nameClient: String, val product: String, val category: String, val valueUnit: String, val amount: String, val valueTotal: String, val number:String? = null, val key: String? = null, val keyInventory: String)
 
 data class DateTime(val day: Int, val month: Int, val year: Int, val hour: Int, val minute: Int, val second: Int, val milliSecond: Int)
 

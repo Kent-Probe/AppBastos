@@ -3,6 +3,7 @@ package com.kent.appbastos.usecases.dashboard
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Space
@@ -31,6 +32,7 @@ class DashBoard : AppCompatActivity() {
         val btnListInventory: Button = findViewById(R.id.btnListInventory)
         val btnAdminUserApp: Button = findViewById(R.id.btnAdminUserApp)
         val btnListReceipt: Button = findViewById(R.id.btnListReceipt)
+        val btnDashBoardInfo: Button = findViewById(R.id.btnDashBoardInfo)
 
         //space in the btn Admin User App
         val space: Space = findViewById(R.id.space)
@@ -42,7 +44,7 @@ class DashBoard : AppCompatActivity() {
         val nameProfile = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString( Keys.PROFILE, null).toString()
         val rol = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString(Keys.ROL, null).toString()
         textUserView.text = nameProfile
-
+        Log.i("ROL:", "ROL ES " + rol + " puede ser? " + Keys.ROL_ADMIN)
         //Show button only admin
         if(rol == Keys.ROL_ADMIN){
             btnAdminUserApp.visibility = Button.VISIBLE
@@ -66,6 +68,11 @@ class DashBoard : AppCompatActivity() {
 
         btnListReceipt.setOnClickListener {
             val intent = Intent(this, ListReceipt::class.java)
+            startActivity(intent)
+        }
+
+        btnDashBoardInfo.setOnClickListener {
+            val intent = Intent(this, InfoDashboard::class.java)
             startActivity(intent)
         }
 

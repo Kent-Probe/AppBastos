@@ -97,6 +97,9 @@ class ListReceipt : AppCompatActivity() {
         toolbar.title = "Recibos"
         setSupportActionBar(toolbar)
 
+        // Habilitar la flecha de atrás
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         //Onclick and more event's for the dataSelect
         dateSelect.setOnClickListener {
             showDatePickerDialog(object : OnChange{
@@ -131,7 +134,8 @@ class ListReceipt : AppCompatActivity() {
                                 amount = it.child(Keys.AMOUNT).value.toString(),
                                 valueTotal = it.child(Keys.VALUE_TOTAL).value.toString(),
                                 number = "null",
-                                key = it.key
+                                key = it.key,
+                                keyInventory = it.child(Keys.KEY_INVENTORY).value.toString()
                             )
                         //filter data
                         when(filter){
@@ -175,7 +179,8 @@ class ListReceipt : AppCompatActivity() {
                                 amount = it.child(Keys.AMOUNT).value.toString(),
                                 valueTotal = it.child(Keys.VALUE_TOTAL).value.toString(),
                                 number = it.child(Keys.NUMBER).value.toString(),
-                                key = it.key
+                                key = it.key,
+                                keyInventory = it.child(Keys.KEY_INVENTORY).value.toString()
                             )
                         //Filter result
                         when(filter){
@@ -216,7 +221,7 @@ class ListReceipt : AppCompatActivity() {
                 listReceiptRecyclerView.adapter = RecyclerViewAdapterReceipt(listReceipt, object : CallBackReceipt{
                     override fun onSuccess(receipt: Receipt) {
                         val intent = Intent(context, ReceiptOpenActivity::class.java).apply {
-                            putExtra(Keys.KEY, receipt.key)
+                            putExtra(Keys.KEY_INVENTORY, receipt.keyInventory)
                             putExtra(Keys.INVENTORY, receipt.amount)
                         }
                         startActivity(intent)
@@ -358,7 +363,7 @@ class ListReceipt : AppCompatActivity() {
         }
 
 
-        radioGroup?.setOnCheckedChangeListener { group, checkedId ->
+        radioGroup?.setOnCheckedChangeListener { _, checkedId ->
             itemSearchView.inputType = InputType.TYPE_CLASS_TEXT
 
             //Val's into bottom sheet dialog

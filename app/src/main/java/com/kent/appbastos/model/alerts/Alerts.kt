@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.kent.appbastos.R
@@ -21,6 +22,20 @@ class Alerts {
         builder.setPositiveButton(positiveButton, null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
+    }
+
+    fun showAlertDateForMont(layoutInflater: LayoutInflater, context: Context){
+        val view: View = layoutInflater.inflate(R.layout.dialog_date_year_mont, null)
+        val dialogAlert = AlertDialog.Builder(context)
+        dialogAlert.setView(view)
+        val dialog = dialogAlert.create()
+        dialog.show()
+
+        val pickerNumber = view.findViewById<NumberPicker>(R.id.pickerNumber)
+        pickerNumber.minValue = 2010
+        pickerNumber.maxValue = 2100
+        pickerNumber.value = 2022
+        pickerNumber.setFormatter { String.format("%02d", it) }
     }
 
     fun showAlertSelection(layoutInflater: LayoutInflater, context: Context, txtDialog: String, txtBtnUp: String, txtBtnDown: String, eventButtons: EventButtonsCallBack){

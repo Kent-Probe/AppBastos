@@ -2,12 +2,16 @@ package com.kent.appbastos.usecases.receipt
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.kent.appbastos.R
+import com.kent.appbastos.model.firebase.DataBaseShareData
 import com.kent.appbastos.model.util.Keys
 
 class ReceiptOpenActivity : AppCompatActivity() {
@@ -23,7 +27,7 @@ class ReceiptOpenActivity : AppCompatActivity() {
 
         //val's
         val amountReceipt = intent?.extras?.getString(Keys.INVENTORY)
-        //val keyReceipt = intent?.extras?.getString(Keys.KEY) TODO("Key of the receipt")
+        val keyInventory = intent?.extras?.getString(Keys.KEY_INVENTORY)
 
         //val's regex
         val regex = "[\$.,/und\\s]".toRegex()
@@ -35,12 +39,28 @@ class ReceiptOpenActivity : AppCompatActivity() {
 
         //text input
         val amount = findViewById<TextInputEditText>(R.id.amountInventory)
+        val inputAMount = findViewById<TextInputLayout>(R.id.inputPayment)
 
-        Toast.makeText(this, "$amountReceipt", Toast.LENGTH_LONG).show()
         amount.addTextChangedListener {
             if(it.toString().toFloat() > amountNumber?.toFloat()!!){
                 amount.setText(amountNumber.toString())
             }
+        }
+
+        //button
+        findViewById<Button>(R.id.btnApply).setOnClickListener {
+            if(amount.text.isNullOrEmpty()){
+                inputAMount.isErrorEnabled = true
+                inputAMount.error = "No puede estar vacio"
+                return@setOnClickListener
+            }
+            inputAMount.isErrorEnabled = false
+            DataBaseShareData().writeNewAmountInventory(amountNumber?.toFloat(), keyInventory)
+            Toast.makeText(this, "Exito al anular factura", Toast.LENGTH_LONG).show()
+            finish()
+        }
+        findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
+            finish()
         }
     }
 }

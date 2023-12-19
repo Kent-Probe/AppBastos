@@ -11,6 +11,8 @@
     <!-- Text's in toolbar-->
     <string name="txtToolbarSearchRef" translatable="false">Buscar por referencia</string>
     <string name="txtToolbarSearchDate" translatable="false">Buscar por fecha</string>
+    <string name="txtToolbarFilterDate" translatable="false">Filtar por fecha</string>
+    <string name="txtToolUpdateDevices" translatable="false">Actualziar dispositivos</string>
 
     <!-- text's in the receipt -->
     <string name="txtNameClientReceipt" translatable="false">Nombre del cliente: </string>
@@ -25,6 +27,7 @@
 
     <!--Text general -->
     <string name="txtBasic" translatable="false">Cargando... </string>
+    <string name="txtDeviceNotFound" translatable="false">Dispositivos no encontrados...</string>
 
     <!-- text in field's -->
     <string name="txtDate" translatable="false">Fecha...</string>
@@ -95,6 +98,8 @@
     <string name="txtBtnContinue" translatable="false">Continuar</string>
     <string name="txtBtnCancel" translatable="false">Cancelar</string>
     <string name="txtBtnApply" translatable="false">Aplicar</string>
+    <string name="txtBtnFilterDateForYear" translatable="false">Filtar fecha por año</string>
+    <string name="txtBtnFilterDateForMont" translatable="false">Filtrar fecha por mes</string>
     <string name="txtBtnAnnul" translatable="false">Anular</string>
     <string name="txtBtnShare" translatable="false">Compartir por WhatsApp</string>
     <string name="txtBtnPrintOut">Imprimir</string>
@@ -108,6 +113,7 @@
     <string name="txtBtnAddInventory">Agregar Inventario</string>
     <string name="txtBtnListInventory">Instancias en inventario</string>
     <string name="txtBtnListReceipt">Recibos</string>
+    <string name="txtBtnInfoDashBoard">informes</string>
     <string name="txtBtnGeneralSub">Abono general</string>
 
     <!-- Description of images -->

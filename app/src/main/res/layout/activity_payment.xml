@@ -180,30 +180,29 @@
 
                 <Button
                     android:id="@+id/btnContinue"
-                    android:layout_width="@dimen/dimBtn"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/style_primary_button"
                     android:text="@string/txtBtnContinue"
                     android:textColor="@color/white"
-                    tools:ignore="TextContrastCheck" />
+                    tools:ignore="TextContrastCheck"
+                    style="?android:attr/buttonBarButtonStyle" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="end">
-
-                    <Button
-                        android:id="@+id/btnCancel"
-                        android:layout_width="@dimen/dimBtn"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/style_primary_button"
-                        android:text="@string/txtBtnCancel"
-                        android:textColor="@color/white"
-                        tools:ignore="TextContrastCheck" />
-                </LinearLayout>
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/style_primary_button"
+                    android:text="@string/txtBtnCancel"
+                    android:textColor="@color/white"
+                    tools:ignore="TextContrastCheck"
+                    style="?android:attr/buttonBarButtonStyle" />
 
             </LinearLayout>
-
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.core.widget.NestedScrollView>

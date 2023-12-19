@@ -1,26 +1,80 @@
 package com.kent.appbastos.usecases.share
 
+
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.kent.appbastos.R
+import com.kent.appbastos.ScanDevices
+import com.kent.appbastos.databinding.ActivityShareBinding
 import com.kent.appbastos.model.util.Keys
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 
+
 class Share : AppCompatActivity() {
 
+    private val bluetoothPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted:Boolean ->
+        if (isGranted) {
+            val bluetoothManager: BluetoothManager = getSystemService(BluetoothManager::class.java)
+            val bluetoothAdapter: BluetoothAdapter? = bluetoothManager.adapter
+            btnPermissions = true
+            if (bluetoothAdapter?.isEnabled == false){
+                val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                btActivityResultLauncher.launch(enableBtIntent)
+            }else{
+                openScanDevices()
+            }
+        }
+    }
+
+    private val btActivityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ){ result : ActivityResult ->
+        if(result.resultCode == RESULT_OK){
+            openScanDevices()
+        }else if(result.resultCode == RESULT_CANCELED){
+            Toast.makeText(this@Share, "Bluetooth no activado", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun openScanDevices() {
+        val intent = Intent(this, ScanDevices::class.java).apply {
+            putExtra(Keys.DATE_TIME, intent.extras?.getString(Keys.DATE_TIME, Keys.ERROR))
+            putExtra(Keys.NAME_CLIENT, intent.extras?.getString(Keys.NAME_CLIENT, Keys.ERROR))
+            putExtra(Keys.TYPE, intent.extras?.getString(Keys.TYPE, Keys.ERROR))
+            putExtra(Keys.CATEGORY, intent.extras?.getString(Keys.CATEGORY, Keys.ERROR))
+            putExtra(Keys.VALUE_TOTAL, intent.extras?.getString(Keys.VALUE_TOTAL, Keys.ERROR))
+            putExtra(Keys.AMOUNT, intent.extras?.getString(Keys.AMOUNT, Keys.ERROR))
+            putExtra(Keys.VALUE_UNIT, intent.extras?.getString(Keys.VALUE_UNIT, Keys.ERROR))
+            putExtra(Keys.REFERENCE, intent.extras?.getString(Keys.REFERENCE, Keys.ERROR))
+            putExtra(Keys.NUMBER_CLIENT, intent.extras?.getString(Keys.NUMBER_CLIENT, Keys.ERROR))
+        }
+        startActivity(intent)
+    }
+
+    private var btnPermissions: Boolean = false
+    private lateinit var biding: ActivityShareBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_share)
+        biding = ActivityShareBinding.inflate(layoutInflater)
+        setContentView(biding.root)
 
 
         val data :MutableMap<String, String?> = hashMapOf(
@@ -63,7 +117,25 @@ class Share : AppCompatActivity() {
 
         //Construction
         btnPrintOut.setOnClickListener {
-            
+            try{
+                val bluetoothManager = getSystemService(BluetoothManager::class.java)
+                val bluetoothAdapter = bluetoothManager.adapter
+                if(bluetoothAdapter == null){
+                    Toast.makeText(this@Share, "Bluetooth no compatible", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+                    bluetoothPermissionLauncher.launch(android.Manifest.permission.BLUETOOTH_CONNECT)
+                }else{
+                    bluetoothPermissionLauncher.launch(android.Manifest.permission.BLUETOOTH_ADMIN)
+                }
+                //val intent = Intent(this, ScanDevices::class.java)
+                //startActivity(intent)
+            }catch (e: Exception){
+                Log.e("ERROR", e.message.toString())
+            }
+
         }
     }
 
@@ -165,6 +237,10 @@ class Share : AppCompatActivity() {
             Toast.makeText(this, "Error, contacta al admin", Toast.LENGTH_LONG).show()
             finish()
         }
+    }
+
+    companion object {
+        private const val REQUEST_ENABLE_BT = 1
     }
 }
 
