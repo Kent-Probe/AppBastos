@@ -25,6 +25,7 @@ object Keys {
     const val KEY = "key"
     const val KEY_DEBTS = "keyDebts"
     const val KEY_INVENTORY = "keyInventory"
+    const val MAC = "mac"
 
 
     //Data in memory

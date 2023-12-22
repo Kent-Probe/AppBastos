@@ -6,7 +6,9 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothSocket
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
@@ -40,6 +42,8 @@ class ScanDevices : AppCompatActivity() {
 
     private lateinit var outputStream: OutputStream
     private lateinit var inputStream: InputStream
+    private lateinit var pref: SharedPreferences
+
 
     private var macAddress: String = "----"
 
@@ -81,6 +85,27 @@ class ScanDevices : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityScanDevicesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.result.text = "Por favor voncule un \ndispositivo primero"
+
+        pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+
+        val mac = pref.getString(Keys.MAC, Keys.ERROR)
+        if (mac != Keys.ERROR && mac != null){
+            Toast.makeText(this@ScanDevices, mac, Toast.LENGTH_LONG).show()
+            bluetoothManager = getSystemService(BluetoothManager::class.java)
+            bluetoothAdapter = bluetoothManager.adapter
+            val successfulConnection = connectDeviceBT(mac)
+            if(successfulConnection) {
+                printData()
+            }else{
+                Toast.makeText(this, "Sucedio un error al conectarse", Toast.LENGTH_LONG).show()
+                val editor = pref.edit()
+                editor.remove(Keys.MAC)
+                editor.apply()
+            }
+            finish()
+        }
 
 
         //assign toolbar, textView of dateSelect and his father, and config
@@ -136,17 +161,18 @@ class ScanDevices : AppCompatActivity() {
         if(pairedDevices!!.isNotEmpty()){
             val devicesBT: MutableList<DeviceBT> = ArrayList()
             for(device in pairedDevices){
-                  if(device.bluetoothClass.deviceClass != 1664 ) return
-                val deviceBT  = if(macAddress == device.address){ DeviceBT(device.name, device.address, true) }
-                                else{ DeviceBT(device.name, device.address, false) }
-                devicesBT.add(deviceBT)
+                if(device.bluetoothClass.deviceClass == 1664 ){
+                    val deviceBT  = if(macAddress == device.address){ DeviceBT(device.name, device.address, true) }
+                    else{ DeviceBT(device.name, device.address, false) }
+                    devicesBT.add(deviceBT)
+                }
             }
             binding.scanDevicesList.layoutManager = LinearLayoutManager(this@ScanDevices)
             binding.scanDevicesList.adapter = RecyclerViewAdapterDevicesListBT(
                 devicesBT,
                 object : EventCallBackDeviceBT {
                     override fun onClick(deviceBT: DeviceBT, viewHolder: RecyclerView.ViewHolder) {
-                        val successfulConnection = connectDeviceBT(deviceBT)
+                        val successfulConnection = connectDeviceBT(deviceBT.address)
 
                         if(!successfulConnection) deviceBT.isConnected = false
                         else{
@@ -184,15 +210,18 @@ class ScanDevices : AppCompatActivity() {
         }else{
             binding.result.visibility = TextView.VISIBLE
             binding.scanDevicesList.visibility = RecyclerView.GONE
-            binding.result.text = "Dipositivos no encontrados, vincule la impresora primero"
+            binding.result.text = "Dipositivos no encontrados, \nvincule la impresora primero"
             Toast.makeText(this, "Dipositivos no encontrados", Toast.LENGTH_LONG).show()
             return
         }
     }
 
 
-    private fun connectDeviceBT(deviceBT: DeviceBT): Boolean{
+    private fun connectDeviceBT(mac: String): Boolean{
         try {
+            val edit = pref.edit()
+            edit.putString(Keys.MAC, mac)
+            edit.apply()
             bluetoothSocket?.close()
             Log.i("INFO:", "Iniciando conexion")
             if (ActivityCompat.checkSelfPermission(
@@ -200,18 +229,12 @@ class ScanDevices : AppCompatActivity() {
                     Manifest.permission.BLUETOOTH_SCAN
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
                 return false
             }
             bluetoothAdapter?.cancelDiscovery()
-            val device: BluetoothDevice? = bluetoothAdapter?.getRemoteDevice(deviceBT.address)
+            val device: BluetoothDevice? = bluetoothAdapter?.getRemoteDevice(mac)
             Log.i("INFO:", "$device")
+            Log.i("INFO:", "MAC: $mac")
             if(device != null){
                 bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(myUUID)
                 Log.i("INFO:", "$bluetoothSocket")
@@ -232,7 +255,6 @@ class ScanDevices : AppCompatActivity() {
 
     fun printData( ) {
         try {
-            val printWriter = PrintWriter(outputStream, true)
             val separate = if (intent.extras?.getString(Keys.NUMBER_CLIENT, Keys.ERROR) != "null") "- - - - - - - - - - - - - - - -\n" +
                     "FECHA: ${intent.extras?.getString(Keys.DATE_TIME, Keys.ERROR)}\n\n" +
                     "REFERENCIA: ${intent.extras?.getString(Keys.REFERENCE, Keys.ERROR)}\n\n"  +
@@ -255,6 +277,8 @@ class ScanDevices : AppCompatActivity() {
                     "VALOR TOTAL: ${intent.extras?.getString(Keys.VALUE_TOTAL, Keys.ERROR)}}\n" +
                     "- - - - - - - - - - - - - - - -\n\n" +
                     "\n"
+            val printWriter = PrintWriter(bluetoothSocket!!.outputStream, true)
+
             printWriter.flush()
             printWriter.flush()
             bluetoothSocket!!.outputStream.write(ESC_ALIGN_LEFT)
