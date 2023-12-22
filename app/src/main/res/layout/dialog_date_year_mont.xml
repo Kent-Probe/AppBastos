@@ -8,8 +8,9 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:background="#008575"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,13 +19,31 @@
             android:id="@+id/btnSelectYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/style_bg_button_null"
+            android:gravity="start|center"
+            android:text="@string/txtBtnZeroAmount"
             android:textColor="@color/white"
-            android:background="#008575"
-            android:gravity="center"
-            android:text="2002"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp"/>
+            android:textSize="35sp"
+            android:layout_marginBottom="10dp"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSelectMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/style_bg_button_null"
+            android:gravity="start|center"
+            android:textAllCaps="false"
+            android:text="@string/txtBtnMonth"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textSize="30sp"
+
+            tools:ignore="DuplicateSpeakableTextCheck" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -37,7 +56,15 @@
         <NumberPicker
             android:id="@+id/pickerNumber"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:theme="@style/NumberPickerTheme" />
+
+        <NumberPicker
+            android:id="@+id/pickerMonth"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:theme="@style/NumberPickerTheme"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -58,22 +85,24 @@
             android:gravity="end">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnCancel"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginVertical="4dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
                 android:layout_marginEnd="10dp"
-                android:background="@android:color/transparent"
-                android:textColor="#008575"
-                android:text="cancelar" />
+                android:background="@drawable/style_bg_button_null_2"
+                android:text="@string/txtBtnCancel"
+                android:textColor="#00796B"/>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnOk"
                 android:layout_width="60dp"
-                android:layout_height="48dp"
-                android:layout_marginVertical="4dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
                 android:layout_marginEnd="15dp"
-                android:background="@android:color/transparent"
-                android:textColor="#008575"
-                android:text="OK" />
+                android:background="@drawable/style_bg_button_null_2"
+                android:text="@string/txtOk"
+                android:textColor="#00796B"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>

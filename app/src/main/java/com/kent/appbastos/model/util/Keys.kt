@@ -5,6 +5,8 @@ import java.text.DecimalFormat
 
 object Keys {
 
+    const val EXTRA = "extra"
+
     //Title
     const val TITLE = "title"
     const val DEBTS = "debts"

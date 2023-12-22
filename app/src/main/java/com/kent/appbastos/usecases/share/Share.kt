@@ -18,9 +18,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.kent.appbastos.R
-import com.kent.appbastos.ScanDevices
 import com.kent.appbastos.databinding.ActivityShareBinding
 import com.kent.appbastos.model.util.Keys
+import com.kent.appbastos.usecases.bluetooth.ScanDevices
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
@@ -70,7 +70,7 @@ class Share : AppCompatActivity() {
     }
 
     private var btnPermissions: Boolean = false
-    private lateinit var biding: ActivityShareBinding
+    private lateinit var biding:  ActivityShareBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         biding = ActivityShareBinding.inflate(layoutInflater)

@@ -59,6 +59,13 @@
     <string name="txtAmountDebts">Cantidad: </string>
     <string name="txtDebtsTotal">Total: </string>
 
+    <string name="txtBtnZero">0$</string>
+    <string name="txtBtnZeroAmount">0</string>
+    <string name="txtBtnToday">Entradas de hoy:</string>
+    <string name="txtBtnMonth">Entradas del mes:</string>
+    <string name="txtBtnSaleToday">Ventas de hoy:</string>
+    <string name="txtBtnSaleMonth">Ventas del mes:</string>
+
     <string name="txtInventoryAmount">Cantidad: </string>
     <string name="txtInventoryAmountMin">Cantidad minima: </string>
     <string name="txtInventoryFlete">Flete: </string>
@@ -115,6 +122,12 @@
     <string name="txtBtnListReceipt">Recibos</string>
     <string name="txtBtnInfoDashBoard">informes</string>
     <string name="txtBtnGeneralSub">Abono general</string>
+    <string name="txtBtnShowLog">Ver registro</string>
+    <string name="txtBtnShowLogToday">Ver registro de hoy</string>
+    <string name="txtOk">Ok</string>
+    <string name="applyFilter">Aplicar filtro</string>
+    <string name="delFilter">Limpiar filtros</string>
+
 
     <!-- Description of images -->
     <string name="descLogo">Logo de la aplicacion de AppBastos</string>

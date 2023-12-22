@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="dimBtn">128dp</dimen>
+    <dimen name="dimH20">20ddp</dimen>
+    <dimen name="dimW60">60dp</dimen>
 </resources>

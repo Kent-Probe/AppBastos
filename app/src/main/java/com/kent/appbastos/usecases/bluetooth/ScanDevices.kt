@@ -1,11 +1,13 @@
-package com.kent.appbastos
+package com.kent.appbastos.usecases.bluetooth
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothSocket
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -19,8 +21,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kent.appbastos.R
 import com.kent.appbastos.databinding.ActivityScanDevicesBinding
 import com.kent.appbastos.model.adapter.RecyclerViewAdapterDevicesListBT
 import com.kent.appbastos.model.util.DeviceBT
@@ -67,7 +71,6 @@ class ScanDevices : AppCompatActivity() {
            findDevices()
         }
     }
-
 
     private var btnPermissions = false
     private val RESULT_OK = 100
@@ -192,6 +195,20 @@ class ScanDevices : AppCompatActivity() {
         try {
             bluetoothSocket?.close()
             Log.i("INFO:", "Iniciando conexion")
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.BLUETOOTH_SCAN
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return false
+            }
             bluetoothAdapter?.cancelDiscovery()
             val device: BluetoothDevice? = bluetoothAdapter?.getRemoteDevice(deviceBT.address)
             Log.i("INFO:", "$device")

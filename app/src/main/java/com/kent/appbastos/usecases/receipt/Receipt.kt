@@ -7,10 +7,10 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.kent.appbastos.R
+import com.kent.appbastos.databinding.ActivityReceiptBinding
 import com.kent.appbastos.model.firebase.*
 import com.kent.appbastos.model.firebase.Receipt
 import com.kent.appbastos.model.util.Keys
@@ -19,13 +19,26 @@ import com.kent.appbastos.usecases.share.Share
 
 class Receipt : AppCompatActivity() {
 
+    private lateinit var binding: ActivityReceiptBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_receipt)
+        binding = ActivityReceiptBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //Tittle
         val title = intent.extras?.getString(Keys.TITLE, Keys.ERROR).toString()
 
+        //Variable button
+        binding.exitBtn.setOnClickListener {
+            finish()
+        }
+
+
+        if(title.equals("ListLog", true)) {
+            binding.btnContinue.visibility = Button.GONE
+            return
+        }
         //Current Date
         val calendar = Calendar.getInstance()
         val now = DateTime(
@@ -107,11 +120,6 @@ class Receipt : AppCompatActivity() {
         findViewById<TextInputEditText>(R.id.valueUnit).setText(valueUnit)
         findViewById<TextInputEditText>(R.id.valueTotal).setText(total)
         findViewById<TextInputEditText>(R.id.reference).setText(reference)
-
-        //Variable button
-        findViewById<FloatingActionButton>(R.id.exitBtn).setOnClickListener {
-            finish()
-        }
 
         findViewById<Button>(R.id.btnContinue).setOnClickListener {
             //Save data in the database

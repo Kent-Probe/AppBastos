@@ -10,164 +10,196 @@
         android:id="@+id/toolbar_layout"
         layout="@layout/toolbar" />
 
-    <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/section_number_sales"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:constraint_referenced_ids="cardView_saleToday,cardView_saleMonth"
-        app:flow_horizontalGap="8dp"
-        app:flow_horizontalStyle="packed"
-        app:flow_verticalGap="8dp"
-        app:flow_verticalStyle="packed"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideOverlay"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout"/>
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView_saleToday"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/card_shadow"
-        android:elevation="10dp"
-        app:cardCornerRadius="20dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/section_number_sales"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:constraint_referenced_ids="cardView_saleToday,cardView_saleMonth"
+                app:flow_horizontalGap="8dp"
+                app:flow_horizontalStyle="packed"
+                app:flow_verticalGap="8dp"
+                app:flow_verticalStyle="packed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_saleToday"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/card_shadow"
+                android:elevation="10dp"
+                app:cardCornerRadius="20dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/txtBtnSaleToday"
+                        android:textColor="@color/black"
+                        android:textSize="23sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/txtBtnZeroAmount"
+                        android:textColor="@color/black"
+                        android:textSize="60sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_saleMonth"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/card_shadow"
+                android:elevation="10dp"
+                app:cardCornerRadius="20dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/txtBtnSaleMonth"
+                        android:textColor="@color/black"
+                        android:textSize="23sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/txtBtnZeroAmount"
+                        android:textColor="@color/black"
+                        android:textSize="60sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_InSale_today"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/card_shadow"
+                android:elevation="10dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/section_number_sales">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:gravity="center"
+                        android:text="@string/txtBtnToday"
+                        android:textColor="@color/black"
+                        android:textSize="30sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/txtBtnZero"
+                        android:textColor="@color/black"
+                        android:textSize="50sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_InSale_Month"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/card_shadow"
+                android:elevation="10dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView_InSale_today">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:gravity="center"
+                        android:text="@string/txtBtnMonth"
+                        android:textColor="@color/black"
+                        android:textSize="30sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/txtBtnZero"
+                        android:textColor="@color/black"
+                        android:textSize="50sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnShowLog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Ventas de hoy:"
-                android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="80dp"
+                android:layout_marginVertical="20dp"
+                android:background="@drawable/style_primary_button"
+                android:text="@string/txtBtnShowLog"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView_InSale_Month"
+                tools:ignore="TextContrastCheck" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="1"
-                android:textColor="@color/black"
-                android:textSize="60sp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView_saleMonth"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/card_shadow"
-        android:elevation="10dp"
-        app:cardCornerRadius="20dp">
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Ventas del mes:"
-                android:textColor="@color/black"
-                android:textSize="25sp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="1"
-                android:textColor="@color/black"
-                android:textSize="60sp" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.cardview.widget.CardView>
-
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView_InSale_today"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:elevation="10dp"
-        android:background="@drawable/card_shadow"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/section_number_sales">
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:gravity="center"
-                android:text="Entradas de hoy:"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="0$"
-                android:textColor="@color/black"
-                android:textSize="50sp" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView_InSale_Month"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:elevation="10dp"
-        android:background="@drawable/card_shadow"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView_InSale_today">
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:gravity="center"
-                android:text="Entradas del mes:"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="0$"
-                android:textColor="@color/black"
-                android:textSize="50sp" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.cardview.widget.CardView>
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
