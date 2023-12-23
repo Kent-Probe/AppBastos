@@ -45,7 +45,7 @@ class ListInventory : AppCompatActivity() {
         val floatButtonBack: FloatingActionButton = findViewById(R.id.exitBtn)
         val floatBtnAddInventory: FloatingActionButton = findViewById(R.id.btnAddInventory)
 
-        if(rol != Keys.ROL_ADMIN){
+        if(rol != Keys.ROL_ADMIN && rol != Keys.ROL_USER_SUDO){
             floatBtnAddInventory.visibility = Button.GONE
         }else{
             floatBtnAddInventory.visibility = Button.VISIBLE

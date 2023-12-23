@@ -11,7 +11,7 @@ import com.kent.appbastos.model.firebase.UserApp
 import com.kent.appbastos.model.util.EventCallBackUserApp
 import com.kent.appbastos.model.util.Keys
 
-class RecyclerViewAdapterListUsersApp(private val values:List<UserApp>, private val eventCallBackSuccess: EventCallBackUserApp):
+class RecyclerViewAdapterListUsersApp(private val values:List<UserApp>, private val eventCallBackSuccess: EventCallBackUserApp, private val boolean: Boolean):
     RecyclerView.Adapter<RecyclerViewAdapterListUsersApp.ViewHolder>() {
 
 
@@ -35,6 +35,10 @@ class RecyclerViewAdapterListUsersApp(private val values:List<UserApp>, private 
         if(user.rol == Keys.ROL_ADMIN){
             holder.btnChangeRol.visibility = Button.GONE
             holder.btnChangeRol.isEnabled = false
+        }
+        if(boolean){
+            holder.btnChangeRol.visibility = Button.VISIBLE
+            holder.btnChangeRol.isEnabled = true
         }
 
         holder.btnChangeRol.setOnClickListener{

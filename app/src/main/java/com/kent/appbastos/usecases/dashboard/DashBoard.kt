@@ -46,7 +46,7 @@ class DashBoard : AppCompatActivity() {
         textUserView.text = nameProfile
         Log.i("ROL:", "ROL ES " + rol + " puede ser? " + Keys.ROL_ADMIN)
         //Show button only admin
-        if(rol == Keys.ROL_ADMIN){
+        if(rol == Keys.ROL_ADMIN || rol == Keys.ROL_USER_SUDO){
             btnAdminUserApp.visibility = Button.VISIBLE
             space.visibility = Space.VISIBLE
         }

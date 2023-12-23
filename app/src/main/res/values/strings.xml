@@ -51,7 +51,7 @@
     <string name="txtRemarks" translatable="false">Comentarios</string>
     <string name="txtAlertDialog" translatable="false">Este cliente tiene una deuda abierta. ¿Que desea hacer?</string>
     <string name="txtUsers">Clientes registrados</string>
-    <string name="txtUsersApp">Usuarios de la plataforma</string>
+    <string name="txtUsersApp">Usuarios</string>
     <string name="txtInventory">Inventario</string>
     <string name="txtClientsDebts">Deudas del cliente</string>
     <string name="txtRegisterUserName">Nombre del usuario</string>

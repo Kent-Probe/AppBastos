@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="120dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/txtUserName"
                 android:textColor="@color/black"
@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="120dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="12dp"
                 android:text="@string/select"
                 android:textColor="@color/black" />
@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="120dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="12dp"
                 android:text="@string/select"
                 android:textColor="@color/black" />
@@ -62,8 +62,10 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
+                android:textSize="15sp"
+                android:background="@drawable/style_bg_btn_general_sub"
                 android:text="@string/txtBtnChangeRol"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

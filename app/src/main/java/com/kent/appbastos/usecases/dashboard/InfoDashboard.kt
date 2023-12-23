@@ -31,7 +31,6 @@ class InfoDashboard : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
 
     private var key: String = "-1"
-    private var month: String = "-1"
 
     private lateinit var binding: ActivityInfoDashboardBinding
     private lateinit var bindingBottomSheet: BottomSheetFilterForDateBinding

@@ -49,6 +49,7 @@ object Keys {
     const val ROL = "rol"
     const val ROL_ADMIN = "admin"
     const val ROL_USER = "usuario"
+    const val ROL_USER_SUDO = "superadmin"
     const val PROVIDER_SESSION = "provider"
     const val EMAIL = "email"
 

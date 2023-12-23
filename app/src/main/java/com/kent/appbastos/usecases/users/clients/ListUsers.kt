@@ -49,7 +49,7 @@ class ListUsers : AppCompatActivity() {
 
         //Only admin
         val isOfCreditSale: Boolean = this.intent.extras?.getBoolean(Keys.CREDIT_SALE) == true
-        if(isOfCreditSale || rol != Keys.ROL_ADMIN){
+        if(isOfCreditSale || rol != Keys.ROL_ADMIN || rol != Keys.ROL_USER_SUDO){
             floatBtnAddUser.visibility = View.GONE
         }
 
