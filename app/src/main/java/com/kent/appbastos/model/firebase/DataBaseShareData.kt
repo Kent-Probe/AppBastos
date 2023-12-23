@@ -177,6 +177,18 @@ class DataBaseShareData {
         })
     }
 
+    fun readDashboard(listener: ValueEventListener){
+        database.child(Keys.DASHBOARD).child(Keys.INFO).addListenerForSingleValueEvent(listener)
+    }
+
+    fun readLogDateDatabase(key: String, listener: ValueEventListener){
+        database.child(Keys.DASHBOARD).child(Keys.LOG).child(key).addListenerForSingleValueEvent(listener)
+    }
+
+    fun readLogDatabase(listener: ValueEventListener){
+        database.child(Keys.DASHBOARD).child(Keys.LOG).addListenerForSingleValueEvent(listener)
+    }
+
 }
 
 data class Receipt(val reference: String, val dateTime: String, val nameClient: String, val product: String, val category: String, val valueUnit: String, val amount: String, val valueTotal: String, val number:String? = null, val key: String? = null, val keyInventory: String)

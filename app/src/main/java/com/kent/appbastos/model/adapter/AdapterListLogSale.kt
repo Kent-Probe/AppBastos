@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kent.appbastos.R
 import com.kent.appbastos.databinding.LogContentItemBinding
+import com.kent.appbastos.model.util.Keys
 import com.kent.appbastos.model.values.LogSale
 
 class AdapterListLogSale(private val logSale: List<LogSale>, private val interactionClickItem: Interaction): RecyclerView.Adapter<AdapterListLogSale.LogHolder>() {
@@ -22,21 +23,18 @@ class AdapterListLogSale(private val logSale: List<LogSale>, private val interac
     override fun onBindViewHolder(holder: LogHolder, position: Int) {
         interaction = interactionClickItem
         holder.render(logSale[position], interaction)
-
-        /*holder.view.setOnClickListener {
-            interactionClickItem.onClickItem()
-        }*/
     }
 
     class LogHolder(val view: View):RecyclerView.ViewHolder(view){
         private val binding: LogContentItemBinding = LogContentItemBinding.bind(view)
 
         val ref = "Referencia: %s"
-        val total = "Total: %s"
+        val total = "Total:"
 
         fun render(logSale: LogSale, int: Interaction){
+            val string: String = total + Keys.FORMAT_PRICE_REGULAR.format(logSale.valueTotal)
             binding.invoiceRef.text = ref.format(logSale.ref)
-            binding.total.text = total.format(logSale.total)
+            binding.total.text = string
             view.setOnClickListener {
                 int.onClickItem()
             }

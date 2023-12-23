@@ -18,6 +18,22 @@ object Keys {
     const val USERS_APP = "usersApp"
     const val USER = "users"
     const val RECEIPT = "receipt"
+    const val LOG = "log"
+    const val DASHBOARD = "dashboard"
+    const val INFO = "info"
+
+    //LogSale
+    const val REF_LOG = "ref"
+    const val NAME_CLIENT_LOG = "nameClient"
+    const val AMOUNT_LOG = "amount"
+    const val VALUE_TOTAL_LOG = "valueTotal"
+    const val VALUE_UNIT_LOG = "valueUnit"
+    const val VALUE_TYPE_SALE_LOG = "typeSale"
+
+    const val AMOUNT_SALES_MONTH = "amountSalesMonth"
+    const val AMOUNT_SALES_TODAY = "amountSalesToday"
+    const val INPUT_MONTH = "inputMonth"
+    const val INPUT_DAY = "inputToday"
 
     //Data share firebase and memory and fields
 
@@ -128,6 +144,7 @@ object Keys {
     //Format
     val FORMAT_PRICE = DecimalFormat("$#,### COP")
     val FORMAT_AMOUNT = DecimalFormat("##.# und")
+    val FORMAT_PRICE_REGULAR = DecimalFormat("$#,###")
     const val FORMAT_AMOUNT_FRACTION = "%s und"
     const val FORMAT_DATE = "%d de %s del %d, %d:%d"
     const val FORMAT_DATE_STRING = "%d de %s del %d, %s:%s"

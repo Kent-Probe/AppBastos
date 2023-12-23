@@ -60,6 +60,7 @@
                         android:textSize="23sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/amountDay"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -94,6 +95,7 @@
                         android:textSize="23sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/amountMonth"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -133,6 +135,7 @@
                         android:textSize="30sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/inputDay"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -171,6 +174,7 @@
                         android:textSize="30sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/inputMonth"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"

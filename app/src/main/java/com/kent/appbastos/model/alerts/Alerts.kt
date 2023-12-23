@@ -23,7 +23,7 @@ class Alerts {
         fun clickBtnOk(yearSelect: Int)
     }
     interface UtilsAdvance{
-        fun clickBtnOk(yearSelect: Int, monthSelect: String)
+        fun clickBtnOk(yearSelect: Int, monthSelect: String, month: Int)
 
     }
 
@@ -116,7 +116,8 @@ class Alerts {
         binding.btnOk.setOnClickListener {
             utilsAdvance.clickBtnOk(
                 binding.pickerNumber.value,
-                month.months[binding.pickerMonth.value].month
+                month.months[binding.pickerMonth.value].month,
+                binding.pickerMonth.value
             )
             dialog.dismiss()
         }
